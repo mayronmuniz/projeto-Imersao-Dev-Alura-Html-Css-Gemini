@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevQuest: 8-Bit Adventure</title>
+    
+    <!-- Fontes Pixeladas -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- RÁDIO RETRO (PLAYER LOCAL) -->
+    <div class="retro-radio" id="mainRadio">
+        <div class="radio-label"><i class="fa-solid fa-music"></i> RADIO 8-BIT</div>
+        <div class="radio-display" id="radioDisplay">♪ AGUARDANDO START...</div>
+        <div class="radio-controls">
+            <button class="radio-btn" onclick="radioPrev()" title="Anterior"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="radio-btn" onclick="radioToggle()" title="Play/Pause"><i class="fa-solid fa-play" id="playIcon"></i></button>
+            <button class="radio-btn" onclick="radioNext()" title="Próxima"><i class="fa-solid fa-forward-step"></i></button>
+            <button class="radio-btn" onclick="radioVolume()" title="Mute"><i class="fa-solid fa-volume-high" id="volIcon"></i></button>
+        </div>
+    </div>
+
+    <!-- Elemento de Áudio para a Rádio -->
+    <audio id="bgmAudio" loop></audio>
+
+    <!-- POPUP CONQUISTA -->
+    <div class="achievement-popup" id="achievementPopup">
+        <i class="fa-solid fa-trophy achievement-icon"></i>
+        <div>
+            <div style="font-family: var(--font-title); font-size: 0.7rem; color: var(--accent-purple);">CONQUISTA DESBLOQUEADA!</div>
+            <div id="achievementText" style="font-family: var(--font-title); margin-top: 5px;">PRIMEIRO SANGUE</div>
+        </div>
+    </div>
+    
+    <!-- CONTROLE DE SFX (Efeitos sonoros) -->
+    <button class="audio-control" onclick="toggleSFX()" id="sfxBtn" title="Ligar/Desligar Efeitos Sonoros">
+        <i class="fa-solid fa-volume-high"></i> SFX: ON
+    </button>
+
+    <!-- MODAL DE CONFIGURAÇÃO INICIAL -->
+    <div class="setup-overlay" id="setupModal">
+        <div class="setup-window">
+            <h1 class="setup-title">BEM-VINDO À JORNADA!<br>IDENTIFIQUE-SE</h1>
+            
+            <label class="setup-label">SEU NOME:</label>
+            <input type="text" id="playerNameInput" class="setup-input" placeholder="Digite seu nome..." maxlength="15">
+
+            <label class="setup-label">ESCOLHA SEU AVATAR:</label>
+            <div class="avatar-selection">
+                <!-- Opção Masculino -->
+                <div class="avatar-option selected" id="opt-male" onclick="selectAvatar('male')">
+                    <div class="pixel-hero-container avatar-preview">
+                        <div class="pixel-hero-art">
+                            <div class="hero-cape"></div>
+                            <div class="hero-head"></div>
+                            <div class="hero-body"></div>
+                            <div class="hero-legs"></div>
+                            <div class="hero-sword"></div>
+                        </div>
+                    </div>
+                    <span style="font-family: var(--font-title); font-size: 0.6rem; color: #fff; margin-top: 10px;">HERÓI</span>
+                </div>
+
+                <!-- Opção Feminino -->
+                <div class="avatar-option" id="opt-female" onclick="selectAvatar('female')">
+                    <div class="pixel-hero-container avatar-preview female-avatar"> 
+                        <div class="pixel-hero-art">
+                            <div class="hero-cape"></div>
+                            <div class="hero-head"></div>
+                            <div class="hero-body"></div>
+                            <div class="hero-legs"></div>
+                            <!-- Vestido -->
+                            <div class="hero-dress"></div>
+                            <div class="hero-sword"></div>
+                        </div>
+                    </div>
+                    <span style="font-family: var(--font-title); font-size: 0.6rem; color: #fff; margin-top: 10px;">HEROÍNA</span>
+                </div>
+            </div>
+
+            <button class="confirm-btn" onclick="confirmSetup()">INICIAR AVENTURA</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="project-title">DEVQUEST</div>
+        <div class="project-subtitle">A Jornada da Imersão Alura com mayronmuniz.dev</div>
+    </header>
+
+    <!-- HUD -->
+    <div class="player-hud">
+        <div class="hud-info">
+            <div class="hud-item">
+                <!-- Botão de Configuração adicionado ao label -->
+                <span class="hud-label">
+                    JOGADOR 
+                    <button class="config-btn" onclick="openSetup()" title="Alterar Perfil">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+                </span>
+                <span id="hud-name" class="hud-value" style="color:var(--accent-yellow)">JOGADOR</span> 
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">RANK</span>
+                <span id="hud-title" class="hud-value">Novato</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">LVL</span>
+                <span id="hud-level" class="hud-value">01</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">SCORE (XP)</span>
+                <span id="hud-xp" class="hud-value">0000</span>
+            </div>
+        </div>
+
+        <div class="hud-avatar-wrapper">
+            <div class="pixel-hero-container hud-size" id="hudHeroContainer"> 
+                <div class="pixel-hero-art">
+                    <div class="hero-cape"></div>
+                    <div class="hero-head"></div>
+                    <div class="hero-body"></div>
+                    <div class="hero-legs"></div>
+                    <div class="hero-dress"></div>
+                    <div class="hero-sword"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Busca -->
+    <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="BUSCAR MISSÃO...">
+    </div>
+
+    <!-- Grid de Cards -->
+    <div class="cards-container" id="container"></div>
+    
+    <!-- SOBRE O AUTOR -->
+    <section class="about-section">
+        <h2 class="about-header">SOBRE O AUTOR</h2>
+        <div class="about-content">
+            <div class="profile-frame">
+                <img src="src/images/FOTO-DE-PERFIL-CV-MAYRON-MUNIZ.webp" alt="Foto de Mayron Muniz" class="profile-img" onerror="this.style.display='none'; this.parentElement.innerHTML = '<i class=\'fa-solid fa-user-astronaut\' style=\'font-size:4rem; color:#fff; display:flex; justify-content:center; align-items:center; height:100%;\'></i>';">
+            </div>
+            <div class="author-info">
+                <p class="author-bio">
+                    Mayron Muniz é um Arquiteto de Soluções apaixonado por tecnologia e alta performance. Especialista em otimização de processos e geração de valor, fundou a Comunidade Algoritmados, fomentando o desenvolvimento de centenas de talentos. Seu conhecimento é vasto e multidisciplinar, abrangendo desde tecnologia e marketing digital até psicologia, mitologia e literatura. Atualmente, aprimora seus conhecimentos em Engenharia de Software na UNIFATECIE, sempre focado no aprendizado contínuo e disruptivo.
+                </p>
+                <div class="author-links">
+                    <a href="https://www.linkedin.com/in/mayronmuniz/" target="_blank" class="social-btn linkedin-btn">
+                        <i class="fa-brands fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/mayronmuniz" target="_blank" class="social-btn github-btn">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://github.com/mayronmuniz/Projeto-Imersao-Dev-Alura-Html-Css-Gemini" target="_blank" class="social-btn repo-btn">
+                        <i class="fa-solid fa-code-branch"></i> Repositório
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RPG MODAL -->
+    <div class="game-overlay" id="gameModal">
+        <div class="game-window" id="gameWindow">
+            <div class="game-avatar-area">
+                <div class="modal-hero-wrapper">
+                    <div class="pixel-hero-container" id="modalHeroContainer">
+                        <div class="pixel-hero-art">
+                            <div class="hero-cape"></div>
+                            <div class="hero-head"></div>
+                            <div class="hero-body"></div>
+                            <div class="hero-legs"></div>
+                            <div class="hero-dress"></div>
+                            <div class="hero-sword"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-stats">
+                    <span id="gameTitleText" style="color: var(--accent-blue); font-size:1.2rem;">QUEST</span>
+                    <span class="life-counter" style="color: var(--accent-red);">
+                        HP: <span id="gameLives">❤️❤️❤️❤️❤️</span>
+                    </span>
+                </div>
+                <button class="game-close-btn" onclick="closeGame()">EXIT</button>
+            </div>
+
+            <div class="game-content" id="gameContent">
+                <!-- Conteúdo injetado via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- POPUP LEVEL UP -->
+    <div class="levelup-popup" id="levelupPopup">
+        <i class="fa-solid fa-star"></i> LEVEL UP! <br><br> NOVO RANK ALCANÇADO!
+    </div>
+
+    <!-- Script Externo -->
+    <script src="script.js"></script>
+</body>
+</html>

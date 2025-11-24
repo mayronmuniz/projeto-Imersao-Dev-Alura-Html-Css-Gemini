@@ -1,0 +1,2673 @@
+{
+    "JavaScript": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Um guardião digital bloqueia o portão. 'Para entrar, imprima 'Olá Mundo' no console.'",
+                "choices": [
+                    { "text": "print('Olá Mundo')", "next": "fail_syntax", "type": "lose" },
+                    { "text": "console.log('Olá Mundo')", "next": "node_2", "type": "safe" },
+                    { "text": "System.out.println('Olá Mundo')", "next": "fail_java", "type": "lose" }
+                ]
+            },
+            "fail_syntax": { "text": "O guardião diz: 'Isso parece Python. Tente novamente.'", "type": "try_again" },
+            "fail_java": { "text": "O guardião ri: 'Aqui não é Java. Tente novamente.'", "type": "try_again" },
+            "node_2": {
+                "text": "Você entra e encontra uma variável 'caixa'. Ela não deve mudar de valor nunca. Como declarar?",
+                "choices": [
+                    { "text": "var caixa = 10;", "next": "fail_var", "type": "lose" },
+                    { "text": "let caixa = 10;", "next": "fail_let", "type": "lose" },
+                    { "text": "const caixa = 10;", "next": "node_3", "type": "safe" }
+                ]
+            },
+            "fail_var": { "text": "Var é antigo e tem escopo vazado. A caixa quebrou.", "type": "try_again" },
+            "fail_let": { "text": "Let permite mudança. O valor da caixa foi alterado por um goblin.", "type": "try_again" },
+            "node_3": {
+                "text": "A sala escurece. Há uma alavanca na parede com a classe '.luz'. Você precisa selecioná-la no DOM.",
+                "choices": [
+                    { "text": "document.getElementById('luz')", "next": "fail_id", "type": "lose" },
+                    { "text": "$('.luz')", "next": "fail_jquery", "type": "lose" },
+                    { "text": "document.querySelector('.luz')", "next": "node_4", "type": "safe" }
+                ]
+            },
+            "fail_id": { "text": "getElementById espera um ID, não uma classe. Você tateia no escuro.", "type": "try_again" },
+            "fail_jquery": { "text": "Você invoca uma biblioteca antiga (jQuery) que não está instalada aqui.", "type": "try_again" },
+            "node_4": {
+                "text": "Você segurou a alavanca. Agora precisa ativar um mecanismo quando ela for clicada. Qual o melhor método?",
+                "choices": [
+                    { "text": "alavanca.addEventListener('click', ativar)", "next": "node_5", "type": "safe" },
+                    { "text": "alavanca.onClick = ativar", "next": "fail_onclick", "type": "safe" },
+                    { "text": "alavanca.listen('click')", "next": "fail_listen", "type": "lose" }
+                ]
+            },
+            "fail_onclick": { "text": "Funciona, mas sobrescreve outros eventos. O mecanismo emperra. (Caminho neutro aceito)", "type": "try_again" },
+            "fail_listen": { "text": "Esse comando não existe no navegador. Nada acontece.", "type": "try_again" },
+            "node_5": {
+                "text": "A porta abre! Um Mago pede que você crie uma 'Arrow Function' para somar dois números (a, b).",
+                "choices": [
+                    { "text": "function somar(a, b) { return a + b; }", "next": "fail_func", "type": "lose" },
+                    { "text": "const somar = (a, b) => a + b;", "next": "node_6", "type": "safe" },
+                    { "text": "def somar(a, b): return a + b", "next": "fail_def", "type": "lose" }
+                ]
+            },
+            "fail_func": { "text": "Isso é uma função tradicional, não uma Arrow Function. O Mago bloqueia a passagem.", "type": "try_again" },
+            "fail_def": { "text": "Sintaxe de Python detectada! O Mago te expulsa.", "type": "try_again" },
+            "node_6": {
+                "text": "Você encontra um baú com um array de itens: ['espada', 'escudo', 'poção']. Como percorrer cada item?",
+                "choices": [
+                    { "text": "itens.forEach(item => usar(item))", "next": "node_7", "type": "safe" },
+                    { "text": "for (i in itens)", "next": "fail_in", "type": "lose" },
+                    { "text": "itens.mapAll()", "next": "fail_map", "type": "lose" }
+                ]
+            },
+            "fail_in": { "text": "For..in itera sobre índices/chaves, não valores diretamente de forma segura aqui.", "type": "try_again" },
+            "fail_map": { "text": "MapAll não existe. Map gera um novo array, mas não é o ideal só para percorrer.", "type": "try_again" },
+            "node_7": {
+                "text": "O Chefe Intermediário é um JSON gigante vindo de uma API (string). Como convertê-lo para Objeto?",
+                "choices": [
+                    { "text": "JSON.stringify(dados)", "next": "fail_string", "type": "lose" },
+                    { "text": "JSON.parse(dados)", "next": "node_8", "type": "safe" },
+                    { "text": "Object.from(dados)", "next": "fail_obj", "type": "lose" }
+                ]
+            },
+            "fail_string": { "text": "Isso transforma objeto em texto! Você petrificou o chefe em vez de entendê-lo.", "type": "try_again" },
+            "fail_obj": { "text": "Método inexistente.", "type": "try_again" },
+            "node_8": {
+                "text": "Você precisa juntar duas strings: 'Olá' e uma variável 'nome'. Qual a forma moderna (ES6)?",
+                "choices": [
+                    { "text": "'Olá ' + nome", "next": "fail_concat", "type": "lose" },
+                    { "text": "`Olá ${nome}`", "next": "node_9", "type": "safe" },
+                    { "text": "f'Olá {nome}'", "next": "fail_fstring", "type": "lose" }
+                ]
+            },
+            "fail_concat": { "text": "Concatenação clássica funciona, mas o Mago quer modernidade (Template Literals).", "type": "try_again" },
+            "fail_fstring": { "text": "Isso é Python (f-string).", "type": "try_again" },
+            "node_9": {
+                "text": "Um espectro pergunta: 'Qual operador verifica valor E tipo (igualdade estrita)?'",
+                "choices": [
+                    { "text": "==", "next": "fail_loose", "type": "lose" },
+                    { "text": "===", "next": "node_10", "type": "safe" },
+                    { "text": "=", "next": "fail_assign", "type": "lose" }
+                ]
+            },
+            "fail_loose": { "text": "== faz coerção de tipo (ex: '5' == 5). O espectro te engana.", "type": "try_again" },
+            "fail_assign": { "text": "= é atribuição, não comparação.", "type": "try_again" },
+            "node_10": {
+                "text": "Você tem um objeto 'heroi' e quer extrair a propriedade 'vida' em uma variável. Use Destructuring.",
+                "choices": [
+                    { "text": "const vida = heroi.vida", "next": "fail_dot", "type": "lose" },
+                    { "text": "const { vida } = heroi", "next": "node_11", "type": "safe" },
+                    { "text": "const [ vida ] = heroi", "next": "fail_array", "type": "lose" }
+                ]
+            },
+            "fail_dot": { "text": "Funciona, mas não é a sintaxe de Destructuring que o desafio pede.", "type": "try_again" },
+            "fail_array": { "text": "Colchetes [] são para Arrays, chaves {} para Objetos.", "type": "try_again" },
+            "node_11": {
+                "text": "Uma armadilha dispara! Você precisa verificar se 'dano' é nulo ou indefinido antes de aplicar um valor padrão 10.",
+                "choices": [
+                    { "text": "dano || 10", "next": "fail_or", "type": "lose" },
+                    { "text": "dano ?? 10", "next": "node_12", "type": "safe" },
+                    { "text": "dano ? 10 : 0", "next": "fail_ternary", "type": "lose" }
+                ]
+            },
+            "fail_or": { "text": "O operador || troca 0 ou '' por 10 também. Você quer apenas Nullish Coalescing.", "type": "try_again" },
+            "fail_ternary": { "text": "Lógica ternária incorreta para valor padrão.", "type": "try_again" },
+            "node_12": {
+                "text": "Você precisa criar um novo array contendo todos os itens do array 'mochila' mais uma 'chave'. Use Spread.",
+                "choices": [
+                    { "text": "[mochila, 'chave']", "next": "fail_nested", "type": "lose" },
+                    { "text": "[...mochila, 'chave']", "next": "node_13", "type": "safe" },
+                    { "text": "mochila.push('chave')", "next": "fail_mut", "type": "lose" }
+                ]
+            },
+            "fail_nested": { "text": "Isso cria um array dentro de outro array [[...], 'chave'].", "type": "try_again" },
+            "fail_mut": { "text": "Push altera o original. O desafio pedia um NOVO array.", "type": "try_again" },
+            "node_13": {
+                "text": "Para filtrar apenas os números pares de uma lista [1, 2, 3, 4], qual método usar?",
+                "choices": [
+                    { "text": "lista.map(n => n % 2 == 0)", "next": "fail_map_bool", "type": "lose" },
+                    { "text": "lista.filter(n => n % 2 === 0)", "next": "node_14", "type": "safe" },
+                    { "text": "lista.reduce(...)", "next": "fail_reduce", "type": "lose" }
+                ]
+            },
+            "fail_map_bool": { "text": "Map retorna [false, true, false, true], não os números filtrados.", "type": "try_again" },
+            "fail_reduce": { "text": "Possível, mas complexo demais para um filtro simples.", "type": "try_again" },
+            "node_14": {
+                "text": "O chão treme! Uma operação assíncrona 'carregarMapa()' retorna uma Promise. Como tratá-la?",
+                "choices": [
+                    { "text": "carregarMapa.then()", "next": "node_15", "type": "safe" },
+                    { "text": "carregarMapa.catch()", "next": "fail_catch_only", "type": "lose" },
+                    { "text": "return carregarMapa", "next": "fail_return", "type": "lose" }
+                ]
+            },
+            "fail_catch_only": { "text": "Catch pega erros, mas não resolve o sucesso.", "type": "try_again" },
+            "fail_return": { "text": "Você retornou a promessa pendente, não o resultado.", "type": "try_again" },
+            "node_15": {
+                "text": "Agora usando a sintaxe moderna 'async/await'. Como você chama a função assíncrona 'iniciar'?",
+                "choices": [
+                    { "text": "const res = await iniciar();", "next": "node_16", "type": "safe" },
+                    { "text": "const res = start iniciar();", "next": "fail_start", "type": "lose" },
+                    { "text": "await iniciar", "next": "fail_no_call", "type": "lose" }
+                ]
+            },
+            "fail_start": { "text": "Sintaxe inventada.", "type": "try_again" },
+            "fail_no_call": { "text": "Você esqueceu os parênteses () para invocar a função.", "type": "try_again" },
+            "node_16": {
+                "text": "Você precisa verificar o tipo de uma variável 'x'.",
+                "choices": [
+                    { "text": "type x", "next": "fail_py_type", "type": "lose" },
+                    { "text": "typeof x", "next": "node_17", "type": "safe" },
+                    { "text": "x.getType()", "next": "fail_method", "type": "lose" }
+                ]
+            },
+            "fail_py_type": { "text": "Comando inválido em JS.", "type": "try_again" },
+            "fail_method": { "text": "Esse método não existe nativamente.", "type": "try_again" },
+            "node_17": {
+                "text": "Como transformar uma string '100' em um número inteiro?",
+                "choices": [
+                    { "text": "parseInt('100')", "next": "node_18", "type": "safe" },
+                    { "text": "toInteger('100')", "next": "fail_toint", "type": "lose" },
+                    { "text": "'100'.toNumber()", "next": "fail_tonum", "type": "lose" }
+                ]
+            },
+            "fail_toint": { "text": "Função inexistente.", "type": "try_again" },
+            "fail_tonum": { "text": "Método inexistente.", "type": "try_again" },
+            "node_18": {
+                "text": "Um Golem de Pedra pergunta: 'Qual método remove o ÚLTIMO elemento de um array?'",
+                "choices": [
+                    { "text": "array.shift()", "next": "fail_shift", "type": "lose" },
+                    { "text": "array.pop()", "next": "node_19", "type": "safe" },
+                    { "text": "array.push()", "next": "fail_push_add", "type": "lose" }
+                ]
+            },
+            "fail_shift": { "text": "Shift remove o PRIMEIRO elemento.", "type": "try_again" },
+            "fail_push_add": { "text": "Push ADICIONA no final.", "type": "try_again" },
+            "node_19": {
+                "text": "Qual método adiciona um elemento no INÍCIO do array?",
+                "choices": [
+                    { "text": "array.unshift()", "next": "node_20", "type": "safe" },
+                    { "text": "array.prepend()", "next": "fail_prepend", "type": "lose" },
+                    { "text": "array.addFirst()", "next": "fail_addfirst", "type": "lose" }
+                ]
+            },
+            "fail_prepend": { "text": "Prepend existe no DOM, não em arrays JS.", "type": "try_again" },
+            "fail_addfirst": { "text": "Método Java/C#, não JS.", "type": "try_again" },
+            "node_20": {
+                "text": "Para evitar erros ao acessar 'usuario.endereco.rua' se 'endereco' não existir, o que você usa?",
+                "choices": [
+                    { "text": "usuario.endereco?.rua", "next": "node_21", "type": "safe" },
+                    { "text": "usuario.endereco && rua", "next": "fail_logic", "type": "lose" },
+                    { "text": "try { usuario.endereco.rua }", "next": "fail_try", "type": "lose" }
+                ]
+            },
+            "fail_logic": { "text": "Lógica incompleta.", "type": "try_again" },
+            "fail_try": { "text": "Funciona, mas Optional Chaining (?.) é muito mais limpo.", "type": "try_again" },
+            "node_21": {
+                "text": "Você quer armazenar um dado no navegador que persista após fechar a aba.",
+                "choices": [
+                    { "text": "sessionStorage", "next": "fail_session", "type": "lose" },
+                    { "text": "localStorage", "next": "node_22", "type": "safe" },
+                    { "text": "cookies", "next": "fail_cookies", "type": "lose" }
+                ]
+            },
+            "fail_session": { "text": "Session morre ao fechar a aba.", "type": "try_again" },
+            "fail_cookies": { "text": "Antigo e complexo para dados simples.", "type": "try_again" },
+            "node_22": {
+                "text": "Como você define uma Classe em JS moderno?",
+                "choices": [
+                    { "text": "class Heroi { constructor() {} }", "next": "node_23", "type": "safe" },
+                    { "text": "function Heroi() {}", "next": "fail_proto", "type": "lose" },
+                    { "text": "define class Heroi", "next": "fail_define", "type": "lose" }
+                ]
+            },
+            "fail_proto": { "text": "Isso é o jeito antigo (prototype).", "type": "try_again" },
+            "fail_define": { "text": "Sintaxe inventada.", "type": "try_again" },
+            "node_23": {
+                "text": "Como exportar uma função para ser usada em outro arquivo?",
+                "choices": [
+                    { "text": "export default minhaFuncao", "next": "node_24", "type": "safe" },
+                    { "text": "module.output = minhaFuncao", "next": "fail_output", "type": "lose" },
+                    { "text": "return minhaFuncao", "next": "fail_ret", "type": "lose" }
+                ]
+            },
+            "fail_output": { "text": "Em Node.js seria module.exports, mas em ES6 Modules é export.", "type": "try_again" },
+            "fail_ret": { "text": "Return é para sair de funções.", "type": "try_again" },
+            "node_24": {
+                "text": "Qual a diferença entre 'forEach' e 'map'?",
+                "choices": [
+                    { "text": "Nenhuma, são iguais.", "next": "fail_equal", "type": "lose" },
+                    { "text": "Map retorna um novo array, forEach não.", "next": "node_25", "type": "safe" },
+                    { "text": "forEach é mais rápido.", "next": "fail_fast", "type": "lose" }
+                ]
+            },
+            "fail_equal": { "text": "Errado. O retorno é fundamentalmente diferente.", "type": "try_again" },
+            "fail_fast": { "text": "Performance depende do motor, mas a funcionalidade é o que importa aqui.", "type": "try_again" },
+            "node_25": {
+                "text": "O que o método 'reduce' faz?",
+                "choices": [
+                    { "text": "Reduz o tamanho do arquivo.", "next": "fail_size", "type": "lose" },
+                    { "text": "Reduz um array a um único valor acumulado.", "next": "node_26", "type": "safe" },
+                    { "text": "Apaga itens duplicados.", "next": "fail_dup", "type": "lose" }
+                ]
+            },
+            "fail_size": { "text": "Não tem a ver com compressão.", "type": "try_again" },
+            "fail_dup": { "text": "Isso seria um Set ou filter.", "type": "try_again" },
+            "node_26": {
+                "text": "Você precisa parar a propagação de um evento (bubbling). O que chamar?",
+                "choices": [
+                    { "text": "event.stopPropagation()", "next": "node_27", "type": "safe" },
+                    { "text": "event.preventDefault()", "next": "fail_prevent", "type": "lose" },
+                    { "text": "event.stop()", "next": "fail_stop", "type": "lose" }
+                ]
+            },
+            "fail_prevent": { "text": "Isso previne o comportamento padrão (ex: enviar form), não a propagação.", "type": "try_again" },
+            "fail_stop": { "text": "Método inexistente.", "type": "try_again" },
+            "node_27": {
+                "text": "O que é o 'this' em uma Arrow Function?",
+                "choices": [
+                    { "text": "O objeto que chamou a função.", "next": "fail_obj_this", "type": "lose" },
+                    { "text": "Ele herda o 'this' do escopo pai (léxico).", "next": "node_28", "type": "safe" },
+                    { "text": "Sempre undefined.", "next": "fail_und", "type": "lose" }
+                ]
+            },
+            "fail_obj_this": { "text": "Isso é para funções normais. Arrow functions não têm seu próprio 'this'.", "type": "try_again" },
+            "fail_und": { "text": "Não necessariamente.", "type": "try_again" },
+            "node_28": {
+                "text": "Como verificar se um valor 'n' NÃO é um número (Not a Number)?",
+                "choices": [
+                    { "text": "n == NaN", "next": "fail_nan_eq", "type": "lose" },
+                    { "text": "isNaN(n)", "next": "node_29", "type": "safe" },
+                    { "text": "typeof n == 'nan'", "next": "fail_typeof", "type": "lose" }
+                ]
+            },
+            "fail_nan_eq": { "text": "NaN nunca é igual a NaN em JS!", "type": "try_again" },
+            "fail_typeof": { "text": "typeof NaN retorna 'number' (curiosamente).", "type": "try_again" },
+            "node_29": {
+                "text": "Você precisa criar uma cópia rasa (shallow copy) de um objeto.",
+                "choices": [
+                    { "text": "const copia = obj", "next": "fail_ref", "type": "lose" },
+                    { "text": "const copia = { ...obj }", "next": "node_30", "type": "safe" },
+                    { "text": "const copia = Object.create(obj)", "next": "fail_create_obj", "type": "lose" }
+                ]
+            },
+            "fail_ref": { "text": "Isso apenas copia a referência, não o objeto.", "type": "try_again" },
+            "fail_create_obj": { "text": "Isso cria um objeto com 'obj' como protótipo, não uma cópia das props.", "type": "try_again" },
+            "node_30": {
+                "text": "Qual comando interrompe um loop imediatamente?",
+                "choices": [
+                    { "text": "stop", "next": "fail_stop_cmd", "type": "lose" },
+                    { "text": "break", "next": "node_31", "type": "safe" },
+                    { "text": "continue", "next": "fail_continue", "type": "lose" }
+                ]
+            },
+            "fail_stop_cmd": { "text": "Comando não existe.", "type": "try_again" },
+            "fail_continue": { "text": "Continue pula para a próxima iteração, não para o loop.", "type": "try_again" },
+            "node_31": {
+                "text": "Chefe Final (O Dragão do Escopo): O que acontece se você usar uma variável 'let' antes de declará-la?",
+                "choices": [
+                    { "text": "É undefined.", "next": "fail_hoisting", "type": "lose" },
+                    { "text": "ReferenceError (Temporal Dead Zone).", "next": "win", "type": "win" },
+                    { "text": "Funciona normalmente.", "next": "fail_work", "type": "lose" }
+                ]
+            },
+            "fail_hoisting": { "text": "Isso acontece com 'var' (hoisting). Com 'let' é erro!", "type": "try_again" },
+            "fail_work": { "text": "O código quebra imediatamente.", "type": "try_again" },
+            "win": { "text": "VOCÊ DERROTOU O DRAGÃO E DOMINOU A LINGUAGEM! PARABÉNS, SENHOR DO JAVASCRIPT!", "type": "win" }
+        }
+    },
+    "CSS": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você chega ao Reino do Estilo. Tudo é cinza e sem vida. Um Pintor Mágico pergunta: 'Como você seleciona todos os parágrafos para pintá-los?'",
+                "choices": [
+                    { "text": "#p { ... }", "next": "fail_id", "type": "lose" },
+                    { "text": "p { ... }", "next": "node_2", "type": "safe" },
+                    { "text": ".paragraph { ... }", "next": "fail_class", "type": "lose" }
+                ]
+            },
+            "fail_id": { "text": "Isso seleciona um ID específico, não todos os parágrafos.", "type": "try_again" },
+            "fail_class": { "text": "Isso seleciona uma classe, não a tag <p> diretamente.", "type": "try_again" },
+
+            "node_2": {
+                "text": "O Pintor sorri. Agora, como você muda a cor do texto para vermelho?",
+                "choices": [
+                    { "text": "text-color: red;", "next": "fail_text_color", "type": "lose" },
+                    { "text": "color: red;", "next": "node_3", "type": "safe" },
+                    { "text": "font-color: red;", "next": "fail_font_color", "type": "lose" }
+                ]
+            },
+            "fail_text_color": { "text": "Propriedade inexistente. Tente algo mais simples.", "type": "try_again" },
+            "fail_font_color": { "text": "Essa propriedade não existe no manual de estilos.", "type": "try_again" },
+
+            "node_3": {
+                "text": "Você encontra um baú (div) muito pequeno. Como aumentar a largura dele para 100% da tela?",
+                "choices": [
+                    { "text": "width: 100%;", "next": "node_4", "type": "safe" },
+                    { "text": "size: 100%;", "next": "fail_size", "type": "lose" },
+                    { "text": "max-width: 100%;", "next": "fail_max", "type": "lose" }
+                ]
+            },
+            "fail_size": { "text": "Size não é uma propriedade válida para largura.", "type": "try_again" },
+            "fail_max": { "text": "Isso apenas limita o tamanho, não força ele a crescer se estiver vazio.", "type": "try_again" },
+
+            "node_4": {
+                "text": "O baú cresceu, mas está colado nas bordas. Como adicionar espaço INTERNO?",
+                "choices": [
+                    { "text": "margin: 20px;", "next": "fail_margin", "type": "lose" },
+                    { "text": "padding: 20px;", "next": "node_5", "type": "safe" },
+                    { "text": "border: 20px;", "next": "fail_border", "type": "lose" }
+                ]
+            },
+            "fail_margin": { "text": "Margin é espaço EXTERNO (fora da caixa).", "type": "try_again" },
+            "fail_border": { "text": "Border cria uma borda, não espaço interno.", "type": "try_again" },
+
+            "node_5": {
+                "text": "Agora você precisa afastar o baú dos outros elementos (espaço EXTERNO).",
+                "choices": [
+                    { "text": "padding: 20px;", "next": "fail_pad_again", "type": "lose" },
+                    { "text": "spacing: 20px;", "next": "fail_space", "type": "lose" },
+                    { "text": "margin: 20px;", "next": "node_6", "type": "safe" }
+                ]
+            },
+            "fail_pad_again": { "text": "Já aprendemos que padding é interno!", "type": "try_again" },
+            "fail_space": { "text": "Propriedade inexistente.", "type": "try_again" },
+
+            "node_6": {
+                "text": "Você vê um texto muito fino. Como deixá-lo em negrito?",
+                "choices": [
+                    { "text": "font-style: bold;", "next": "fail_style", "type": "lose" },
+                    { "text": "font-weight: bold;", "next": "node_7", "type": "safe" },
+                    { "text": "text-decoration: bold;", "next": "fail_dec", "type": "lose" }
+                ]
+            },
+            "fail_style": { "text": "Font-style é para itálico (italic).", "type": "try_again" },
+            "fail_dec": { "text": "Text-decoration é para sublinhado (underline).", "type": "try_again" },
+
+            "node_7": {
+                "text": "Um elemento está escondido. Como removê-lo completamente do layout (como se não existisse)?",
+                "choices": [
+                    { "text": "visibility: hidden;", "next": "fail_vis", "type": "lose" },
+                    { "text": "opacity: 0;", "next": "fail_op", "type": "lose" },
+                    { "text": "display: none;", "next": "node_8", "type": "safe" }
+                ]
+            },
+            "fail_vis": { "text": "Ele fica invisível, mas ainda ocupa espaço.", "type": "try_again" },
+            "fail_op": { "text": "Ele fica transparente, mas ainda ocupa espaço e é clicável.", "type": "try_again" },
+
+            "node_8": {
+                "text": "Você entra no Labirinto do Flexbox. Como ativar o Flexbox em um container?",
+                "choices": [
+                    { "text": "position: flex;", "next": "fail_pos_flex", "type": "lose" },
+                    { "text": "display: flex;", "next": "node_9", "type": "safe" },
+                    { "text": "flex-direction: row;", "next": "fail_dir", "type": "lose" }
+                ]
+            },
+            "fail_pos_flex": { "text": "Flex não é um valor de position.", "type": "try_again" },
+            "fail_dir": { "text": "Isso configura a direção, mas não ativa o flex.", "type": "try_again" },
+
+            "node_9": {
+                "text": "Os itens estão em linha, mas você quer que fiquem em coluna. O que fazer?",
+                "choices": [
+                    { "text": "flex-direction: column;", "next": "node_10", "type": "safe" },
+                    { "text": "justify-content: column;", "next": "fail_just_col", "type": "lose" },
+                    { "text": "align-items: column;", "next": "fail_align_col", "type": "lose" }
+                ]
+            },
+            "fail_just_col": { "text": "Valor inválido para justify-content.", "type": "try_again" },
+            "fail_align_col": { "text": "Valor inválido para align-items.", "type": "try_again" },
+
+            "node_10": {
+                "text": "Como centralizar os itens horizontalmente (no eixo principal) em um container flex?",
+                "choices": [
+                    { "text": "align-items: center;", "next": "fail_align", "type": "lose" },
+                    { "text": "text-align: center;", "next": "fail_text_align", "type": "lose" },
+                    { "text": "justify-content: center;", "next": "node_11", "type": "safe" }
+                ]
+            },
+            "fail_align": { "text": "Align-items controla o eixo transversal (vertical, por padrão).", "type": "try_again" },
+            "fail_text_align": { "text": "Isso funciona para texto, não para itens flex.", "type": "try_again" },
+
+            "node_11": {
+                "text": "E para centralizar verticalmente (no eixo transversal)?",
+                "choices": [
+                    { "text": "align-items: center;", "next": "node_12", "type": "safe" },
+                    { "text": "vertical-align: middle;", "next": "fail_vertical", "type": "lose" },
+                    { "text": "justify-content: middle;", "next": "fail_just_mid", "type": "lose" }
+                ]
+            },
+            "fail_vertical": { "text": "Vertical-align é para elementos inline/table.", "type": "try_again" },
+            "fail_just_mid": { "text": "Middle não existe em Flexbox (use center).", "type": "try_again" },
+
+            "node_12": {
+                "text": "Os itens estão espremidos. Como permitir que eles quebrem para a próxima linha?",
+                "choices": [
+                    { "text": "flex-wrap: wrap;", "next": "node_13", "type": "safe" },
+                    { "text": "white-space: wrap;", "next": "fail_white", "type": "lose" },
+                    { "text": "overflow: wrap;", "next": "fail_over", "type": "lose" }
+                ]
+            },
+            "fail_white": { "text": "Isso é para texto.", "type": "try_again" },
+            "fail_over": { "text": "Isso não existe.", "type": "try_again" },
+
+            "node_13": {
+                "text": "Você encontrou uma Grid Mágica. Como criar um grid com 3 colunas iguais?",
+                "choices": [
+                    { "text": "grid-template-columns: 33% 33% 33%;", "next": "fail_percent", "type": "lose" },
+                    { "text": "grid-template-columns: repeat(3, 1fr);", "next": "node_14", "type": "safe" },
+                    { "text": "display: grid-3;", "next": "fail_display3", "type": "lose" }
+                ]
+            },
+            "fail_percent": { "text": "Funciona, mas sobra 1%. Use frações (fr) para perfeição.", "type": "try_again" },
+            "fail_display3": { "text": "Sintaxe inventada.", "type": "try_again" },
+
+            "node_14": {
+                "text": "Como criar um espaço (gap) de 20px entre as células do grid?",
+                "choices": [
+                    { "text": "margin: 20px;", "next": "fail_grid_marg", "type": "lose" },
+                    { "text": "gap: 20px;", "next": "node_15", "type": "safe" },
+                    { "text": "spacing: 20px;", "next": "fail_grid_space", "type": "lose" }
+                ]
+            },
+            "fail_grid_marg": { "text": "Isso afeta o container, não o espaço entre itens.", "type": "try_again" },
+            "fail_grid_space": { "text": "Não existe.", "type": "try_again" },
+
+            "node_15": {
+                "text": "Um elemento precisa ficar fixo no topo da tela, mesmo ao rolar. Qual position?",
+                "choices": [
+                    { "text": "position: absolute;", "next": "fail_abs", "type": "lose" },
+                    { "text": "position: static;", "next": "fail_static", "type": "lose" },
+                    { "text": "position: fixed;", "next": "node_16", "type": "safe" }
+                ]
+            },
+            "fail_abs": { "text": "Absolute rola junto com a página (se o pai não for fixed).", "type": "try_again" },
+            "fail_static": { "text": "Static é o padrão, não fixa nada.", "type": "try_again" },
+
+            "node_16": {
+                "text": "E para um elemento se posicionar em relação ao seu pai mais próximo (que não seja static)?",
+                "choices": [
+                    { "text": "position: relative;", "next": "fail_rel", "type": "lose" },
+                    { "text": "position: absolute;", "next": "node_17", "type": "safe" },
+                    { "text": "position: sticky;", "next": "fail_stick", "type": "lose" }
+                ]
+            },
+            "fail_rel": { "text": "Relative posiciona em relação a SI MESMO.", "type": "try_again" },
+            "fail_stick": { "text": "Sticky cola baseado na rolagem.", "type": "try_again" },
+
+            "node_17": {
+                "text": "Qual propriedade altera a ordem de empilhamento (quem fica por cima) dos elementos posicionados?",
+                "choices": [
+                    { "text": "z-index", "next": "node_18", "type": "safe" },
+                    { "text": "stack-order", "next": "fail_stack", "type": "lose" },
+                    { "text": "layer", "next": "fail_layer", "type": "lose" }
+                ]
+            },
+            "fail_stack": { "text": "Não existe.", "type": "try_again" },
+            "fail_layer": { "text": "Existe cascade layers, mas para empilhamento visual usamos z-index.", "type": "try_again" },
+
+            "node_18": {
+                "text": "Você quer adicionar uma sombra em uma caixa. Qual a propriedade?",
+                "choices": [
+                    { "text": "text-shadow", "next": "fail_txt_shad", "type": "lose" },
+                    { "text": "box-shadow", "next": "node_19", "type": "safe" },
+                    { "text": "shadow", "next": "fail_shad", "type": "lose" }
+                ]
+            },
+            "fail_txt_shad": { "text": "Isso é para texto, não para a caixa (div).", "type": "try_again" },
+            "fail_shad": { "text": "Incompleto.", "type": "try_again" },
+
+            "node_19": {
+                "text": "Como arredondar os cantos de um botão?",
+                "choices": [
+                    { "text": "corner-radius", "next": "fail_corner", "type": "lose" },
+                    { "text": "border-radius", "next": "node_20", "type": "safe" },
+                    { "text": "border-round", "next": "fail_round", "type": "lose" }
+                ]
+            },
+            "fail_corner": { "text": "Parece lógico, mas não é o nome.", "type": "try_again" },
+            "fail_round": { "text": "Não existe.", "type": "try_again" },
+
+            "node_20": {
+                "text": "Você quer mudar a cor de um link quando o mouse passa por cima. Qual pseudo-classe usar?",
+                "choices": [
+                    { "text": ":hover", "next": "node_21", "type": "safe" },
+                    { "text": ":active", "next": "fail_active", "type": "lose" },
+                    { "text": ":focus", "next": "fail_focus", "type": "lose" }
+                ]
+            },
+            "fail_active": { "text": ":active é no momento do clique.", "type": "try_again" },
+            "fail_focus": { "text": ":focus é quando o elemento é selecionado (tab).", "type": "try_again" },
+
+            "node_21": {
+                "text": "Como selecionar o PRIMEIRO filho de uma lista?",
+                "choices": [
+                    { "text": ":first-child", "next": "node_22", "type": "safe" },
+                    { "text": ":child(1)", "next": "fail_child1", "type": "lose" },
+                    { "text": ":nth-child(0)", "next": "fail_nth0", "type": "lose" }
+                ]
+            },
+            "fail_child1": { "text": "Sintaxe incorreta.", "type": "try_again" },
+            "fail_nth0": { "text": "CSS começa a contar do 1, não do 0!", "type": "try_again" },
+
+            "node_22": {
+                "text": "Você quer aplicar estilos apenas em telas menores que 600px. O que usar?",
+                "choices": [
+                    { "text": "@media (max-width: 600px)", "next": "node_23", "type": "safe" },
+                    { "text": "@screen small", "next": "fail_screen", "type": "lose" },
+                    { "text": "if (width < 600)", "next": "fail_if", "type": "lose" }
+                ]
+            },
+            "fail_screen": { "text": "Isso parece Tailwind, não CSS puro.", "type": "try_again" },
+            "fail_if": { "text": "Isso é lógica de programação (JS), não CSS.", "type": "try_again" },
+
+            "node_23": {
+                "text": "Qual unidade é relativa ao tamanho da fonte do elemento raiz (html)?",
+                "choices": [
+                    { "text": "em", "next": "fail_em", "type": "lose" },
+                    { "text": "rem", "next": "node_24", "type": "safe" },
+                    { "text": "px", "next": "fail_px", "type": "lose" }
+                ]
+            },
+            "fail_em": { "text": "em é relativo ao elemento pai.", "type": "try_again" },
+            "fail_px": { "text": "px é absoluto (pixels).", "type": "try_again" },
+
+            "node_24": {
+                "text": "Como fazer uma animação suave de 0.5s ao mudar a cor?",
+                "choices": [
+                    { "text": "animation: 0.5s;", "next": "fail_anim", "type": "lose" },
+                    { "text": "transition: 0.5s;", "next": "node_25", "type": "safe" },
+                    { "text": "change: 0.5s;", "next": "fail_change", "type": "lose" }
+                ]
+            },
+            "fail_anim": { "text": "Animation requer keyframes. Para mudanças simples, use transition.", "type": "try_again" },
+            "fail_change": { "text": "Não existe.", "type": "try_again" },
+
+            "node_25": {
+                "text": "Para definir uma animação complexa com etapas, qual regra você usa?",
+                "choices": [
+                    { "text": "@keyframes", "next": "node_26", "type": "safe" },
+                    { "text": "@animation", "next": "fail_at_anim", "type": "lose" },
+                    { "text": "@steps", "next": "fail_steps", "type": "lose" }
+                ]
+            },
+            "fail_at_anim": { "text": "Não existe essa regra.", "type": "try_again" },
+            "fail_steps": { "text": "Não existe.", "type": "try_again" },
+
+            "node_26": {
+                "text": "Você quer importar uma fonte externa. Qual regra usar no CSS?",
+                "choices": [
+                    { "text": "@import", "next": "fail_import", "type": "safe" },
+                    { "text": "@font-face", "next": "node_27", "type": "safe" },
+                    { "text": "link", "next": "fail_link", "type": "lose" }
+                ]
+            },
+            "fail_import": { "text": "Funciona para outros CSS, mas para definir arquivos de fonte locais, @font-face é a chave.", "type": "safe" },
+            "fail_link": { "text": "Isso é no HTML.", "type": "try_again" },
+
+            "node_27": {
+                "text": "Como selecionar todos os elementos que são filhos diretos de uma div?",
+                "choices": [
+                    { "text": "div > *", "next": "node_28", "type": "safe" },
+                    { "text": "div *", "next": "fail_descendant", "type": "lose" },
+                    { "text": "div + *", "next": "fail_adjacent", "type": "lose" }
+                ]
+            },
+            "fail_descendant": { "text": "Espaço seleciona todos os descendentes (netos, bisnetos...).", "type": "try_again" },
+            "fail_adjacent": { "text": "+ seleciona o irmão adjacente.", "type": "try_again" },
+
+            "node_28": {
+                "text": "Qual propriedade controla a transparência de um elemento?",
+                "choices": [
+                    { "text": "transparent", "next": "fail_transp", "type": "lose" },
+                    { "text": "opacity", "next": "node_29", "type": "safe" },
+                    { "text": "filter", "next": "fail_filter_op", "type": "lose" }
+                ]
+            },
+            "fail_transp": { "text": "Isso é um valor de cor, não uma propriedade.", "type": "try_again" },
+            "fail_filter_op": { "text": "Filter pode fazer isso, mas opacity é a propriedade direta.", "type": "try_again" },
+
+            "node_29": {
+                "text": "O que 'box-sizing: border-box' faz?",
+                "choices": [
+                    { "text": "Inclui padding e border na largura total.", "next": "node_30", "type": "safe" },
+                    { "text": "Adiciona uma borda na caixa.", "next": "fail_add_bor", "type": "lose" },
+                    { "text": "Faz a caixa flutuar.", "next": "fail_float_box", "type": "lose" }
+                ]
+            },
+            "fail_add_bor": { "text": "Não, isso seria border.", "type": "try_again" },
+            "fail_float_box": { "text": "Não tem relação com float.", "type": "try_again" },
+
+            "node_30": {
+                "text": "Chefe Final: O Dragão da Responsividade. Ele pergunta: 'Qual a meta tag essencial no HTML para o CSS responsivo funcionar?'",
+                "choices": [
+                    { "text": "<meta name='viewport' content='width=device-width, initial-scale=1'>", "next": "win", "type": "win" },
+                    { "text": "<meta name='responsive' content='true'>", "next": "fail_meta_resp", "type": "lose" },
+                    { "text": "<meta charset='utf-8'>", "next": "fail_charset", "type": "lose" }
+                ]
+            },
+            "fail_meta_resp": { "text": "Tag inventada! O Dragão queima seu layout.", "type": "try_again" },
+            "fail_charset": { "text": "Importante, mas não controla a responsividade.", "type": "try_again" },
+
+            "win": { "text": "VOCÊ DOMOU O DRAGÃO E O LAYOUT ESTÁ PERFEITO EM TODOS OS DISPOSITIVOS! MESTRE DO CSS!", "type": "win" }
+        }
+    },
+  "Python": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você acorda na Floresta de Pythônia. Uma Grande Serpente bloqueia o caminho e sibila: 'Para passar, mostre que sabe falar. Imprima 'Olá Mundo'. '",
+                "choices": [
+                    { "text": "console.log('Olá Mundo')", "next": "fail_js", "type": "lose" },
+                    { "text": "print('Olá Mundo')", "next": "node_2", "type": "safe" },
+                    { "text": "System.out.println('Olá Mundo')", "next": "fail_java", "type": "lose" }
+                ]
+            },
+            "fail_js": { "text": "A serpente ri: 'Isso é coisa de navegador web. Aqui é terra firme!'", "type": "try_again" },
+            "fail_java": { "text": "A serpente dorme de tédio com tanta verbosidade.", "type": "try_again" },
+            
+            "node_2": {
+                "text": "A serpente se move. Você encontra um baú trancado. Para abri-lo, crie uma variável 'chave' com o valor 10.",
+                "choices": [
+                    { "text": "var chave = 10", "next": "fail_var", "type": "lose" },
+                    { "text": "int chave = 10;", "next": "fail_int", "type": "lose" },
+                    { "text": "chave = 10", "next": "node_3", "type": "safe" }
+                ]
+            },
+            "fail_var": { "text": "Var? Aqui não precisamos declarar palavras-chave para variáveis simples.", "type": "try_again" },
+            "fail_int": { "text": "Tipagem estática explícita não é necessária aqui, viajante.", "type": "try_again" },
+
+            "node_3": {
+                "text": "O baú abre! Dentro há um pergaminho sobre Indentação. Como você define um bloco de código 'if'?",
+                "choices": [
+                    { "text": "Usando chaves { }", "next": "fail_braces", "type": "lose" },
+                    { "text": "Usando : e indentação", "next": "node_4", "type": "safe" },
+                    { "text": "Usando begin e end", "next": "fail_pascal", "type": "lose" }
+                ]
+            },
+            "fail_braces": { "text": "Chaves são para dicionários! A indentação quebrou e o código falhou.", "type": "try_again" },
+            "fail_pascal": { "text": "Isso é Pascal? Você está no século errado.", "type": "try_again" },
+
+            "node_4": {
+                "text": "Você precisa perguntar o nome do guardião da ponte. Qual função captura entrada do usuário?",
+                "choices": [
+                    { "text": "cin >> nome", "next": "fail_cpp", "type": "lose" },
+                    { "text": "input('Qual seu nome?')", "next": "node_5", "type": "safe" },
+                    { "text": "scanf('%s', nome)", "next": "fail_c", "type": "lose" }
+                ]
+            },
+            "fail_cpp": { "text": "C++ é poderoso, mas aqui preferimos simplicidade.", "type": "try_again" },
+            "fail_c": { "text": "Cuidado com buffer overflow! Use a magia de alto nível.", "type": "try_again" },
+
+            "node_5": {
+                "text": "O guardião deixa passar. Agora você vê uma Lista de frutas: ['maçã', 'banana']. Como adicionar 'uva'?",
+                "choices": [
+                    { "text": "lista.push('uva')", "next": "fail_push", "type": "lose" },
+                    { "text": "lista.add('uva')", "next": "fail_add", "type": "lose" },
+                    { "text": "lista.append('uva')", "next": "node_6", "type": "safe" }
+                ]
+            },
+            "fail_push": { "text": "Push é coisa de JavaScript.", "type": "try_again" },
+            "fail_add": { "text": "Add é para Sets (Conjuntos), não Listas.", "type": "try_again" },
+
+            "node_6": {
+                "text": "Você precisa acessar o PRIMEIRO item da lista. Qual o índice?",
+                "choices": [
+                    { "text": "lista[1]", "next": "fail_one", "type": "lose" },
+                    { "text": "lista[0]", "next": "node_7", "type": "safe" },
+                    { "text": "lista.first()", "next": "fail_first", "type": "lose" }
+                ]
+            },
+            "fail_one": { "text": "Em Python (e na maioria das linguagens), começamos do zero!", "type": "try_again" },
+            "fail_first": { "text": "Método inexistente.", "type": "try_again" },
+
+            "node_7": {
+                "text": "Uma Tupla Mágica aparece: (1, 2). Você tenta mudar o primeiro valor para 3. O que acontece?",
+                "choices": [
+                    { "text": "Funciona normalmente", "next": "fail_mutable", "type": "lose" },
+                    { "text": "Erro! Tuplas são imutáveis", "next": "node_8", "type": "safe" },
+                    { "text": "A tupla vira uma lista", "next": "fail_transform", "type": "lose" }
+                ]
+            },
+            "fail_mutable": { "text": "Impossível. A magia da Tupla é sua rigidez.", "type": "try_again" },
+            "fail_transform": { "text": "Não magicamente.", "type": "try_again" },
+
+            "node_8": {
+                "text": "Você quer iterar sobre uma lista de números de 0 a 4. Qual a função mágica para gerar esses números?",
+                "choices": [
+                    { "text": "range(5)", "next": "node_9", "type": "safe" },
+                    { "text": "xrange(5)", "next": "fail_py2", "type": "lose" },
+                    { "text": "list(0..4)", "next": "fail_syntax_range", "type": "lose" }
+                ]
+            },
+            "fail_py2": { "text": "Isso é Python 2 antigo! Atualize seu grimório.", "type": "try_again" },
+            "fail_syntax_range": { "text": "Sintaxe inválida.", "type": "try_again" },
+
+            "node_9": {
+                "text": "Um Mago pede para você definir uma função chamada 'voar'.",
+                "choices": [
+                    { "text": "func voar():", "next": "fail_func", "type": "lose" },
+                    { "text": "function voar() {}", "next": "fail_js_again", "type": "lose" },
+                    { "text": "def voar():", "next": "node_10", "type": "safe" }
+                ]
+            },
+            "fail_func": { "text": "Func? Talvez em Go ou Swift.", "type": "try_again" },
+            "fail_js_again": { "text": "JavaScript de novo? O Mago te lança um raio.", "type": "try_again" },
+
+            "node_10": {
+                "text": "Dentro da função, você quer devolver um valor e encerrar. O que usar?",
+                "choices": [
+                    { "text": "return valor", "next": "node_11", "type": "safe" },
+                    { "text": "output valor", "next": "fail_output", "type": "lose" },
+                    { "text": "yield valor", "next": "node_11_alt", "type": "safe" }
+                ]
+            },
+            "fail_output": { "text": "Comando desconhecido.", "type": "try_again" },
+            "node_11_alt": { "text": "Yield cria um gerador (Generator), não encerra a função totalmente, mas serve. O Mago aceita.", "type": "try_again" },
+
+            "node_11": {
+                "text": "Você encontrou um Dicionário Sagrado: {'chave': 'valor'}. Como pegar o valor?",
+                "choices": [
+                    { "text": "dic.get('chave')", "next": "node_12", "type": "safe" },
+                    { "text": "dic->chave", "next": "fail_arrow", "type": "lose" },
+                    { "text": "dic.chave", "next": "fail_dot", "type": "lose" }
+                ]
+            },
+            "fail_arrow": { "text": "Isso parece PHP.", "type": "try_again" },
+            "fail_dot": { "text": "Em Python, dicionários não usam ponto para acesso (a menos que use libs especiais).", "type": "try_again" },
+
+            "node_12": {
+                "text": "Você precisa formatar uma string com uma variável 'nome'. Qual o jeito mais moderno (Python 3.6+)?",
+                "choices": [
+                    { "text": "f'Olá {nome}'", "next": "node_13", "type": "safe" },
+                    { "text": "'Olá %s' % nome", "next": "fail_old", "type": "lose" },
+                    { "text": "'Olá ' + nome", "next": "fail_concat", "type": "lose" }
+                ]
+            },
+            "fail_old": { "text": "Funciona, mas é arcaico.", "type": "try_again" },
+            "fail_concat": { "text": "Pouco eficiente e feio.", "type": "try_again" },
+
+            "node_13": {
+                "text": "Um Golem de Pedra bloqueia a passagem. Você precisa cortar a string 'Pedra' em letras. Como?",
+                "choices": [
+                    { "text": "explode('Pedra')", "next": "fail_php", "type": "lose" },
+                    { "text": "list('Pedra')", "next": "node_14", "type": "safe" },
+                    { "text": "'Pedra'.split()", "next": "fail_split", "type": "lose" }
+                ]
+            },
+            "fail_php": { "text": "PHP detectado! O Golem te esmaga.", "type": "try_again" },
+            "fail_split": { "text": "Split sem argumento separa por espaços, não letras.", "type": "try_again" },
+
+            "node_14": {
+                "text": "Você precisa usar magia matemática. Como importar a biblioteca de matemática?",
+                "choices": [
+                    { "text": "include math", "next": "fail_c_include", "type": "lose" },
+                    { "text": "import math", "next": "node_15", "type": "safe" },
+                    { "text": "using math", "next": "fail_csharp", "type": "lose" }
+                ]
+            },
+            "fail_c_include": { "text": "Aqui não é C.", "type": "try_again" },
+            "fail_csharp": { "text": "Aqui não é C#.", "type": "try_again" },
+
+            "node_15": {
+                "text": "Você precisa instalar uma poção externa chamada 'requests'. Qual ferramenta usa no terminal?",
+                "choices": [
+                    { "text": "npm install requests", "next": "fail_npm", "type": "lose" },
+                    { "text": "pip install requests", "next": "node_16", "type": "safe" },
+                    { "text": "gem install requests", "next": "fail_ruby", "type": "lose" }
+                ]
+            },
+            "fail_npm": { "text": "Node Package Manager? Você está na floresta errada.", "type": "try_again" },
+            "fail_ruby": { "text": "Ruby? Não.", "type": "try_again" },
+
+            "node_16": {
+                "text": "O chão se abre! Para evitar que seu código quebre com um erro, qual bloco você usa?",
+                "choices": [
+                    { "text": "try / catch", "next": "fail_js_catch", "type": "lose" },
+                    { "text": "try / except", "next": "node_17", "type": "safe" },
+                    { "text": "begin / rescue", "next": "fail_ruby_rescue", "type": "lose" }
+                ]
+            },
+            "fail_js_catch": { "text": "Em Python usamos 'except', não 'catch'.", "type": "try_again" },
+            "fail_ruby_rescue": { "text": "Ruby de novo?", "type": "try_again" },
+
+            "node_17": {
+                "text": "Você encontra um pergaminho de Orientação a Objetos. Como definir o construtor de uma classe?",
+                "choices": [
+                    { "text": "def __init__(self):", "next": "node_18", "type": "safe" },
+                    { "text": "def constructor():", "next": "fail_construct", "type": "lose" },
+                    { "text": "def Python():", "next": "fail_class_name", "type": "lose" }
+                ]
+            },
+            "fail_construct": { "text": "Isso é JS/PHP. Python usa dunder methods.", "type": "try_again" },
+            "fail_class_name": { "text": "Isso é Java/C#.", "type": "try_again" },
+
+            "node_18": {
+                "text": "O que é o 'self' nos métodos da classe?",
+                "choices": [
+                    { "text": "Uma palavra reservada do sistema", "next": "fail_reserved", "type": "lose" },
+                    { "text": "Uma referência à instância atual", "next": "node_19", "type": "safe" },
+                    { "text": "Uma referência à classe global", "next": "fail_global", "type": "lose" }
+                ]
+            },
+            "fail_reserved": { "text": "Na verdade é uma convenção, você poderia chamar de 'banana', mas não deve.", "type": "try_again" },
+            "fail_global": { "text": "Errado. É a instância.", "type": "try_again" },
+
+            "node_19": {
+                "text": "Você precisa criar uma função anônima rápida (uma linha). Qual feitiço usar?",
+                "choices": [
+                    { "text": "lambda x: x + 1", "next": "node_20", "type": "safe" },
+                    { "text": "x => x + 1", "next": "fail_arrow_js", "type": "lose" },
+                    { "text": "anonymous(x) { return x + 1 }", "next": "fail_anon", "type": "lose" }
+                ]
+            },
+            "fail_arrow_js": { "text": "Arrow function é JS.", "type": "try_again" },
+            "fail_anon": { "text": "Muito verboso.", "type": "try_again" },
+
+            "node_20": {
+                "text": "Você vê uma lista [1, 2, 3] e quer criar uma nova com o dobro: [2, 4, 6]. Qual o jeito 'Pythonico'?",
+                "choices": [
+                    { "text": "Usar um loop for e append", "next": "fail_verbose", "type": "lose" },
+                    { "text": "List Comprehension: [x*2 for x in lista]", "next": "node_21", "type": "safe" },
+                    { "text": "lista.map(x => x*2)", "next": "fail_map_js", "type": "lose" }
+                ]
+            },
+            "fail_verbose": { "text": "Funciona, mas não é o jeito Pythonico elegante.", "type": "try_again" },
+            "fail_map_js": { "text": "Sintaxe incorreta.", "type": "try_again" },
+
+            "node_21": {
+                "text": "Para isolar as dependências do seu projeto e não quebrar o sistema, o que você cria?",
+                "choices": [
+                    { "text": "Uma Máquina Virtual (VM)", "next": "fail_vm", "type": "lose" },
+                    { "text": "Um Virtual Environment (venv)", "next": "node_22", "type": "safe" },
+                    { "text": "Uma nova pasta", "next": "fail_folder", "type": "lose" }
+                ]
+            },
+            "fail_vm": { "text": "Exagero! Muito pesado.", "type": "try_again" },
+            "fail_folder": { "text": "Não isola as bibliotecas instaladas.", "type": "try_again" },
+
+            "node_22": {
+                "text": "Você quer modificar o comportamento de uma função sem alterar seu código (ex: @login_required). O que é isso?",
+                "choices": [
+                    { "text": "Um Decorator", "next": "node_23", "type": "safe" },
+                    { "text": "Uma Herança", "next": "fail_inheritance", "type": "lose" },
+                    { "text": "Um Pointer", "next": "fail_pointer", "type": "lose" }
+                ]
+            },
+            "fail_inheritance": { "text": "Isso é de classes.", "type": "try_again" },
+            "fail_pointer": { "text": "Python esconde os ponteiros de você.", "type": "try_again" },
+
+            "node_23": {
+                "text": "Como você abre um arquivo de texto garantindo que ele feche sozinho depois?",
+                "choices": [
+                    { "text": "file = open(); ... file.close()", "next": "fail_manual", "type": "lose" },
+                    { "text": "with open('file.txt') as f:", "next": "node_24", "type": "safe" },
+                    { "text": "using file = new File()", "next": "fail_csharp_using", "type": "lose" }
+                ]
+            },
+            "fail_manual": { "text": "Perigoso! Se der erro no meio, o arquivo fica aberto.", "type": "try_again" },
+            "fail_csharp_using": { "text": "Sintaxe C#.", "type": "try_again" },
+
+            "node_24": {
+                "text": "Qual o valor lógico (Booleano) de uma lista vazia [] em Python?",
+                "choices": [
+                    { "text": "True", "next": "fail_true", "type": "lose" },
+                    { "text": "False", "next": "node_25", "type": "safe" },
+                    { "text": "Undefined", "next": "fail_und", "type": "lose" }
+                ]
+            },
+            "fail_true": { "text": "Errado. Coleções vazias são 'Falsy'.", "type": "try_again" },
+            "fail_und": { "text": "Undefined não existe em Python (seria None, mas é False).", "type": "try_again" },
+
+            "node_25": {
+                "text": "Você quer criar uma função que 'pausa' e retorna valores sob demanda (lazy). O que usar?",
+                "choices": [
+                    { "text": "return", "next": "fail_ret", "type": "lose" },
+                    { "text": "yield (Generator)", "next": "node_26", "type": "safe" },
+                    { "text": "break", "next": "fail_brk", "type": "lose" }
+                ]
+            },
+            "fail_ret": { "text": "Return encerra a função totalmente.", "type": "try_again" },
+            "fail_brk": { "text": "Break sai de loops.", "type": "try_again" },
+
+            "node_26": {
+                "text": "Para indicar que uma variável deve ser 'int' (Type Hinting), como você faz?",
+                "choices": [
+                    { "text": "int x = 10", "next": "fail_static", "type": "lose" },
+                    { "text": "x: int = 10", "next": "node_27", "type": "safe" },
+                    { "text": "var x int = 10", "next": "fail_go", "type": "lose" }
+                ]
+            },
+            "fail_static": { "text": "Isso é C/Java.", "type": "try_again" },
+            "fail_go": { "text": "Isso é Go.", "type": "try_again" },
+
+            "node_27": {
+                "text": "Como verificar se um item 'x' existe dentro de uma lista?",
+                "choices": [
+                    { "text": "lista.contains(x)", "next": "fail_contains", "type": "lose" },
+                    { "text": "if x in lista:", "next": "node_28", "type": "safe" },
+                    { "text": "lista.has(x)", "next": "fail_has", "type": "lose" }
+                ]
+            },
+            "fail_contains": { "text": "Java?", "type": "try_again" },
+            "fail_has": { "text": "JS (Set)?", "type": "try_again" },
+
+            "node_28": {
+                "text": "O que é o 'GIL' em Python?",
+                "choices": [
+                    { "text": "Uma biblioteca gráfica", "next": "fail_gui", "type": "lose" },
+                    { "text": "Global Interpreter Lock", "next": "node_29", "type": "safe" },
+                    { "text": "Um tipo de dado", "next": "fail_type", "type": "lose" }
+                ]
+            },
+            "fail_gui": { "text": "Não, isso seria GUI.", "type": "try_again" },
+            "fail_type": { "text": "Não.", "type": "try_again" },
+
+            "node_29": {
+                "text": "Qual biblioteca é a rainha da Ciência de Dados em Python?",
+                "choices": [
+                    { "text": "Django", "next": "fail_web", "type": "lose" },
+                    { "text": "Pandas", "next": "node_30", "type": "safe" },
+                    { "text": "Flask", "next": "fail_web2", "type": "lose" }
+                ]
+            },
+            "fail_web": { "text": "Isso é para Web.", "type": "try_again" },
+            "fail_web2": { "text": "Também Web.", "type": "try_again" },
+
+            "node_30": {
+                "text": "Chefe Final: O Dragão 'IndentationError'. Ele pergunta: 'Qual a filosofia do Python?'",
+                "choices": [
+                    { "text": "TMTOWTDI (There's more than one way to do it)", "next": "fail_perl", "type": "lose" },
+                    { "text": "O Zen of Python (Import this)", "next": "win", "type": "win" },
+                    { "text": "Move fast and break things", "next": "fail_fb", "type": "lose" }
+                ]
+            },
+            "fail_perl": { "text": "Isso é Perl! O Dragão te queima.", "type": "try_again" },
+            "fail_fb": { "text": "Filosofia do Facebook antigo, não do Python.", "type": "try_again" },
+
+            "win": { "text": "VOCÊ DERROTOU O DRAGÃO E DOMINOU A COBRA! PARABÉNS, MESTRE PYTHONISTA!", "type": "win" }
+        }
+    },
+    "Java": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você entra na Fortaleza da JVM. Um Golem de Café pede o comando de entrada: 'Imprima 'Olá Mundo' no console.'",
+                "choices": [
+                    { "text": "print('Olá Mundo')", "next": "fail_python", "type": "lose" },
+                    { "text": "console.log('Olá Mundo');", "next": "fail_js", "type": "lose" },
+                    { "text": "System.out.println('Olá Mundo');", "next": "node_2", "type": "safe" }
+                ]
+            },
+            "fail_python": { "text": "A JVM não entende a simplicidade do Python.", "type": "try_again" },
+            "fail_js": { "text": "JavaScript pertence aos navegadores, não a esta fortaleza.", "type": "try_again" },
+            "node_2": {
+                "text": "O Golem se impressiona. 'Qual a assinatura exata do método que inicia um programa Java?'",
+                "choices": [
+                    { "text": "public static void main(String[] args)", "next": "node_3", "type": "safe" },
+                    { "text": "public void main(string args)", "next": "fail_main_sig", "type": "lose" },
+                    { "text": "static main()", "next": "fail_main_sig", "type": "lose" }
+                ]
+            },
+            "fail_main_sig": { "text": "A assinatura está incorreta. O compilador reclama e o portão não abre.", "type": "try_again" },
+            "node_3": {
+                "text": "Você precisa de uma variável para guardar sua idade. Como declarar um inteiro?",
+                "choices": [
+                    { "text": "var idade = 30;", "next": "fail_var", "type": "lose" },
+                    { "text": "int idade = 30;", "next": "node_4", "type": "safe" },
+                    { "text": "idade = 30;", "next": "fail_no_type", "type": "lose" }
+                ]
+            },
+            "fail_var": { "text": "'var' é para inferência de tipo local e nem sempre é a melhor prática. Seja explícito!", "type": "try_again" },
+            "fail_no_type": { "text": "Java é fortemente tipado. Você precisa declarar o tipo.", "type": "try_again" },
+            "node_4": {
+                "text": "'int' é um tipo primitivo. Qual desses NÃO é um tipo primitivo?",
+                "choices": [
+                    { "text": "String", "next": "node_5", "type": "safe" },
+                    { "text": "double", "next": "fail_primitive", "type": "lose" },
+                    { "text": "boolean", "next": "fail_primitive", "type": "lose" }
+                ]
+            },
+            "fail_primitive": { "text": "Errado. 'double' e 'boolean' são tipos primitivos.", "type": "try_again" },
+            "node_5": {
+                "text": "Você tem duas Strings, s1 e s2. Qual é a forma CORRETA de verificar se o conteúdo delas é igual?",
+                "choices": [
+                    { "text": "if (s1 == s2)", "next": "fail_string_comp", "type": "lose" },
+                    { "text": "if (s1.equals(s2))", "next": "node_6", "type": "safe" },
+                    { "text": "if (s1.compare(s2))", "next": "fail_string_method", "type": "lose" }
+                ]
+            },
+            "fail_string_comp": { "text": "'==' compara as referências dos objetos, não o conteúdo. Um bug comum!", "type": "try_again" },
+            "fail_string_method": { "text": "O método 'compare' não existe para isso. Use 'equals'.", "type": "try_again" },
+            "node_6": {
+                "text": "Para criar uma instância de uma classe 'Guerreiro', qual palavra-chave você usa?",
+                "choices": [
+                    { "text": "create Guerreiro();", "next": "fail_create", "type": "lose" },
+                    { "text": "Guerreiro g = new Guerreiro();", "next": "node_7", "type": "safe" },
+                    { "text": "Guerreiro g = Guerreiro.instance();", "next": "fail_instance", "type": "lose" }
+                ]
+            },
+            "fail_create": { "text": "Sintaxe desconhecida. Use a palavra-chave 'new'.", "type": "try_again" },
+            "fail_instance": { "text": "Isso parece um padrão Singleton, não a forma padrão de instanciação.", "type": "try_again" },
+            "node_7": {
+                "text": "Você precisa de uma lista de itens que pode crescer. O que é melhor usar?",
+                "choices": [
+                    { "text": "String[] itens = new String[10];", "next": "fail_array", "type": "lose" },
+                    { "text": "ArrayList<String> itens = new ArrayList<>();", "next": "node_8", "type": "safe" },
+                    { "text": "Collection itens = new Collection();", "next": "fail_collection", "type": "lose" }
+                ]
+            },
+            "fail_array": { "text": "Um array tem tamanho fixo. Você não conseguiria adicionar mais de 10 itens.", "type": "try_again" },
+            "fail_collection": { "text": "Collection é uma interface, não pode ser instanciada diretamente.", "type": "try_again" },
+            "node_8": {
+                "text": "Como você adiciona o item 'Espada' na sua ArrayList 'itens'?",
+                "choices": [
+                    { "text": "itens.add('Espada');", "next": "node_9", "type": "safe" },
+                    { "text": "itens.push('Espada');", "next": "fail_push", "type": "lose" },
+                    { "text": "itens.append('Espada');", "next": "fail_append", "type": "lose" }
+                ]
+            },
+            "fail_push": { "text": "'push' é mais comum em JavaScript. Em Java, usamos 'add'.", "type": "try_again" },
+            "fail_append": { "text": "'append' é usado em outras classes, como StringBuilder. Para listas, é 'add'.", "type": "try_again" },
+            "node_9": {
+                "text": "Qual o loop ideal para percorrer todos os elementos de uma coleção sem se preocupar com o índice?",
+                "choices": [
+                    { "text": "for (int i=0; i<itens.size(); i++)", "next": "fail_for_index", "type": "lose" },
+                    { "text": "for (String item : itens)", "next": "node_10", "type": "safe" },
+                    { "text": "while (itens.hasNext())", "next": "fail_while", "type": "lose" }
+                ]
+            },
+            "fail_for_index": { "text": "Funciona, mas o loop 'for-each' (ou enhanced for) é mais limpo e seguro.", "type": "try_again" },
+            "fail_while": { "text": "Isso requer um Iterator. O for-each é mais direto.", "type": "try_again" },
+            "node_10": {
+                "text": "O método especial que é chamado quando um objeto é criado é o...?",
+                "choices": [
+                    { "text": "Método start()", "next": "fail_start", "type": "lose" },
+                    { "text": "Construtor", "next": "node_11", "type": "safe" },
+                    { "text": "Método init()", "next": "fail_init", "type": "lose" }
+                ]
+            },
+            "fail_start": { "text": "Start é usado em Threads, não na criação de objetos genéricos.", "type": "try_again" },
+            "fail_init": { "text": "'init' é uma convenção em outras linguagens. Em Java, o construtor tem o mesmo nome da classe.", "type": "try_again" },
+            "node_11": {
+                "text": "Dentro de um método de instância, como você se refere à própria instância do objeto?",
+                "choices": [
+                    { "text": "this", "next": "node_12", "type": "safe" },
+                    { "text": "self", "next": "fail_self", "type": "lose" },
+                    { "text": "object", "next": "fail_object", "type": "lose" }
+                ]
+            },
+            "fail_self": { "text": "'self' é a convenção em Python, não em Java.", "type": "try_again" },
+            "fail_object": { "text": "Palavra-chave incorreta.", "type": "try_again" },
+            "node_12": {
+                "text": "Sua classe 'Cavaleiro' precisa herdar os atributos da classe 'Humano'. Qual palavra-chave usar?",
+                "choices": [
+                    { "text": "class Cavaleiro inherits Humano", "next": "fail_syntax_heranca", "type": "lose" },
+                    { "text": "class Cavaleiro extends Humano", "next": "node_13", "type": "safe" },
+                    { "text": "class Cavaleiro implements Humano", "next": "fail_implements", "type": "lose" }
+                ]
+            },
+            "fail_syntax_heranca": { "text": "Sintaxe incorreta. Java usa 'extends' para herança de classes.", "type": "try_again" },
+            "fail_implements": { "text": "'implements' é para Interfaces, não para herança entre classes.", "type": "try_again" },
+            "node_13": {
+                "text": "Para garantir que um método da subclasse está realmente sobrescrevendo um da superclasse, qual anotação usar?",
+                "choices": [
+                    { "text": "@Override", "next": "node_14", "type": "safe" },
+                    { "text": "@Overwrite", "next": "fail_overwrite", "type": "lose" },
+                    { "text": "@Super", "next": "fail_super_anot", "type": "lose" }
+                ]
+            },
+            "fail_overwrite": { "text": "Anotação incorreta. O correto é 'Override'.", "type": "try_again" },
+            "fail_super_anot": { "text": "Super é uma palavra-chave para chamar o construtor pai, não uma anotação para isso.", "type": "try_again" },
+            "node_14": {
+                "text": "Qual palavra-chave é usada para que uma classe siga um contrato definido por uma Interface?",
+                "choices": [
+                    { "text": "extends", "next": "fail_extends_interface", "type": "lose" },
+                    { "text": "implements", "next": "node_15", "type": "safe" },
+                    { "text": "follows", "next": "fail_follows", "type": "lose" }
+                ]
+            },
+            "fail_extends_interface": { "text": "Uma classe implementa uma interface. Uma interface pode estender outra interface.", "type": "try_again" },
+            "fail_follows": { "text": "Palavra-chave inexistente.", "type": "try_again" },
+            "node_15": {
+                "text": "Você precisa lidar com um método que pode lançar um erro (Exceção). Qual bloco de código usar para capturar o erro?",
+                "choices": [
+                    { "text": "try-catch", "next": "node_16", "type": "safe" },
+                    { "text": "if-error", "next": "fail_if_error", "type": "lose" },
+                    { "text": "check-throw", "next": "fail_check_throw", "type": "lose" }
+                ]
+            },
+            "fail_if_error": { "text": "Não é assim que Java lida com exceções de forma robusta.", "type": "try_again" },
+            "fail_check_throw": { "text": "Bloco inexistente.", "type": "try_again" },
+            "node_16": {
+                "text": "Qual palavra-chave é usada para definir um método ou variável que pertence à classe em si, e não a uma instância?",
+                "choices": [
+                    { "text": "class_member", "next": "fail_class_member", "type": "lose" },
+                    { "text": "static", "next": "node_17", "type": "safe" },
+                    { "text": "global", "next": "fail_global", "type": "lose" }
+                ]
+            },
+            "fail_class_member": { "text": "Palavra-chave incorreta.", "type": "try_again" },
+            "fail_global": { "text": "'global' não é usado desta forma em Java. 'static' é o correto.", "type": "try_again" },
+            "node_17": {
+                "text": "Se você declarar uma variável como 'final', o que isso significa?",
+                "choices": [
+                    { "text": "Que ela é a última variável do programa", "next": "fail_final_last", "type": "lose" },
+                    { "text": "Que seu valor não pode ser modificado após a inicialização", "next": "node_18", "type": "safe" },
+                    { "text": "Que ela só pode ser usada no bloco 'finally'", "next": "fail_final_finally", "type": "lose" }
+                ]
+            },
+            "fail_final_last": { "text": "Não. 'final' significa imutabilidade.", "type": "try_again" },
+            "fail_final_finally": { "text": "'final' e 'finally' são coisas completamente diferentes.", "type": "try_again" },
+            "node_18": {
+                "text": "Qual modificador de acesso torna um método visível apenas dentro da própria classe?",
+                "choices": [
+                    { "text": "public", "next": "fail_public", "type": "lose" },
+                    { "text": "protected", "next": "fail_protected", "type": "lose" },
+                    { "text": "private", "next": "node_19", "type": "safe" }
+                ]
+            },
+            "fail_public": { "text": "'public' torna visível para todos.", "type": "try_again" },
+            "fail_protected": { "text": "'protected' permite acesso no pacote e em subclasses.", "type": "try_again" },
+            "node_19": {
+                "text": "Qual coleção é ideal para armazenar pares de chave-valor únicos?",
+                "choices": [
+                    { "text": "ArrayList", "next": "fail_arraylist_map", "type": "lose" },
+                    { "text": "HashSet", "next": "fail_hashset_map", "type": "lose" },
+                    { "text": "HashMap", "next": "node_20", "type": "safe" }
+                ]
+            },
+            "fail_arraylist_map": { "text": "ArrayList armazena uma sequência de elementos, não pares chave-valor.", "type": "try_again" },
+            "fail_hashset_map": { "text": "HashSet armazena elementos únicos, mas não em formato chave-valor.", "type": "try_again" },
+            "node_20": {
+                "text": "Para concatenar muitas Strings em um loop, qual classe é mais eficiente que o operador '+'?",
+                "choices": [
+                    { "text": "StringJoiner", "next": "fail_joiner", "type": "lose" },
+                    { "text": "StringBuilder", "next": "node_21", "type": "safe" },
+                    { "text": "StringCreator", "next": "fail_creator", "type": "lose" }
+                ]
+            },
+            "fail_joiner": { "text": "StringJoiner é útil, mas StringBuilder é o padrão para construção de strings mutáveis.", "type": "try_again" },
+            "fail_creator": { "text": "Classe inexistente.", "type": "try_again" },
+            "node_21": {
+                "text": "O que a sintaxe 'List<String>' representa?",
+                "choices": [
+                    { "text": "Uma lista que só aceita a palavra 'String'", "next": "fail_generics_literal", "type": "lose" },
+                    { "text": "O uso de Generics para criar uma lista tipada para Strings", "next": "node_22", "type": "safe" },
+                    { "text": "Um tipo de lista especial mais rápida", "next": "fail_generics_fast", "type": "lose" }
+                ]
+            },
+            "fail_generics_literal": { "text": "Não, o tipo 'String' define que todos os elementos da lista devem ser Strings.", "type": "try_again" },
+            "fail_generics_fast": { "text": "Generics são sobre segurança de tipo, não performance.", "type": "try_again" },
+            "node_22": {
+                "text": "Você tem um 'double' e precisa atribuí-lo a um 'int'. O que você precisa fazer?",
+                "choices": [
+                    { "text": "Casting explícito: (int) meuDouble", "next": "node_23", "type": "safe" },
+                    { "text": "Java converte automaticamente", "next": "fail_casting_auto", "type": "lose" },
+                    { "text": "Chamar o método toInt()", "next": "fail_to_int_method", "type": "lose" }
+                ]
+            },
+            "fail_casting_auto": { "text": "A conversão de um tipo maior para um menor (com possível perda de dados) precisa ser explícita.", "type": "try_again" },
+            "fail_to_int_method": { "text": "Esse método não existe para tipos primitivos.", "type": "try_again" },
+            "node_23": {
+                "text": "A partir do Java 8, como você pode representar uma função anônima de forma concisa?",
+                "choices": [
+                    { "text": "Com uma classe anônima interna", "next": "fail_anonymous_class", "type": "lose" },
+                    { "text": "Com uma Expressão Lambda", "next": "node_24", "type": "safe" },
+                    { "text": "Com um 'function pointer'", "next": "fail_func_pointer", "type": "lose" }
+                ]
+            },
+            "fail_anonymous_class": { "text": "Isso era o jeito antigo e verboso. As lambdas são a forma moderna.", "type": "try_again" },
+            "fail_func_pointer": { "text": "Java não expõe ponteiros como C/C++.", "type": "try_again" },
+            "node_24": {
+                "text": "Qual é o ponto de entrada para a API de Streams em uma coleção?",
+                "choices": [
+                    { "text": "O método .stream()", "next": "node_25", "type": "safe" },
+                    { "text": "O método .process()", "next": "fail_process", "type": "lose" },
+                    { "text": "A classe Stream.of(colecao)", "next": "node_25_alt", "type": "safe" }
+                ]
+            },
+            "fail_process": { "text": "Método inexistente para isso.", "type": "try_again" },
+            "node_25_alt": { "text": "Funciona, mas chamar o método na própria coleção é mais comum. Você avança.", "next": "node_25", "type": "safe"},
+            "node_25": {
+                "text": "Em uma Stream, qual operação intermediária você usaria para selecionar apenas os elementos que atendem a uma condição?",
+                "choices": [
+                    { "text": ".select()", "next": "fail_select", "type": "lose" },
+                    { "text": ".filter()", "next": "node_26", "type": "safe" },
+                    { "text": ".where()", "next": "fail_where", "type": "lose" }
+                ]
+            },
+            "fail_select": { "text": "'.select()' não é uma operação padrão da Stream API de Java.", "type": "try_again" },
+            "fail_where": { "text": "'where' é comum em outras linguagens como LINQ (C#), mas em Java é 'filter'.", "type": "try_again" },
+            "node_26": {
+                "text": "Após filtrar e mapear uma stream, qual operação terminal a transforma de volta em uma List?",
+                "choices": [
+                    { "text": ".toList()", "next": "fail_toList", "type": "lose" },
+                    { "text": ".collect(Collectors.toList())", "next": "node_27", "type": "safe" },
+                    { "text": ".revert()", "next": "fail_revert", "type": "lose" }
+                ]
+            },
+            "fail_toList": { "text": "'.toList()' é uma adição mais recente (Java 16+). O método 'collect' é o mais universal e poderoso.", "type": "try_again" },
+            "fail_revert": { "text": "Operação inexistente.", "type": "try_again" },
+            "node_27": {
+                "text": "O que é a famosa 'Bilion Dollar Mistake' que você deve sempre tomar cuidado em Java?",
+                "choices": [
+                    { "text": "Herança múltipla", "next": "fail_multiple_inheritance", "type": "lose" },
+                    { "text": "A invenção do valor 'null'", "next": "node_28", "type": "safe" },
+                    { "text": "Checked Exceptions", "next": "fail_checked_exceptions", "type": "lose" }
+                ]
+            },
+            "fail_multiple_inheritance": { "text": "Java evitou isso de propósito. A 'Bilion Dollar Mistake' é outra coisa.", "type": "try_again" },
+            "fail_checked_exceptions": { "text": "Checked exceptions são controversas, mas não são a famosa 'Bilion Dollar Mistake'.", "type": "try_again" },
+            "node_28": {
+                "text": "Se você tenta chamar um método em uma referência de objeto que é 'null', que exceção ocorre?",
+                "choices": [
+                    { "text": "NullPointerException", "next": "node_29", "type": "safe" },
+                    { "text": "IllegalArgumentException", "next": "fail_illegal_arg", "type": "lose" },
+                    { "text": "RuntimeException", "next": "fail_runtime", "type": "lose" }
+                ]
+            },
+            "fail_illegal_arg": { "text": "Isso ocorre quando o argumento passado para um método é inválido.", "type": "try_again" },
+            "fail_runtime": { "text": "NullPointerException é uma sub-classe de RuntimeException, mas a resposta específica é a correta.", "type": "try_again" },
+            "node_29": {
+                "text": "Qual classe pode ser usada para encapsular um valor que PODE ser nulo, forçando a verificação?",
+                "choices": [
+                    { "text": "Nullable<T>", "next": "fail_nullable", "type": "lose" },
+                    { "text": "Optional<T>", "next": "node_30", "type": "safe" },
+                    { "text": "Maybe<T>", "next": "fail_maybe", "type": "lose" }
+                ]
+            },
+            "fail_nullable": { "text": "Isso existe em outras linguagens, como C#. Em Java, é 'Optional'.", "type": "try_again" },
+            "fail_maybe": { "text": "'Maybe' é um conceito de programação funcional, mas a classe em Java se chama 'Optional'.", "type": "try_again" },
+            "node_30": {
+                "text": "Para compilar seu código Java, qual executável do JDK você usa?",
+                "choices": [
+                    { "text": "java", "next": "fail_run", "type": "lose" },
+                    { "text": "javac", "next": "node_31", "type": "safe" },
+                    { "text": "jar", "next": "fail_jar", "type": "lose" }
+                ]
+            },
+            "fail_run": { "text": "O comando 'java' executa o bytecode (.class), não compila o código-fonte (.java).", "type": "try_again" },
+            "fail_jar": { "text": "O comando 'jar' cria arquivos de pacote (.jar), mas não compila.", "type": "try_again" },
+            "node_31": {
+                "text": "Chefe Final: O Dragão da Arquitetura. Ele ruge: 'Qual a diferença entre JVM, JRE e JDK?'",
+                "choices": [
+                    { "text": "São todos nomes para a mesma coisa.", "next": "fail_same", "type": "lose" },
+                    { "text": "JDK (compila) > JRE (executa) > JVM (interpreta).", "next": "win", "type": "win" },
+                    { "text": "JVM é para Servidor, JRE para Desktop, JDK para Desenvolvimento.", "next": "fail_env", "type": "lose" }
+                ]
+            },
+            "fail_same": { "text": "Errado! Cada um tem um papel fundamental e distinto no ecossistema Java.", "type": "try_again" },
+            "fail_env": { "text": "A separação não é por ambiente, mas por funcionalidade. O JDK contém o JRE que contém a JVM.", "type": "try_again" },
+            "win": { "text": "VOCÊ DOMINOU A PLATAFORMA JAVA! O DRAGÃO TE SERVE UMA XÍCARA DE CAFÉ. PARABÉNS, ARQUITETO DE SOFTWARE!", "type": "win" }
+        }
+    },
+    "C#": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você entra na Cidadela da Microsoft. Para provar seu valor, como você inclui a biblioteca principal do sistema?",
+                "choices": [
+                    { "text": "import System;", "next": "fail_import", "type": "lose" },
+                    { "text": "include <System>;", "next": "fail_include", "type": "lose" },
+                    { "text": "using System;", "next": "node_2", "type": "safe" }
+                ]
+            },
+            "fail_import": { "text": "'import' é para Java ou Python. Em C#, usamos outra palavra.", "type": "try_again" },
+            "fail_include": { "text": "Isso é C++. A cidadela não reconhece este dialeto antigo.", "type": "try_again" },
+            "node_2": {
+                "text": "Correto. Agora, como você escreve 'Olá Mundo' no console?",
+                "choices": [
+                    { "text": "System.out.println('Olá Mundo');", "next": "fail_java", "type": "lose" },
+                    { "text": "Console.WriteLine('Olá Mundo');", "next": "node_3", "type": "safe" },
+                    { "text": "print('Olá Mundo');", "next": "fail_python", "type": "lose" }
+                ]
+            },
+            "fail_java": { "text": "Sintaxe de Java detectada. Os guardas do C# olham feio para você.", "type": "try_again" },
+            "fail_python": { "text": "Muito simples para este lugar. Seja mais específico.", "type": "try_again" },
+            "node_3": {
+                "text": "Como você declara uma variável de texto 'nome' com interpolação de string?",
+                "choices": [
+                    { "text": "string nome = 'Meu nome é {nome}';", "next": "fail_format", "type": "lose" },
+                    { "text": "string nome = $\"Meu nome é {nome}\";", "next": "node_4", "type": "safe" },
+                    { "text": "var nome = f'Meu nome é {nome}';", "next": "fail_fstring", "type": "lose" }
+                ]
+            },
+            "fail_format": { "text": "Faltou o '$' para ativar a interpolação. A string não foi formatada.", "type": "try_again" },
+            "fail_fstring": { "text": "Isso é uma f-string de Python.", "type": "try_again" },
+            "node_4": {
+                "text": "Qual a principal diferença entre um 'Value Type' (struct, int) e um 'Reference Type' (class)?",
+                "choices": [
+                    { "text": "Value Types são armazenados na Heap, Reference Types na Stack.", "next": "fail_heap_stack", "type": "lose" },
+                    { "text": "Value Types são passados por cópia, Reference Types por referência.", "next": "node_5", "type": "safe" },
+                    { "text": "Não há diferença prática.", "next": "fail_no_diff", "type": "lose" }
+                ]
+            },
+            "fail_heap_stack": { "text": "É o oposto! Value Types vão para a Stack (geralmente), Reference Types para a Heap.", "type": "try_again" },
+            "fail_no_diff": { "text": "A diferença é crucial e causa muitos bugs se não for entendida!", "type": "try_again" },
+            "node_5": {
+                "text": "Você quer uma propriedade 'Vida' em uma classe 'Jogador' com getter e setter. Qual a forma mais concisa?",
+                "choices": [
+                    { "text": "public int Vida { get; set; }", "next": "node_6", "type": "safe" },
+                    { "text": "private int vida; public int getVida...", "next": "fail_verbose_prop", "type": "lose" },
+                    { "text": "public int Vida();", "next": "fail_method_prop", "type": "lose" }
+                ]
+            },
+            "fail_verbose_prop": { "text": "Funciona, mas isso é o 'backing field' manual. As auto-properties são mais limpas.", "type": "try_again" },
+            "fail_method_prop": { "text": "Isso declara um método, não uma propriedade.", "type": "try_again" },
+            "node_6": {
+                "text": "Como a classe 'Guerreiro' herda da classe 'Personagem'?",
+                "choices": [
+                    { "text": "class Guerreiro extends Personagem", "next": "fail_extends", "type": "lose" },
+                    { "text": "class Guerreiro : Personagem", "next": "node_7", "type": "safe" },
+                    { "text": "class Guerreiro inherits Personagem", "next": "fail_inherits", "type": "lose" }
+                ]
+            },
+            "fail_extends": { "text": "'extends' é a palavra-chave do Java. C# usa um símbolo.", "type": "try_again" },
+            "fail_inherits": { "text": "Palavra-chave inexistente.", "type": "try_again" },
+            "node_7": {
+                "text": "Para sobrescrever um método da classe pai, o método pai deve ser '...' e o filho '...'.",
+                "choices": [
+                    { "text": "virtual, override", "next": "node_8", "type": "safe" },
+                    { "text": "overridable, new", "next": "fail_override_keywords", "type": "lose" },
+                    { "text": "abstract, implement", "next": "fail_override_keywords", "type": "lose" }
+                ]
+            },
+            "fail_override_keywords": { "text": "Combinação incorreta. 'virtual' permite sobrescrever, 'override' executa a sobrescrita.", "type": "try_again" },
+            "node_8": {
+                "text": "Qual a diferença entre uma 'interface' e uma 'abstract class'?",
+                "choices": [
+                    { "text": "Uma classe pode implementar várias interfaces, mas herdar de apenas uma classe.", "next": "node_9", "type": "safe" },
+                    { "text": "Interfaces podem ter campos, classes abstratas não.", "next": "fail_interface_fields", "type": "lose" },
+                    { "text": "São exatamente a mesma coisa.", "next": "fail_same_abstract", "type": "lose" }
+                ]
+            },
+            "fail_interface_fields": { "text": "É o contrário. Classes abstratas podem ter campos e implementação, interfaces não (tradicionalmente).", "type": "try_again" },
+            "fail_same_abstract": { "text": "São conceitos diferentes com propósitos diferentes. Herança vs Contrato.", "type": "try_again" },
+            "node_9": {
+                "text": "Você precisa de uma lista dinâmica de inteiros. Qual classe genérica da 'System.Collections.Generic' você usa?",
+                "choices": [
+                    { "text": "ArrayList", "next": "fail_arraylist", "type": "lose" },
+                    { "text": "List<int>", "next": "node_10", "type": "safe" },
+                    { "text": "int[]", "next": "fail_int_array", "type": "lose" }
+                ]
+            },
+            "fail_arraylist": { "text": "ArrayList é legado e não-genérico (armazena 'object'). Prefira as coleções genéricas.", "type": "try_again" },
+            "fail_int_array": { "text": "Isso é um array, que tem tamanho fixo.", "type": "try_again" },
+            "node_10": {
+                "text": "Qual o loop ideal para iterar sobre cada item de uma 'List<string>' chamada 'nomes'?",
+                "choices": [
+                    { "text": "for (int i=0; i<nomes.Count; i++)", "next": "fail_for_loop", "type": "lose" },
+                    { "text": "foreach (string nome in nomes)", "next": "node_11", "type": "safe" },
+                    { "text": "for (nome in nomes)", "next": "fail_forin_loop", "type": "lose" }
+                ]
+            },
+            "fail_for_loop": { "text": "Funciona, mas o 'foreach' é mais limpo e seguro para coleções.", "type": "try_again" },
+            "fail_forin_loop": { "text": "Sintaxe incorreta. Falta o tipo da variável de iteração.", "type": "try_again" },
+            "node_11": {
+                "text": "Qual coleção é ideal para armazenar pares de chave-valor, como 'string' e 'int'?",
+                "choices": [
+                    { "text": "List<string, int>", "next": "fail_list_kv", "type": "lose" },
+                    { "text": "Dictionary<string, int>", "next": "node_12", "type": "safe" },
+                    { "text": "Tuple<string, int>", "next": "fail_tuple_kv", "type": "lose" }
+                ]
+            },
+            "fail_list_kv": { "text": "List<T> aceita apenas um tipo genérico.", "type": "try_again" },
+            "fail_tuple_kv": { "text": "Tupla armazena um conjunto fixo de valores, não uma coleção de busca por chave.", "type": "try_again" },
+            "node_12": {
+                "text": "Um método pode falhar. Para capturar uma 'Exception', qual bloco você usa?",
+                "choices": [
+                    { "text": "try-except", "next": "fail_except", "type": "lose" },
+                    { "text": "try-catch-finally", "next": "node_13", "type": "safe" },
+                    { "text": "attempt-rescue", "next": "fail_rescue", "type": "lose" }
+                ]
+            },
+            "fail_except": { "text": "'except' é a palavra-chave do Python. Em C#, usamos 'catch'.", "type": "try_again" },
+            "fail_rescue": { "text": "Sintaxe desconhecida.", "type": "try_again" },
+            "node_13": {
+                "text": "Para garantir que um recurso (como um arquivo ou conexão) seja liberado, mesmo se ocorrer um erro, qual declaração você usa?",
+                "choices": [
+                    { "text": "O bloco 'finally'", "next": "fail_finally_only", "type": "lose" },
+                    { "text": "A declaração 'using'", "next": "node_14", "type": "safe" },
+                    { "text": "O método 'Dispose()' manualmente", "next": "fail_dispose_manual", "type": "lose" }
+                ]
+            },
+            "fail_finally_only": { "text": "'finally' funciona, mas 'using' é muito mais elegante e seguro para objetos IDisposable.", "type": "try_again" },
+            "fail_dispose_manual": { "text": "Perigoso. Se uma exceção ocorrer antes da chamada, o recurso não é liberado.", "type": "try_again" },
+            "node_14": {
+                "text": "Qual o nome da tecnologia que permite escrever consultas a coleções de forma declarativa, parecida com SQL?",
+                "choices": [
+                    { "text": "LINQ (Language Integrated Query)", "next": "node_15", "type": "safe" },
+                    { "text": "SQL#", "next": "fail_sqlsharp", "type": "lose" },
+                    { "text": "DataQuery", "next": "fail_dataquery", "type": "lose" }
+                ]
+            },
+            "fail_sqlsharp": { "text": "Nome incorreto.", "type": "try_again" },
+            "fail_dataquery": { "text": "Nome incorreto.", "type": "try_again" },
+            "node_15": {
+                "text": "Usando LINQ, como você filtra uma lista de números para obter apenas os pares?",
+                "choices": [
+                    { "text": "numeros.Filter(n => n % 2 == 0)", "next": "fail_linq_filter", "type": "lose" },
+                    { "text": "numeros.Where(n => n % 2 == 0)", "next": "node_16", "type": "safe" },
+                    { "text": "select n from numeros where n % 2 == 0", "next": "node_16_alt", "type": "safe" }
+                ]
+            },
+            "fail_linq_filter": { "text": "O método de filtro do LINQ chama-se 'Where'.", "type": "try_again" },
+            "node_16_alt": { "text": "Essa é a sintaxe de consulta (query syntax) do LINQ. Também está correta! Você avança.", "next": "node_16", "type": "safe"},
+            "node_16": {
+                "text": "E se você quisesse transformar essa lista de números em uma lista de strings ('1', '2', ...)?",
+                "choices": [
+                    { "text": "numeros.Map(n => n.ToString())", "next": "fail_linq_map", "type": "lose" },
+                    { "text": "numeros.Select(n => n.ToString())", "next": "node_17", "type": "safe" },
+                    { "text": "numeros.Cast<string>()", "next": "fail_linq_cast", "type": "lose" }
+                ]
+            },
+            "fail_linq_map": { "text": "'Map' é comum em outras linguagens. Em LINQ, a projeção é feita com 'Select'.", "type": "try_again" },
+            "fail_linq_cast": { "text": "'Cast' tenta converter o tipo, não transformar o valor. Use 'Select'.", "type": "try_again" },
+            "node_17": {
+                "text": "A expressão 'n => n > 10' é um exemplo de...?",
+                "choices": [
+                    { "text": "Uma Expressão Lambda", "next": "node_18", "type": "safe" },
+                    { "text": "Um Delegate Anônimo", "next": "fail_delegate", "type": "lose" },
+                    { "text": "Uma Arrow Function", "next": "fail_arrow", "type": "lose" }
+                ]
+            },
+            "fail_delegate": { "text": "É relacionado, mas 'Expressão Lambda' é o nome moderno e conciso para esta sintaxe.", "type": "try_again" },
+            "fail_arrow": { "text": "'Arrow function' é o termo em JavaScript.", "type": "try_again" },
+            "node_18": {
+                "text": "Você precisa de um método utilitário que não dependa de uma instância da classe. Qual modificador usar?",
+                "choices": [
+                    { "text": "shared", "next": "fail_shared", "type": "lose" },
+                    { "text": "static", "next": "node_19", "type": "safe" },
+                    { "text": "global", "next": "fail_global", "type": "lose" }
+                ]
+            },
+            "fail_shared": { "text": "Palavra-chave do VB.NET. Em C#, usamos 'static'.", "type": "try_again" },
+            "fail_global": { "text": "Não existe em C#.", "type": "try_again" },
+            "node_19": {
+                "text": "Para tornar um método visível apenas para classes no mesmo assembly (projeto), qual modificador de acesso você usa?",
+                "choices": [
+                    { "text": "private", "next": "fail_access_private", "type": "lose" },
+                    { "text": "internal", "next": "node_20", "type": "safe" },
+                    { "text": "protected", "next": "fail_access_protected", "type": "lose" }
+                ]
+            },
+            "fail_access_private": { "text": "'private' limita o acesso apenas à própria classe.", "type": "try_again" },
+            "fail_access_protected": { "text": "'protected' limita ao mesmo assembly OU classes derivadas.", "type": "try_again" },
+            "node_20": {
+                "text": "Como declarar uma variável inteira que pode também ser nula?",
+                "choices": [
+                    { "text": "int? idade = null;", "next": "node_21", "type": "safe" },
+                    { "text": "Nullable<int> idade = null;", "next": "node_21_alt", "type": "safe" },
+                    { "text": "var idade = null;", "next": "fail_nullable_var", "type": "lose" }
+                ]
+            },
+            "node_21_alt": { "text": "Essa é a forma explícita da classe por baixo dos panos. O '?' é o açúcar sintático. Correto!", "next": "node_21", "type": "safe"},
+            "fail_nullable_var": { "text": "O compilador não consegue inferir o tipo a partir de 'null'. Você precisa ser explícito.", "type": "try_again" },
+            "node_21": {
+                "text": "Se uma variável 'nome' pode ser nula, qual operador você usa para atribuir um valor padrão ('Desconhecido') se ela for nula?",
+                "choices": [
+                    { "text": "nome || 'Desconhecido'", "next": "fail_op_or", "type": "lose" },
+                    { "text": "nome ?? 'Desconhecido'", "next": "node_22", "type": "safe" },
+                    { "text": "nome ? 'Desconhecido'", "next": "fail_op_ternary", "type": "lose" }
+                ]
+            },
+            "fail_op_or": { "text": "Isso é de outras linguagens. C# usa o operador de coalescência nula.", "type": "try_again" },
+            "fail_op_ternary": { "text": "Falta a parte do 'else' no operador ternário.", "type": "try_again" },
+            "node_22": {
+                "text": "E para acessar uma propriedade 'Length' de uma string que pode ser nula, sem causar exceção?",
+                "choices": [
+                    { "text": "nome?.Length", "next": "node_23", "type": "safe" },
+                    { "text": "if (nome != null) nome.Length", "next": "fail_op_if", "type": "lose" },
+                    { "text": "nome.Length ?? 0", "next": "fail_op_null_len", "type": "lose" }
+                ]
+            },
+            "fail_op_if": { "text": "Funciona, mas o operador condicional nulo ('?.') é a forma moderna e concisa.", "type": "try_again" },
+            "fail_op_null_len": { "text": "Isso não previne a exceção, apenas daria um valor padrão depois do erro.", "type": "try_again" },
+            "node_23": {
+                "text": "Qual a palavra-chave usada para definir um tipo de valor (Value Type) similar a uma classe?",
+                "choices": [
+                    { "text": "struct", "next": "node_24", "type": "safe" },
+                    { "text": "value_class", "next": "fail_value_class", "type": "lose" },
+                    { "text": "record", "next": "fail_record", "type": "lose" }
+                ]
+            },
+            "fail_value_class": { "text": "Palavra-chave inexistente.", "type": "try_again" },
+            "fail_record": { "text": "'record' é um tipo de referência (ou valor) focado em imutabilidade, mas 'struct' é a resposta clássica para Value Types customizados.", "type": "try_again" },
+            "node_24": {
+                "text": "Como você chama um método que pode demorar, sem travar a interface do usuário?",
+                "choices": [
+                    { "text": "Envolvendo-o em uma Thread", "next": "fail_thread", "type": "lose" },
+                    { "text": "Marcando o método com 'async' e chamando com 'await'", "next": "node_25", "type": "safe" },
+                    { "text": "Usando um 'BackgroundWorker'", "next": "fail_bgworker", "type": "lose" }
+                ]
+            },
+            "fail_thread": { "text": "Funciona, mas é o jeito antigo e complexo de gerenciar threads manualmente.", "type": "try_again" },
+            "fail_bgworker": { "text": "Isso é de tecnologias mais antigas como WinForms. 'async/await' é o padrão moderno.", "type": "try_again" },
+            "node_25": {
+                "text": "Qual o nome do gerenciador de pacotes do .NET, usado para adicionar bibliotecas como o 'Newtonsoft.Json'?",
+                "choices": [
+                    { "text": "NPM", "next": "fail_npm", "type": "lose" },
+                    { "text": "NuGet", "next": "node_26", "type": "safe" },
+                    { "text": "Maven", "next": "fail_maven", "type": "lose" }
+                ]
+            },
+            "fail_npm": { "text": "NPM é para o ecossistema Node.js/JavaScript.", "type": "try_again" },
+            "fail_maven": { "text": "Maven é para o ecossistema Java.", "type": "try_again" },
+            "node_26": {
+                "text": "Você quer definir um 'apelido' para um tipo longo como 'Dictionary<string, List<int>>'. O que usar?",
+                "choices": [
+                    { "text": "typedef", "next": "fail_typedef", "type": "lose" },
+                    { "text": "using MeuDicionario = Dictionary<string, List<int>>;", "next": "node_27", "type": "safe" },
+                    { "text": "alias", "next": "fail_alias", "type": "lose" }
+                ]
+            },
+            "fail_typedef": { "text": "Isso é C++. Em C#, usamos uma diretiva 'using' para isso.", "type": "try_again" },
+            "fail_alias": { "text": "Conceito correto, mas a palavra-chave está errada.", "type": "try_again" },
+            "node_27": {
+                "text": "O que são 'Extension Methods'?",
+                "choices": [
+                    { "text": "Métodos que só podem ser chamados por herança.", "next": "fail_ext_inh", "type": "lose" },
+                    { "text": "Métodos estáticos que parecem métodos de instância de um tipo existente.", "next": "node_28", "type": "safe" },
+                    { "text": "Métodos que estendem o tempo de vida de um objeto.", "next": "fail_ext_life", "type": "lose" }
+                ]
+            },
+            "fail_ext_inh": { "text": "Não, eles não têm a ver com herança.", "type": "try_again" },
+            "fail_ext_life": { "text": "Não, o nome se refere a estender a API de um tipo.", "type": "try_again" },
+            "node_28": {
+                "text": "Qual a palavra-chave usada para passar um argumento para um método de forma que o método possa alterá-lo?",
+                "choices": [
+                    { "text": "out", "next": "fail_out", "type": "lose" },
+                    { "text": "ref", "next": "node_29", "type": "safe" },
+                    { "text": "params", "next": "fail_params", "type": "lose" }
+                ]
+            },
+            "fail_out": { "text": "'out' também permite alteração, mas força o método a inicializar o valor. 'ref' requer que o valor já tenha sido inicializado.", "type": "try_again" },
+            "fail_params": { "text": "'params' permite passar um número variável de argumentos.", "type": "try_again" },
+            "node_29": {
+                "text": "O que é um 'delegate'?",
+                "choices": [
+                    { "text": "Um tipo que representa uma referência a um método com uma assinatura específica.", "next": "node_30", "type": "safe" },
+                    { "text": "Uma classe que não pode ser instanciada.", "next": "fail_delegate_class", "type": "lose" },
+                    { "text": "Uma forma de programação assíncrona.", "next": "fail_delegate_async", "type": "lose" }
+                ]
+            },
+            "fail_delegate_class": { "text": "Isso seria uma classe estática ou abstrata.", "type": "try_again" },
+            "fail_delegate_async": { "text": "Delegates são usados em eventos e callbacks, mas não são a feature principal de async.", "type": "try_again" },
+            "node_30": {
+                "text": "Com o advento do .NET Core e .NET 5+, C# tornou-se...",
+                "choices": [
+                    { "text": "Exclusivo para Windows", "next": "fail_exclusive", "type": "lose" },
+                    { "text": "Multiplataforma (Windows, Linux, macOS)", "next": "node_31", "type": "safe" },
+                    { "text": "Uma linguagem para Web Assembly apenas", "next": "fail_wasm", "type": "lose" }
+                ]
+            },
+            "fail_exclusive": { "text": "Isso era verdade na era do .NET Framework. Hoje, o .NET é aberto e multiplataforma.", "type": "try_again" },
+            "fail_wasm": { "text": "Ele pode rodar em Web Assembly via Blazor, mas não é sua única finalidade.", "type": "try_again" },
+            "node_31": {
+                "text": "Chefe Final: O Dragão da CLR. Ele ruge: 'O que a CLR (Common Language Runtime) faz?'",
+                "choices": [
+                    { "text": "Compila o código C# diretamente para código de máquina.", "next": "fail_clr_compile", "type": "lose" },
+                    { "text": "Gerencia a execução do código (memória, segurança, JIT) e permite interoperabilidade entre linguagens .NET.", "next": "win", "type": "win" },
+                    { "text": "É apenas uma biblioteca de classes padrão.", "next": "fail_clr_bcl", "type": "lose" }
+                ]
+            },
+            "fail_clr_compile": { "text": "O compilador C# compila para IL (Intermediate Language). A CLR então compila a IL para código de máquina (JIT - Just-In-Time).", "type": "try_again" },
+            "fail_clr_bcl": { "text": "A biblioteca de classes (BCL/FCL) é parte do .NET, mas a CLR é o ambiente de execução.", "type": "try_again" },
+            "win": { "text": "VOCÊ DOMINOU O ECOSSISTEMA .NET! O DRAGÃO TE NOMEIA ARQUITETO DE SOLUÇÕES. PARABÉNS!", "type": "win" }
+        }
+    },
+    "SQL": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você chega ao Templo dos Dados. O Oráculo sussurra: 'Qual o comando para SELECIONAR dados de uma tabela?'",
+                "choices": [
+                    { "text": "GET", "next": "fail_verb", "type": "lose" },
+                    { "text": "SELECT", "next": "node_2", "type": "safe" },
+                    { "text": "FETCH", "next": "fail_verb", "type": "lose" }
+                ]
+            },
+            "fail_verb": { "text": "Verbo incorreto. A linguagem das tabelas é precisa.", "type": "try_again" },
+            "node_2": {
+                "text": "Correto. Para buscar TODAS as colunas da tabela 'Clientes', qual caractere usar?",
+                "choices": [
+                    { "text": "* (asterisco)", "next": "node_3", "type": "safe" },
+                    { "text": "# (hashtag)", "next": "fail_char", "type": "lose" },
+                    { "text": "% (porcentagem)", "next": "fail_char", "type": "lose" }
+                ]
+            },
+            "fail_char": { "text": "Caractere errado. O asterisco representa 'tudo'.", "type": "try_again" },
+            "node_3": {
+                "text": "Você quer filtrar clientes do 'Brasil'. Qual cláusula usar?",
+                "choices": [
+                    { "text": "FILTER BY pais = 'Brasil'", "next": "fail_filter", "type": "lose" },
+                    { "text": "WHERE pais = 'Brasil'", "next": "node_4", "type": "safe" },
+                    { "text": "IF pais = 'Brasil'", "next": "fail_if", "type": "lose" }
+                ]
+            },
+            "fail_filter": { "text": "FILTER não é a cláusula padrão para isso.", "type": "try_again" },
+            "fail_if": { "text": "IF é para controle de fluxo, não para filtrar linhas em um SELECT.", "type": "try_again" },
+            "node_4": {
+                "text": "Agora, ordene os resultados pelo nome do cliente em ordem alfabética.",
+                "choices": [
+                    { "text": "SORT BY nome", "next": "fail_sort", "type": "lose" },
+                    { "text": "ORDER BY nome ASC", "next": "node_5", "type": "safe" },
+                    { "text": "GROUP BY nome", "next": "fail_group", "type": "lose" }
+                ]
+            },
+            "fail_sort": { "text": "SORT não é um comando SQL. Use ORDER BY.", "type": "try_again" },
+            "fail_group": { "text": "GROUP BY agrupa linhas, não as ordena para exibição.", "type": "try_again" },
+            "node_5": {
+                "text": "Como inserir um novo cliente na tabela 'Clientes'?",
+                "choices": [
+                    { "text": "INSERT INTO Clientes (nome) VALUES ('João');", "next": "node_6", "type": "safe" },
+                    { "text": "ADD TO Clientes ('João');", "next": "fail_add", "type": "lose" },
+                    { "text": "CREATE Clientes (nome) VALUES ('João');", "next": "fail_create", "type": "lose" }
+                ]
+            },
+            "fail_add": { "text": "Comando inexistente. A sintaxe correta é INSERT INTO.", "type": "try_again" },
+            "fail_create": { "text": "CREATE é para criar novas tabelas, não para inserir dados.", "type": "try_again" },
+            "node_6": {
+                "text": "O cliente 'João' mudou-se para 'Portugal'. Como atualizar o registro dele?",
+                "choices": [
+                    { "text": "CHANGE Clientes SET pais = 'Portugal' WHERE nome = 'João';", "next": "fail_change", "type": "lose" },
+                    { "text": "UPDATE Clientes SET pais = 'Portugal' WHERE nome = 'João';", "next": "node_7", "type": "safe" },
+                    { "text": "MODIFY Clientes SET pais = 'Portugal' WHERE nome = 'João';", "next": "fail_modify", "type": "lose" }
+                ]
+            },
+            "fail_change": { "text": "Comando incorreto.", "type": "try_again" },
+            "fail_modify": { "text": "Comando incorreto. Use UPDATE para modificar registros existentes.", "type": "try_again" },
+            "node_7": {
+                "text": "O cliente 'Pedro' cancelou a conta. Como removê-lo da tabela?",
+                "choices": [
+                    { "text": "DELETE FROM Clientes WHERE nome = 'Pedro';", "next": "node_8", "type": "safe" },
+                    { "text": "REMOVE FROM Clientes WHERE nome = 'Pedro';", "next": "fail_remove", "type": "lose" },
+                    { "text": "DROP Clientes WHERE nome = 'Pedro';", "next": "fail_drop", "type": "lose" }
+                ]
+            },
+            "fail_remove": { "text": "Comando inexistente. Use DELETE.", "type": "try_again" },
+            "fail_drop": { "text": "DROP apaga a tabela inteira! Cuidado! Use DELETE para linhas.", "type": "try_again" },
+            "node_8": {
+                "text": "Você tem as tabelas 'Pedidos' e 'Clientes'. Como combinar os dados para ver o nome do cliente em cada pedido?",
+                "choices": [
+                    { "text": "MERGE Pedidos, Clientes;", "next": "fail_merge", "type": "lose" },
+                    { "text": "JOIN Pedidos ON Pedidos.cliente_id = Clientes.id;", "next": "node_9", "type": "safe" },
+                    { "text": "COMBINE Pedidos, Clientes;", "next": "fail_combine", "type": "lose" }
+                ]
+            },
+            "fail_merge": { "text": "MERGE é um comando mais complexo para sincronizar tabelas.", "type": "try_again" },
+            "fail_combine": { "text": "Comando inexistente. Use JOIN.", "type": "try_again" },
+            "node_9": {
+                "text": "Qual tipo de JOIN retorna TODOS os clientes, mesmo aqueles que não fizeram pedidos?",
+                "choices": [
+                    { "text": "INNER JOIN", "next": "fail_inner", "type": "lose" },
+                    { "text": "LEFT JOIN (com Clientes à esquerda)", "next": "node_10", "type": "safe" },
+                    { "text": "RIGHT JOIN (com Clientes à esquerda)", "next": "fail_right", "type": "lose" }
+                ]
+            },
+            "fail_inner": { "text": "INNER JOIN retorna apenas a intersecção - clientes QUE FIZERAM pedidos.", "type": "try_again" },
+            "fail_right": { "text": "Isso retornaria todos os pedidos, e apenas clientes que fizeram pedidos.", "type": "try_again" },
+            "node_10": {
+                "text": "Para contar quantos clientes existem em cada país, qual cláusula você usa?",
+                "choices": [
+                    { "text": "COUNT(pais)", "next": "fail_count_only", "type": "lose" },
+                    { "text": "GROUP BY pais", "next": "node_11", "type": "safe" },
+                    { "text": "SUMMARIZE BY pais", "next": "fail_summarize", "type": "lose" }
+                ]
+            },
+            "fail_count_only": { "text": "Você precisa agrupar os resultados para que o COUNT funcione por país.", "type": "try_again" },
+            "fail_summarize": { "text": "Comando inexistente.", "type": "try_again" },
+            "node_11": {
+                "text": "Após agrupar por país, como você filtra para mostrar apenas os países com MAIS de 10 clientes?",
+                "choices": [
+                    { "text": "WHERE COUNT(*) > 10", "next": "fail_where_agg", "type": "lose" },
+                    { "text": "HAVING COUNT(*) > 10", "next": "node_12", "type": "safe" },
+                    { "text": "FILTER COUNT(*) > 10", "next": "fail_filter_agg", "type": "lose" }
+                ]
+            },
+            "fail_where_agg": { "text": "WHERE filtra antes do agrupamento. Para filtrar o resultado de uma agregação, use HAVING.", "type": "try_again" },
+            "fail_filter_agg": { "text": "Comando inexistente.", "type": "try_again" },
+            "node_12": {
+                "text": "Qual função de agregação retorna a soma total dos valores de uma coluna 'total'?",
+                "choices": [
+                    { "text": "TOTAL(total)", "next": "fail_total", "type": "lose" },
+                    { "text": "SUM(total)", "next": "node_13", "type": "safe" },
+                    { "text": "ADD(total)", "next": "fail_add_agg", "type": "lose" }
+                ]
+            },
+            "fail_total": { "text": "Função inexistente.", "type": "try_again" },
+            "fail_add_agg": { "text": "Função inexistente.", "type": "try_again" },
+            "node_13": {
+                "text": "E para encontrar a média de 'salario'?",
+                "choices": [
+                    { "text": "AVG(salario)", "next": "node_14", "type": "safe" },
+                    { "text": "MEAN(salario)", "next": "fail_mean", "type": "lose" },
+                    { "text": "AVERAGE(salario)", "next": "fail_average", "type": "lose" }
+                ]
+            },
+            "fail_mean": { "text": "MEAN não é uma função SQL padrão.", "type": "try_again" },
+            "fail_average": { "text": "A abreviação correta é AVG.", "type": "try_again" },
+            "node_14": {
+                "text": "Para encontrar todos os produtos cujo nome começa com 'Espada', qual cláusula usar?",
+                "choices": [
+                    { "text": "WHERE nome STARTS WITH 'Espada'", "next": "fail_starts", "type": "lose" },
+                    { "text": "WHERE nome LIKE 'Espada%'", "next": "node_15", "type": "safe" },
+                    { "text": "WHERE nome = 'Espada*'", "next": "fail_equals_wild", "type": "lose" }
+                ]
+            },
+            "fail_starts": { "text": "Não é uma sintaxe SQL padrão.", "type": "try_again" },
+            "fail_equals_wild": { "text": "O operador de igualdade não usa wildcards. Use LIKE.", "type": "try_again" },
+            "node_15": {
+                "text": "Como selecionar clientes que moram no 'Brasil', 'Portugal' ou 'Angola'?",
+                "choices": [
+                    { "text": "WHERE pais IN ('Brasil', 'Portugal', 'Angola')", "next": "node_16", "type": "safe" },
+                    { "text": "WHERE pais = 'Brasil' AND pais = 'Portugal'...", "next": "fail_and_in", "type": "lose" },
+                    { "text": "WHERE pais CONTAINS ('Brasil', ...)", "next": "fail_contains_in", "type": "lose" }
+                ]
+            },
+            "fail_and_in": { "text": "A lógica deveria ser OR, não AND. IN é a forma mais limpa.", "type": "try_again" },
+            "fail_contains_in": { "text": "Comando inexistente.", "type": "try_again" },
+            "node_16": {
+                "text": "Para selecionar produtos com preço entre 100 e 200, qual o operador ideal?",
+                "choices": [
+                    { "text": "WHERE preco >= 100 AND preco <= 200", "next": "node_17_alt", "type": "safe" },
+                    { "text": "WHERE preco BETWEEN 100 AND 200", "next": "node_17", "type": "safe" },
+                    { "text": "WHERE preco IN (100, 200)", "next": "fail_in_range", "type": "lose" }
+                ]
+            },
+            "node_17_alt": { "text": "Funciona perfeitamente, mas BETWEEN é mais conciso. Você avança.", "next": "node_17", "type": "safe"},
+            "fail_in_range": { "text": "IN verifica igualdade, não um intervalo contínuo.", "type": "try_again" },
+            "node_17": {
+                "text": "Como renomear a coluna 'nome_cliente' para 'Cliente' no resultado da sua query?",
+                "choices": [
+                    { "text": "SELECT nome_cliente RENAME Cliente", "next": "fail_rename", "type": "lose" },
+                    { "text": "SELECT nome_cliente AS Cliente", "next": "node_18", "type": "safe" },
+                    { "text": "SELECT nome_cliente = Cliente", "next": "fail_equals_alias", "type": "lose" }
+                ]
+            },
+            "fail_rename": { "text": "Comando inexistente para alias de coluna.", "type": "try_again" },
+            "fail_equals_alias": { "text": "Use a palavra-chave AS para criar um alias.", "type": "try_again" },
+            "node_18": {
+                "text": "Qual comando cria uma nova tabela no banco de dados?",
+                "choices": [
+                    { "text": "CREATE TABLE", "next": "node_19", "type": "safe" },
+                    { "text": "NEW TABLE", "next": "fail_new", "type": "lose" },
+                    { "text": "MAKE TABLE", "next": "fail_make", "type": "lose" }
+                ]
+            },
+            "fail_new": { "text": "Comando incorreto.", "type": "try_again" },
+            "fail_make": { "text": "Comando incorreto.", "type": "try_again" },
+            "node_19": {
+                "text": "Qual tipo de dado é ideal para armazenar nomes de até 50 caracteres?",
+                "choices": [
+                    { "text": "TEXT", "next": "fail_text_type", "type": "lose" },
+                    { "text": "VARCHAR(50)", "next": "node_20", "type": "safe" },
+                    { "text": "STRING(50)", "next": "fail_string_type", "type": "lose" }
+                ]
+            },
+            "fail_text_type": { "text": "TEXT é para textos longos sem limite fixo, o que pode ser ineficiente aqui.", "type": "try_again" },
+            "fail_string_type": { "text": "STRING não é um tipo SQL padrão. VARCHAR é o correto.", "type": "try_again" },
+            "node_20": {
+                "text": "A restrição (constraint) que garante que cada linha tenha um identificador único é a...?",
+                "choices": [
+                    { "text": "UNIQUE KEY", "next": "fail_unique", "type": "lose" },
+                    { "text": "PRIMARY KEY", "next": "node_21", "type": "safe" },
+                    { "text": "ID KEY", "next": "fail_id_key", "type": "lose" }
+                ]
+            },
+            "fail_unique": { "text": "UNIQUE garante unicidade, mas PRIMARY KEY é o identificador principal da tabela e não pode ser nulo.", "type": "try_again" },
+            "fail_id_key": { "text": "Constraint inexistente.", "type": "try_again" },
+            "node_21": {
+                "text": "E a restrição que liga uma tabela a outra (ex: 'Pedidos' com 'Clientes') é a...?",
+                "choices": [
+                    { "text": "FOREIGN KEY", "next": "node_22", "type": "safe" },
+                    { "text": "LINKED KEY", "next": "fail_linked", "type": "lose" },
+                    { "text": "RELATION KEY", "next": "fail_relation", "type": "lose" }
+                ]
+            },
+            "fail_linked": { "text": "Constraint inexistente.", "type": "try_again" },
+            "fail_relation": { "text": "Constraint inexistente.", "type": "try_again" },
+            "node_22": {
+                "text": "Qual comando é usado para modificar a estrutura de uma tabela existente (ex: adicionar uma coluna)?",
+                "choices": [
+                    { "text": "MODIFY TABLE", "next": "fail_modify_table", "type": "lose" },
+                    { "text": "ALTER TABLE", "next": "node_23", "type": "safe" },
+                    { "text": "UPDATE TABLE", "next": "fail_update_table", "type": "lose" }
+                ]
+            },
+            "fail_modify_table": { "text": "Comando incorreto.", "type": "try_again" },
+            "fail_update_table": { "text": "UPDATE modifica os dados, não a estrutura.", "type": "try_again" },
+            "node_23": {
+                "text": "Para apagar permanentemente uma tabela e todos os seus dados, qual comando usar?",
+                "choices": [
+                    { "text": "DELETE TABLE", "next": "fail_delete_table", "type": "lose" },
+                    { "text": "TRUNCATE TABLE", "next": "fail_truncate", "type": "lose" },
+                    { "text": "DROP TABLE", "next": "node_24", "type": "safe" }
+                ]
+            },
+            "fail_delete_table": { "text": "DELETE apaga linhas, não a tabela.", "type": "try_again" },
+            "fail_truncate": { "text": "TRUNCATE apaga todos os dados rapidamente, mas mantém a estrutura da tabela.", "type": "try_again" },
+            "node_24": {
+                "text": "Qual a diferença entre 'UNION' e 'UNION ALL'?",
+                "choices": [
+                    { "text": "Nenhuma, são sinônimos.", "next": "fail_union_same", "type": "lose" },
+                    { "text": "UNION remove duplicatas, UNION ALL não.", "next": "node_25", "type": "safe" },
+                    { "text": "UNION ALL é mais rápido, mas pode falhar.", "next": "fail_union_fast", "type": "lose" }
+                ]
+            },
+            "fail_union_same": { "text": "Não são. A remoção de duplicatas é uma diferença fundamental.", "type": "try_again" },
+            "fail_union_fast": { "text": "UNION ALL é mais rápido porque não precisa verificar duplicatas, mas não falha por isso.", "type": "try_again" },
+            "node_25": {
+                "text": "Para obter apenas os 5 primeiros resultados de uma query, qual cláusula (comum) você adicionaria no final?",
+                "choices": [
+                    { "text": "TOP 5", "next": "node_26_alt", "type": "safe" },
+                    { "text": "FIRST 5", "next": "fail_first_rows", "type": "lose" },
+                    { "text": "LIMIT 5", "next": "node_26", "type": "safe" }
+                ]
+            },
+            "node_26_alt": { "text": "'TOP' é a sintaxe usada pelo SQL Server. 'LIMIT' é mais comum em outros como MySQL/PostgreSQL. Ambas corretas!", "next": "node_26", "type": "safe"},
+            "fail_first_rows": { "text": "Cláusula incorreta.", "type": "try_again" },
+            "node_26": {
+                "text": "Qual palavra-chave remove valores duplicados do seu conjunto de resultados?",
+                "choices": [
+                    { "text": "UNIQUE", "next": "fail_unique_select", "type": "lose" },
+                    { "text": "DISTINCT", "next": "node_27", "type": "safe" },
+                    { "text": "NODUP", "next": "fail_nodup", "type": "lose" }
+                ]
+            },
+            "fail_unique_select": { "text": "UNIQUE é uma constraint de tabela, não um filtro de SELECT.", "type": "try_again" },
+            "fail_nodup": { "text": "Comando inexistente.", "type": "try_again" },
+            "node_27": {
+                "text": "Como você verifica se o valor em uma coluna 'data_entrega' é nulo?",
+                "choices": [
+                    { "text": "WHERE data_entrega = NULL", "next": "fail_null_equals", "type": "lose" },
+                    { "text": "WHERE data_entrega IS NULL", "next": "node_28", "type": "safe" },
+                    { "text": "WHERE data_entrega IS EMPTY", "next": "fail_null_empty", "type": "lose" }
+                ]
+            },
+            "fail_null_equals": { "text": "NULL não é 'igual' a nada, nem a ele mesmo. Você deve usar o operador IS.", "type": "try_again" },
+            "fail_null_empty": { "text": "Comando incorreto.", "type": "try_again" },
+            "node_28": {
+                "text": "O que é uma 'subquery' (ou subselect)?",
+                "choices": [
+                    { "text": "Uma query dentro de outra query.", "next": "node_29", "type": "safe" },
+                    { "text": "Uma query salva para uso posterior.", "next": "fail_sub_view", "type": "lose" },
+                    { "text": "Um backup de uma query.", "next": "fail_sub_backup", "type": "lose" }
+                ]
+            },
+            "fail_sub_view": { "text": "Isso seria mais parecido com uma VIEW ou Stored Procedure.", "type": "try_again" },
+            "fail_sub_backup": { "text": "Não é um conceito de backup.", "type": "try_again" },
+            "node_29": {
+                "text": "Para que serve a cláusula 'ON' em um comando JOIN?",
+                "choices": [
+                    { "text": "Para ligar o JOIN.", "next": "fail_on_turn", "type": "lose" },
+                    { "text": "Para especificar a condição de junção entre as tabelas.", "next": "node_30", "type": "safe" },
+                    { "text": "Para filtrar os resultados do JOIN.", "next": "fail_on_where", "type": "lose" }
+                ]
+            },
+            "fail_on_turn": { "text": "Descrição muito vaga.", "type": "try_again" },
+            "fail_on_where": { "text": "Isso é feito com a cláusula WHERE, após o JOIN ser estabelecido.", "type": "try_again" },
+            "node_30": {
+                "text": "Qual das seguintes NÃO é uma linguagem de banco de dados?",
+                "choices": [
+                    { "text": "DML (Data Manipulation Language)", "next": "fail_not_lang", "type": "lose" },
+                    { "text": "DDL (Data Definition Language)", "next": "fail_not_lang", "type": "lose" },
+                    { "text": "DRL (Data Retrieval Language)", "next": "win_alt", "type": "win" }
+                ]
+            },
+            "fail_not_lang": { "text": "DML (INSERT, UPDATE) e DDL (CREATE, ALTER) são subconjuntos do SQL.", "type": "try_again" },
+            "win_alt": { "text": "Correto! DRL é um termo menos comum, geralmente incluído em DML (SELECT). Você passou!", "type": "win" },
+            "node_31": {
+                "text": "Chefe Final: O Sphinx da Normalização. Ele pergunta: 'Qual a sigla SQL?'",
+                "choices": [
+                    { "text": "Simple Query Language", "next": "fail_acronym", "type": "lose" },
+                    { "text": "Structured Query Language", "next": "win", "type": "win" },
+                    { "text": "Standard Question Language", "next": "fail_acronym", "type": "lose" }
+                ]
+            },
+            "fail_acronym": { "text": "Incorreto. A estrutura é a chave!", "type": "try_again" },
+            "win": { "text": "VOCÊ DECIFROU O ORÁCULO E DOMINOU OS DADOS! O TEMPLO SE CURVA À SUA SABEDORIA. PARABÉNS, MESTRE DE BANCO DE DADOS!", "type": "win" }
+        }
+    },
+    "React": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você entra no Domo do Virtual DOM. Um Construtor etéreo diz: 'Qual a sintaxe que mistura HTML com JavaScript?'",
+                "choices": [
+                    { "text": "HTMLX", "next": "fail_syntax", "type": "lose" },
+                    { "text": "JSX", "next": "node_2", "type": "safe" },
+                    { "text": "JSHTML", "next": "fail_syntax", "type": "lose" }
+                ]
+            },
+            "fail_syntax": { "text": "Termo incorreto. A sintaxe tem um nome específico.", "type": "try_again" },
+            "node_2": {
+                "text": "Correto. Para criar um estado que, ao mudar, re-renderiza o componente, qual Hook você usa?",
+                "choices": [
+                    { "text": "useState", "next": "node_3", "type": "safe" },
+                    { "text": "useEffect", "next": "fail_effect", "type": "lose" },
+                    { "text": "createState", "next": "fail_create_state", "type": "lose" }
+                ]
+            },
+            "fail_effect": { "text": "useEffect é para efeitos colaterais, como chamadas de API, não para guardar estado.", "type": "try_again" },
+            "fail_create_state": { "text": "Hook inexistente.", "type": "try_again" },
+            "node_3": {
+                "text": "Por convenção, como nomeamos componentes em React?",
+                "choices": [
+                    { "text": "camelCase", "next": "fail_case", "type": "lose" },
+                    { "text": "PascalCase", "next": "node_4", "type": "safe" },
+                    { "text": "kebab-case", "next": "fail_case", "type": "lose" }
+                ]
+            },
+            "fail_case": { "text": "Convenção incorreta. Componentes devem começar com letra maiúscula.", "type": "try_again" },
+            "node_4": {
+                "text": "Como você passa dados de um componente pai para um filho?",
+                "choices": [
+                    { "text": "Através de 'state'", "next": "fail_pass_state", "type": "lose" },
+                    { "text": "Através de 'props'", "next": "node_5", "type": "safe" },
+                    { "text": "Usando 'context'", "next": "fail_pass_context", "type": "lose" }
+                ]
+            },
+            "fail_pass_state": { "text": "State é interno ao componente. Para passar dados para fora, use props.", "type": "try_again" },
+            "fail_pass_context": { "text": "Context é para evitar passar props por muitos níveis, mas o mecanismo base é props.", "type": "try_again" },
+            "node_5": {
+                "text": "Para renderizar uma lista de itens, qual método de array é mais comumente usado em JSX?",
+                "choices": [
+                    { "text": "forEach()", "next": "fail_list_foreach", "type": "lose" },
+                    { "text": "map()", "next": "node_6", "type": "safe" },
+                    { "text": "for()", "next": "fail_list_for", "type": "lose" }
+                ]
+            },
+            "fail_list_foreach": { "text": "forEach não retorna um novo array, então não renderiza nada em JSX.", "type": "try_again" },
+            "fail_list_for": { "text": "Loops 'for' não podem ser usados diretamente dentro de chaves {} em JSX.", "type": "try_again" },
+            "node_6": {
+                "text": "Ao usar map() para renderizar uma lista, qual prop é essencial para performance e identidade dos elementos?",
+                "choices": [
+                    { "text": "id", "next": "fail_key_id", "type": "lose" },
+                    { "text": "key", "next": "node_7", "type": "safe" },
+                    { "text": "index", "next": "fail_key_index", "type": "lose" }
+                ]
+            },
+            "fail_key_id": { "text": "'id' é um atributo HTML. React precisa da prop 'key'.", "type": "try_again" },
+            "fail_key_index": { "text": "Usar o índice como chave é um anti-padrão se a lista puder mudar de ordem.", "type": "try_again" },
+            "node_7": {
+                "text": "Como você renderiza um <p> apenas se a variável 'mostrar' for verdadeira?",
+                "choices": [
+                    { "text": "{ if (mostrar) <p>...</p> }", "next": "fail_cond_if", "type": "lose" },
+                    { "text": "{ mostrar && <p>...</p> }", "next": "node_8", "type": "safe" },
+                    { "text": "<p show={mostrar}>...</p>", "next": "fail_cond_show", "type": "lose" }
+                ]
+            },
+            "fail_cond_if": { "text": "Declarações 'if' não podem ser usadas dentro de JSX. Use expressões.", "type": "try_again" },
+            "fail_cond_show": { "text": "Não existe um atributo 'show' nativo para isso.", "type": "try_again" },
+            "node_8": {
+                "text": "Qual a forma correta de passar uma função 'handleClick' para o evento de clique de um botão?",
+                "choices": [
+                    { "text": "onclick={handleClick()}", "next": "fail_event_call", "type": "lose" },
+                    { "text": "onClick={handleClick}", "next": "node_9", "type": "safe" },
+                    { "text": "on-click={handleClick}", "next": "fail_event_case", "type": "lose" }
+                ]
+            },
+            "fail_event_call": { "text": "Você está chamando a função na renderização, não passando a referência!", "type": "try_again" },
+            "fail_event_case": { "text": "Eventos em React usam camelCase (onClick).", "type": "try_again" },
+            "node_9": {
+                "text": "Qual Hook é usado para executar efeitos colaterais (ex: buscar dados) após a renderização?",
+                "choices": [
+                    { "text": "useState", "next": "fail_hook_state", "type": "lose" },
+                    { "text": "useEffect", "next": "node_10", "type": "safe" },
+                    { "text": "useCallback", "next": "fail_hook_callback", "type": "lose" }
+                ]
+            },
+            "fail_hook_state": { "text": "useState é para estado.", "type": "try_again" },
+            "fail_hook_callback": { "text": "useCallback é para memorizar funções, não para executar efeitos.", "type": "try_again" },
+            "node_10": {
+                "text": "No useEffect, o que um array de dependências vazio `[]` significa?",
+                "choices": [
+                    { "text": "Executa a cada renderização.", "next": "fail_dep_every", "type": "lose" },
+                    { "text": "Executa apenas uma vez, após a montagem.", "next": "node_11", "type": "safe" },
+                    { "text": "Executa quando o componente é desmontado.", "next": "fail_dep_unmount", "type": "lose" }
+                ]
+            },
+            "fail_dep_every": { "text": "Para executar a cada renderização, você omitiria o array de dependências.", "type": "try_again" },
+            "fail_dep_unmount": { "text": "Para executar na desmontagem, você retorna uma função de dentro do useEffect.", "type": "try_again" },
+            "node_11": {
+                "text": "Para evitar passar 'props' por múltiplos níveis de componentes, qual recurso do React você pode usar?",
+                "choices": [
+                    { "text": "State Lifting", "next": "fail_context_lift", "type": "lose" },
+                    { "text": "Context API", "next": "node_12", "type": "safe" },
+                    { "text": "Redux", "next": "fail_context_redux", "type": "lose" }
+                ]
+            },
+            "fail_context_lift": { "text": "State Lifting é o oposto, é subir o estado para um ancestral comum.", "type": "try_again" },
+            "fail_context_redux": { "text": "Redux é uma biblioteca externa para isso. Context API é a solução nativa do React.", "type": "try_again" },
+            "node_12": {
+                "text": "Qual Hook é uma alternativa ao useState para lógicas de estado mais complexas?",
+                "choices": [
+                    { "text": "useReducer", "next": "node_13", "type": "safe" },
+                    { "text": "useContext", "next": "fail_reducer_context", "type": "lose" },
+                    { "text": "useComplexState", "next": "fail_reducer_fake", "type": "lose" }
+                ]
+            },
+            "fail_reducer_context": { "text": "useContext serve para consumir um contexto, não para gerenciar estado complexo.", "type": "try_again" },
+            "fail_reducer_fake": { "text": "Hook inexistente.", "type": "try_again" },
+            "node_13": {
+                "text": "Qual Hook permite acessar um nó do DOM diretamente ou persistir um valor entre renderizações sem causar uma nova?",
+                "choices": [
+                    { "text": "useRef", "next": "node_14", "type": "safe" },
+                    { "text": "useDOM", "next": "fail_ref_dom", "type": "lose" },
+                    { "text": "useMemo", "next": "fail_ref_memo", "type": "lose" }
+                ]
+            },
+            "fail_ref_dom": { "text": "Hook inexistente.", "type": "try_again" },
+            "fail_ref_memo": { "text": "useMemo memoriza o resultado de uma função, não uma referência.", "type": "try_again" },
+            "node_14": {
+                "text": "O que é um 'componente controlado' (controlled component)?",
+                "choices": [
+                    { "text": "Um componente que controla o estado de outros.", "next": "fail_controlled_other", "type": "lose" },
+                    { "text": "Um input de formulário cujo valor é controlado pelo estado do React.", "next": "node_15", "type": "safe" },
+                    { "text": "Um componente que não pode ser modificado.", "next": "fail_controlled_fixed", "type": "lose" }
+                ]
+            },
+            "fail_controlled_other": { "text": "Não, o termo se refere a como um componente gerencia seu próprio estado interno, especialmente em formulários.", "type": "try_again" },
+            "fail_controlled_fixed": { "text": "Não, o valor pode ser modificado, mas através do estado do React.", "type": "try_again" },
+            "node_15": {
+                "text": "Qual biblioteca é a solução padrão do ecossistema React para roteamento?",
+                "choices": [
+                    { "text": "React Navigation", "next": "fail_router_native", "type": "lose" },
+                    { "text": "React Router", "next": "node_16", "type": "safe" },
+                    { "text": "Next.js Router", "next": "fail_router_next", "type": "lose" }
+                ]
+            },
+            "fail_router_native": { "text": "Essa é para React Native (mobile).", "type": "try_again" },
+            "fail_router_next": { "text": "Esse é o roteador específico do framework Next.js.", "type": "try_again" },
+            "node_16": {
+                "text": "O que é 'prop drilling'?",
+                "choices": [
+                    { "text": "Passar props através de vários níveis de componentes que não precisam delas.", "next": "node_17", "type": "safe" },
+                    { "text": "Uma técnica para otimizar o acesso a props.", "next": "fail_drilling_opt", "type": "lose" },
+                    { "text": "Um erro que ocorre ao passar a prop errada.", "next": "fail_drilling_error", "type": "lose" }
+                ]
+            },
+            "fail_drilling_opt": { "text": "É um problema a ser evitado, não uma otimização.", "type": "try_again" },
+            "fail_drilling_error": { "text": "Não é um erro de sintaxe, mas um problema de arquitetura.", "type": "try_again" },
+            "node_17": {
+                "text": "O que é um 'Custom Hook'?",
+                "choices": [
+                    { "text": "Um componente que só contém lógica.", "next": "fail_custom_comp", "type": "lose" },
+                    { "text": "Uma função JavaScript que usa outros Hooks e cujo nome começa com 'use'.", "next": "node_18", "type": "safe" },
+                    { "text": "Um Hook criado com a palavra-chave 'custom'.", "next": "fail_custom_keyword", "type": "lose" }
+                ]
+            },
+            "fail_custom_comp": { "text": "Não é um componente, mas uma função para compartilhar lógica entre componentes.", "type": "try_again" },
+            "fail_custom_keyword": { "text": "Não existe a palavra-chave 'custom'. É uma convenção de nomenclatura.", "type": "try_again" },
+            "node_18": {
+                "text": "Para retornar múltiplos elementos de um componente sem adicionar um nó extra ao DOM, o que você usa?",
+                "choices": [
+                    { "text": "Um array de elementos", "next": "fail_fragment_array", "type": "lose" },
+                    { "text": "React.Fragment ou <>...</>", "next": "node_19", "type": "safe" },
+                    { "text": "Uma <div> invisível", "next": "fail_fragment_div", "type": "lose" }
+                ]
+            },
+            "fail_fragment_array": { "text": "Isso funciona, mas requer chaves (keys) e é menos legível que Fragments.", "type": "try_again" },
+            "fail_fragment_div": { "text": "Isso adiciona um nó extra ao DOM, que é o que Fragments evitam.", "type": "try_again" },
+            "node_19": {
+                "text": "Qual Hook você usaria para memorizar (cachear) o resultado de um cálculo pesado, evitando que ele seja refeito a cada renderização?",
+                "choices": [
+                    { "text": "useCallback", "next": "fail_memo_callback", "type": "lose" },
+                    { "text": "useMemo", "next": "node_20", "type": "safe" },
+                    { "text": "useState", "next": "fail_memo_state", "type": "lose" }
+                ]
+            },
+            "fail_memo_callback": { "text": "useCallback memoriza a própria função, não seu valor de retorno.", "type": "try_again" },
+            "fail_memo_state": { "text": "useState armazena estado, mas não memoriza um cálculo.", "type": "try_again" },
+            "node_20": {
+                "text": "O que significa 'Lifting State Up'?",
+                "choices": [
+                    { "text": "Mover o estado para um componente pai para que possa ser compartilhado por filhos.", "next": "node_21", "type": "safe" },
+                    { "text": "Converter state em props.", "next": "fail_lift_props", "type": "lose" },
+                    { "text": "Armazenar o estado globalmente fora do React.", "next": "fail_lift_global", "type": "lose" }
+                ]
+            },
+            "fail_lift_props": { "text": "É uma consequência, mas não a definição do padrão.", "type": "try_again" },
+            "fail_lift_global": { "text": "Não, o estado é movido para um ancestral comum dentro do React.", "type": "try_again" },
+            "node_21": {
+                "text": "Qual o propósito do Virtual DOM?",
+                "choices": [
+                    { "text": "Substituir o HTML por um formato binário.", "next": "fail_vdom_binary", "type": "lose" },
+                    { "text": "Minimizar manipulações diretas e custosas no DOM real, comparando o que mudou.", "next": "node_22", "type": "safe" },
+                    { "text": "Permitir que o React funcione offline.", "next": "fail_vdom_offline", "type": "lose" }
+                ]
+            },
+            "fail_vdom_binary": { "text": "Não, é uma representação do DOM em objetos JavaScript.", "type": "try_again" },
+            "fail_vdom_offline": { "text": "Não tem relação com funcionalidade offline.", "type": "try_again" },
+            "node_22": {
+                "text": "Qual a principal diferença entre componentes de Classe e de Função hoje em dia?",
+                "choices": [
+                    { "text": "Componentes de Classe são mais rápidos.", "next": "fail_class_fast", "type": "lose" },
+                    { "text": "Componentes de Função usam Hooks para estado e ciclo de vida.", "next": "node_23", "type": "safe" },
+                    { "text": "Apenas componentes de Classe podem ter estado.", "next": "fail_class_state", "type": "lose" }
+                ]
+            },
+            "fail_class_fast": { "text": "Não há uma diferença significativa de performance, e componentes de função podem ser até mais otimizados.", "type": "try_again" },
+            "fail_class_state": { "text": "Isso era verdade antes dos Hooks. Hoje, componentes de função têm estado com useState.", "type": "try_again" },
+            "node_23": {
+                "text": "Em um componente de Classe, qual método do ciclo de vida é chamado após o componente ser montado no DOM?",
+                "choices": [
+                    { "text": "componentDidMount", "next": "node_24", "type": "safe" },
+                    { "text": "componentWillMount", "next": "fail_lifecycle_willmount", "type": "lose" },
+                    { "text": "render", "next": "fail_lifecycle_render", "type": "lose" }
+                ]
+            },
+            "fail_lifecycle_willmount": { "text": "Esse método é legado e inseguro. O correto é componentDidMount.", "type": "try_again" },
+            "fail_lifecycle_render": { "text": "render é chamado antes, para criar o DOM a ser montado.", "type": "try_again" },
+            "node_24": {
+                "text": "Em um componente de Classe, como você deve atualizar o estado para garantir uma nova renderização?",
+                "choices": [
+                    { "text": "this.state.valor = novoValor;", "next": "fail_setstate_direct", "type": "lose" },
+                    { "text": "this.setState({ valor: novoValor });", "next": "node_25", "type": "safe" },
+                    { "text": "this.updateState({ valor: novoValor });", "next": "fail_setstate_update", "type": "lose" }
+                ]
+            },
+            "fail_setstate_direct": { "text": "Nunca modifique o estado diretamente! Isso não dispara a re-renderização.", "type": "try_again" },
+            "fail_setstate_update": { "text": "O método correto é setState.", "type": "try_again" },
+            "node_25": {
+                "text": "O que é a prop 'children'?",
+                "choices": [
+                    { "text": "Uma lista de todos os componentes filhos.", "next": "fail_children_list", "type": "lose" },
+                    { "text": "O conteúdo que é passado entre a tag de abertura e fechamento de um componente.", "next": "node_26", "type": "safe" },
+                    { "text": "Uma função para criar componentes filhos.", "next": "fail_children_func", "type": "lose" }
+                ]
+            },
+            "fail_children_list": { "text": "Não é uma lista, mas o conteúdo em si (pode ser um elemento, string, etc).", "type": "try_again" },
+            "fail_children_func": { "text": "Isso seria um 'render prop', um padrão diferente.", "type": "try_again" },
+            "node_26": {
+                "text": "Qual Hook você usaria para memorizar uma função, evitando que ela seja recriada em toda renderização?",
+                "choices": [
+                    { "text": "useMemo", "next": "fail_callback_memo", "type": "lose" },
+                    { "text": "useCallback", "next": "node_27", "type": "safe" },
+                    { "text": "useFunction", "next": "fail_callback_fake", "type": "lose" }
+                ]
+            },
+            "fail_callback_memo": { "text": "useMemo memoriza um valor (o resultado de uma função), não a função em si.", "type": "try_again" },
+            "fail_callback_fake": { "text": "Hook inexistente.", "type": "try_again" },
+            "node_27": {
+                "text": "O que é um Higher-Order Component (HOC)?",
+                "choices": [
+                    { "text": "Um componente que renderiza outros componentes.", "next": "fail_hoc_render", "type": "lose" },
+                    { "text": "Uma função que recebe um componente e retorna um novo componente com lógica adicional.", "next": "node_28", "type": "safe" },
+                    { "text": "O componente principal da aplicação, como <App />.", "next": "fail_hoc_app", "type": "lose" }
+                ]
+            },
+            "fail_hoc_render": { "text": "Isso descreve quase todos os componentes. Um HOC é um padrão mais específico.", "type": "try_again" },
+            "fail_hoc_app": { "text": "Não, é um padrão de reuso de lógica.", "type": "try_again" },
+            "node_28": {
+                "text": "No JSX, como você adiciona a classe CSS 'minha-classe' a uma div?",
+                "choices": [
+                    { "text": "class='minha-classe'", "next": "fail_css_class", "type": "lose" },
+                    { "text": "className='minha-classe'", "next": "node_29", "type": "safe" },
+                    { "text": "css='minha-classe'", "next": "fail_css_css", "type": "lose" }
+                ]
+            },
+            "fail_css_class": { "text": "'class' é uma palavra reservada em JavaScript. React usa 'className' em seu lugar.", "type": "try_again" },
+            "fail_css_css": { "text": "Atributo incorreto.", "type": "try_again" },
+            "node_29": {
+                "text": "Qual Hook permite que um componente filho exponha funcionalidades para um componente pai?",
+                "choices": [
+                    { "text": "forwardRef", "next": "fail_imperative_forward", "type": "lose" },
+                    { "text": "useImperativeHandle", "next": "node_30", "type": "safe" },
+                    { "text": "useParentHandle", "next": "fail_imperative_fake", "type": "lose" }
+                ]
+            },
+            "fail_imperative_forward": { "text": "'forwardRef' é usado para passar uma ref para o filho, mas 'useImperativeHandle' é que personaliza o que é exposto.", "type": "try_again" },
+            "fail_imperative_fake": { "text": "Hook inexistente.", "type": "try_again" },
+            "node_30": {
+                "text": "O que o React.memo() faz?",
+                "choices": [
+                    { "text": "Memoriza o estado de um componente.", "next": "fail_memo_state_comp", "type": "lose" },
+                    { "text": "Impede a re-renderização de um componente se suas props não mudaram.", "next": "node_31", "type": "safe" },
+                    { "text": "Grava o componente em memória para acesso mais rápido.", "next": "fail_memo_memory", "type": "lose" }
+                ]
+            },
+            "fail_memo_state_comp": { "text": "Ele não memoriza o estado, ele memoriza o resultado da renderização.", "type": "try_again" },
+            "fail_memo_memory": { "text": "Não é sobre acesso, é sobre evitar re-renderizações desnecessárias.", "type": "try_again" },
+            "node_31": {
+                "text": "Chefe Final: O Otimizador de Build. Ele pergunta: 'Qual a principal finalidade de ferramentas como Vite ou Create React App?'",
+                "choices": [
+                    { "text": "São obrigatórias para escrever código React.", "next": "fail_cra_mandatory", "type": "lose" },
+                    { "text": "Fornecer uma configuração de build pronta para transpilar, otimizar e servir a aplicação.", "next": "win", "type": "win" },
+                    { "text": "Apenas instalar o React e o ReactDOM.", "next": "fail_cra_install", "type": "lose" }
+                ]
+            },
+            "fail_cra_mandatory": { "text": "Não são. Você pode configurar o React manualmente, mas é muito mais complexo.", "type": "try_again" },
+            "fail_cra_install": { "text": "Elas fazem muito mais do que isso, configurando todo um ambiente de desenvolvimento.", "type": "try_again" },
+            "win": { "text": "VOCÊ DOMINOU OS HOOKS E O FLUXO DE DADOS! A REATIVIDADE ESTÁ SOB SEU CONTROLE. PARABÉNS, MESTRE DO REACT!", "type": "win" }
+        }
+    },
+    "TypeScript": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você entra no Santuário da Tipagem. O Guardião do Compilador pergunta: 'Como você declara uma variável 'nome' que só pode ser string?'",
+                "choices": [
+                    { "text": "let nome: any;", "next": "fail_any", "type": "lose" },
+                    { "text": "let nome: string | null;", "next": "node_2", "type": "safe" },
+                    { "text": "let nome: string;", "next": "fail_strict", "type": "lose" }
+                ]
+            },
+            "fail_any": { "text": "Usar 'any' derrota o propósito do TypeScript! O guardião te bane.", "type": "try_again" },
+            "fail_strict": { "text": "Se pode ser nulo, o compilador estrito vai reclamar.", "type": "try_again" },
+            "node_2": {
+                "text": "Um tipo que pode ser 'string' OU 'number' é chamado de...?",
+                "choices": [
+                    { "text": "Tipo Híbrido", "next": "fail_union_name", "type": "lose" },
+                    { "text": "Union Type", "next": "node_3", "type": "safe" },
+                    { "text": "Tipo 'any'", "next": "fail_union_any", "type": "lose" }
+                ]
+            },
+            "fail_union_name": { "text": "Nome incorreto. Use o termo técnico.", "type": "try_again" },
+            "fail_union_any": { "text": "'any' aceita qualquer coisa, não apenas os tipos especificados. É perigoso!", "type": "try_again" },
+            "node_3": {
+                "text": "Para descrever a 'forma' de um objeto, qual palavra-chave é preferível para contratos públicos e extensibilidade?",
+                "choices": [
+                    { "text": "type", "next": "fail_type_alias", "type": "lose" },
+                    { "text": "interface", "next": "node_4", "type": "safe" },
+                    { "text": "class", "next": "fail_class_shape", "type": "lose" }
+                ]
+            },
+            "fail_type_alias": { "text": "'type' é ótimo para tipos primitivos e uniões. Para objetos, 'interface' oferece melhor extensibilidade.", "type": "try_again" },
+            "fail_class_shape": { "text": "Classes definem a forma E a implementação. Interfaces apenas a forma.", "type": "try_again" },
+            "node_4": {
+                "text": "Em uma interface, como você define uma propriedade 'id' que não pode ser alterada após a criação do objeto?",
+                "choices": [
+                    { "text": "const id: number;", "next": "fail_readonly_const", "type": "lose" },
+                    { "text": "readonly id: number;", "next": "node_5", "type": "safe" },
+                    { "text": "static id: number;", "next": "fail_readonly_static", "type": "lose" }
+                ]
+            },
+            "fail_readonly_const": { "text": "'const' é para variáveis, não para propriedades de interface.", "type": "try_again" },
+            "fail_readonly_static": { "text": "'static' pertence à definição da classe, não à instância.", "type": "try_again" },
+            "node_5": {
+                "text": "Como você tipa uma função que recebe um número e retorna uma string?",
+                "choices": [
+                    { "text": "function fn(p: number): string", "next": "node_6", "type": "safe" },
+                    { "text": "function fn(number): string", "next": "fail_fn_param", "type": "lose" },
+                    { "text": "function fn(p): string", "next": "fail_fn_implicit", "type": "lose" }
+                ]
+            },
+            "fail_fn_param": { "text": "O nome do parâmetro é obrigatório.", "type": "try_again" },
+            "fail_fn_implicit": { "text": "O parâmetro 'p' tem o tipo implícito 'any'. Seja explícito!", "type": "try_again" },
+            "node_6": {
+                "text": "E se a função não retornar valor algum?",
+                "choices": [
+                    { "text": "retorna 'undefined'", "next": "fail_void_undef", "type": "lose" },
+                    { "text": "o tipo de retorno é 'void'", "next": "node_7", "type": "safe" },
+                    { "text": "o tipo de retorno é 'null'", "next": "fail_void_null", "type": "lose" }
+                ]
+            },
+            "fail_void_undef": { "text": "'undefined' é um valor. 'void' é a ausência de valor.", "type": "try_again" },
+            "fail_void_null": { "text": "'null' é um valor. 'void' é a ausência de valor.", "type": "try_again" },
+            "node_7": {
+                "text": "Você quer criar uma função que aceite qualquer tipo, mas retorne esse mesmo tipo. O que usar?",
+                "choices": [
+                    { "text": "any", "next": "fail_generic_any", "type": "lose" },
+                    { "text": "Generics (<T>)", "next": "node_8", "type": "safe" },
+                    { "text": "unknown", "next": "fail_generic_unknown", "type": "lose" }
+                ]
+            },
+            "fail_generic_any": { "text": "Com 'any', você perde a informação do tipo que entrou.", "type": "try_again" },
+            "fail_generic_unknown": { "text": "'unknown' forçaria uma checagem de tipo antes de usar o valor, perdendo a conexão de entrada/saída.", "type": "try_again" },
+            "node_8": {
+                "text": "Como você define um conjunto de constantes nomeadas, como Dias da Semana?",
+                "choices": [
+                    { "text": "Com um objeto literal", "next": "fail_enum_obj", "type": "lose" },
+                    { "text": "Com 'enum'", "next": "node_9", "type": "safe" },
+                    { "text": "Com uma 'interface'", "next": "fail_enum_interface", "type": "lose" }
+                ]
+            },
+            "fail_enum_obj": { "text": "Funciona, mas 'enum' é a ferramenta específica e mais segura para isso.", "type": "try_again" },
+            "fail_enum_interface": { "text": "Interfaces definem formas, não valores constantes.", "type": "try_again" },
+            "node_9": {
+                "text": "Você tem uma variável 'x' do tipo 'unknown'. Como você diz ao compilador 'eu garanto que isso é uma string'?",
+                "choices": [
+                    { "text": "(string)x", "next": "fail_cast_c", "type": "lose" },
+                    { "text": "x as string", "next": "node_10", "type": "safe" },
+                    { "text": "new String(x)", "next": "fail_cast_new", "type": "lose" }
+                ]
+            },
+            "fail_cast_c": { "text": "Isso é sintaxe de casting de C/Java.", "type": "try_again" },
+            "fail_cast_new": { "text": "Isso cria um objeto String, não faz uma asserção de tipo.", "type": "try_again" },
+            "node_10": {
+                "text": "Qual a principal diferença entre 'unknown' e 'any'?",
+                "choices": [
+                    { "text": "'unknown' é mais seguro, pois força uma verificação de tipo antes do uso.", "next": "node_11", "type": "safe" },
+                    { "text": "Nenhuma, são a mesma coisa.", "next": "fail_unknown_any", "type": "lose" },
+                    { "text": "'any' é mais seguro, pois é mais flexível.", "next": "fail_unknown_any_safe", "type": "lose" }
+                ]
+            },
+            "fail_unknown_any": { "text": "Não são. A segurança que 'unknown' provê é a principal diferença.", "type": "try_again" },
+            "fail_unknown_any_safe": { "text": "'any' é uma porta aberta para bugs. 'unknown' é a alternativa segura.", "type": "try_again" },
+            "node_11": {
+                "text": "Para criar um novo tipo 'UserID' que é um 'string' ou 'number', o que você usaria?",
+                "choices": [
+                    { "text": "interface UserID extends string, number", "next": "fail_alias_interface", "type": "lose" },
+                    { "text": "type UserID = string | number;", "next": "node_12", "type": "safe" },
+                    { "text": "enum UserID { string, number }", "next": "fail_alias_enum", "type": "lose" }
+                ]
+            },
+            "fail_alias_interface": { "text": "Interfaces não podem estender tipos primitivos.", "type": "try_again" },
+            "fail_alias_enum": { "text": "Enums são para valores nomeados, não para alias de tipos existentes.", "type": "try_again" },
+            "node_12": {
+                "text": "Qual o comando para compilar um arquivo 'app.ts'?",
+                "choices": [
+                    { "text": "ts-node app.ts", "next": "fail_compile_tsnode", "type": "lose" },
+                    { "text": "tsc app.ts", "next": "node_13", "type": "safe" },
+                    { "text": "node app.ts", "next": "fail_compile_node", "type": "lose" }
+                ]
+            },
+            "fail_compile_tsnode": { "text": "ts-node compila e executa, mas o comando apenas para compilar é outro.", "type": "try_again" },
+            "fail_compile_node": { "text": "Node não entende TypeScript nativamente.", "type": "try_again" },
+            "node_13": {
+                "text": "Qual o nome do arquivo de configuração do TypeScript?",
+                "choices": [
+                    { "text": "package.json", "next": "fail_config_pkg", "type": "lose" },
+                    { "text": "tsconfig.json", "next": "node_14", "type": "safe" },
+                    { "text": "typescript.config.js", "next": "fail_config_name", "type": "lose" }
+                ]
+            },
+            "fail_config_pkg": { "text": "Esse é o arquivo do Node.js/NPM.", "type": "try_again" },
+            "fail_config_name": { "text": "Nome de arquivo incorreto.", "type": "try_again" },
+            "node_14": {
+                "text": "Qual 'Utility Type' transforma todas as propriedades de um tipo em opcionais?",
+                "choices": [
+                    { "text": "Optional<T>", "next": "fail_util_optional", "type": "lose" },
+                    { "text": "Partial<T>", "next": "node_15", "type": "safe" },
+                    { "text": "Nullable<T>", "next": "fail_util_nullable", "type": "lose" }
+                ]
+            },
+            "fail_util_optional": { "text": "Nome incorreto.", "type": "try_again" },
+            "fail_util_nullable": { "text": "Nome incorreto.", "type": "try_again" },
+            "node_15": {
+                "text": "E qual 'Utility Type' permite criar um novo tipo escolhendo apenas algumas propriedades de outro tipo (ex: 'id' e 'nome')?",
+                "choices": [
+                    { "text": "Extract<T, K>", "next": "fail_util_extract", "type": "lose" },
+                    { "text": "Select<T, K>", "next": "fail_util_select", "type": "lose" },
+                    { "text": "Pick<T, K>", "next": "node_16", "type": "safe" }
+                ]
+            },
+            "fail_util_extract": { "text": "Extract é para extrair tipos de uma união.", "type": "try_again" },
+            "fail_util_select": { "text": "Isso parece LINQ. O correto é Pick.", "type": "try_again" },
+            "node_16": {
+                "text": "Como você combina duas interfaces 'A' e 'B' em um novo tipo 'C' que tem todas as propriedades de ambas?",
+                "choices": [
+                    { "text": "type C = A & B;", "next": "node_17", "type": "safe" },
+                    { "text": "type C = A | B;", "next": "fail_intersect_union", "type": "lose" },
+                    { "text": "interface C extends A, B {}", "next": "node_17_alt", "type": "safe" }
+                ]
+            },
+            "fail_intersect_union": { "text": "Isso criaria um Union Type, que pode ser A ou B, mas não ambos.", "type": "try_again" },
+            "node_17_alt": { "text": "Interfaces podem estender múltiplas outras interfaces. Esta é outra forma correta!", "next": "node_17", "type": "safe"},
+            "node_17": {
+                "text": "Qual a relação do TypeScript com o JavaScript?",
+                "choices": [
+                    { "text": "São linguagens concorrentes sem relação.", "next": "fail_relation", "type": "lose" },
+                    { "text": "TypeScript é um superset de JavaScript.", "next": "node_18", "type": "safe" },
+                    { "text": "JavaScript é um superset de TypeScript.", "next": "fail_relation_reverse", "type": "lose" }
+                ]
+            },
+            "fail_relation": { "text": "Errado. Há uma relação direta e fundamental.", "type": "try_again" },
+            "fail_relation_reverse": { "text": "É o contrário. Todo código JS é, teoricamente, código TS válido.", "type": "try_again" },
+            "node_18": {
+                "text": "Em uma classe TypeScript, qual modificador torna um membro acessível apenas dentro da classe e de suas subclasses?",
+                "choices": [
+                    { "text": "private", "next": "fail_access_private", "type": "lose" },
+                    { "text": "protected", "next": "node_19", "type": "safe" },
+                    { "text": "internal", "next": "fail_access_internal", "type": "lose" }
+                ]
+            },
+            "fail_access_private": { "text": "'private' o torna acessível apenas dentro da própria classe.", "type": "try_again" },
+            "fail_access_internal": { "text": "'internal' é para visibilidade a nível de módulo, não de herança.", "type": "try_again" },
+            "node_19": {
+                "text": "O que uma 'abstract class' pode ter que uma 'interface' não pode?",
+                "choices": [
+                    { "text": "Métodos abstratos", "next": "fail_abstract_methods", "type": "lose" },
+                    { "text": "Implementação de métodos e propriedades", "next": "node_20", "type": "safe" },
+                    { "text": "Tipos genéricos", "next": "fail_abstract_generics", "type": "lose" }
+                ]
+            },
+            "fail_abstract_methods": { "text": "Ambas podem ter métodos sem implementação.", "type": "try_again" },
+            "fail_abstract_generics": { "text": "Ambas suportam genéricos.", "type": "try_again" },
+            "node_20": {
+                "text": "Para que serve a palavra-chave 'implements'?",
+                "choices": [
+                    { "text": "Para herdar de uma classe.", "next": "fail_implements_extends", "type": "lose" },
+                    { "text": "Para garantir que uma classe adere à forma de uma interface.", "next": "node_21", "type": "safe" },
+                    { "text": "Para importar um módulo.", "next": "fail_implements_import", "type": "lose" }
+                ]
+            },
+            "fail_implements_extends": { "text": "Para herdar, usamos 'extends'.", "type": "try_again" },
+            "fail_implements_import": { "text": "Para importar, usamos 'import'.", "type": "try_again" },
+            "node_21": {
+                "text": "Qual tipo especial representa um valor que nunca deveria ocorrer?",
+                "choices": [
+                    { "text": "void", "next": "fail_never_void", "type": "lose" },
+                    { "text": "never", "next": "node_22", "type": "safe" },
+                    { "text": "unknown", "next": "fail_never_unknown", "type": "lose" }
+                ]
+            },
+            "fail_never_void": { "text": "'void' significa que a função retorna sem valor. 'never' significa que a função nunca retorna.", "type": "try_again" },
+            "fail_never_unknown": { "text": "'unknown' é um tipo que existe, mas que não sabemos qual é.", "type": "try_again" },
+            "node_22": {
+                "text": "Como você define um tipo para um array que só pode conter strings?",
+                "choices": [
+                    { "text": "Array<string>", "next": "node_23", "type": "safe" },
+                    { "text": "string[]", "next": "node_23_alt", "type": "safe" },
+                    { "text": "{string}", "next": "fail_array_braces", "type": "lose" }
+                ]
+            },
+            "node_23_alt": { "text": "Esta é a sintaxe de atalho. Também está correta!", "next": "node_23", "type": "safe"},
+            "fail_array_braces": { "text": "Sintaxe incorreta.", "type": "try_again" },
+            "node_23": {
+                "text": "Qual opção no 'tsconfig.json' força a verificação explícita de valores 'null' e 'undefined'?",
+                "choices": [
+                    { "text": "'noImplicitAny'", "next": "fail_strict_any", "type": "lose" },
+                    { "text": "'strictNullChecks'", "next": "node_24", "type": "safe" },
+                    { "text": "'allowNulls'", "next": "fail_strict_allow", "type": "lose" }
+                ]
+            },
+            "fail_strict_any": { "text": "Essa opção reclama de 'any' implícito.", "type": "try_again" },
+            "fail_strict_allow": { "text": "Opção incorreta.", "type": "try_again" },
+            "node_24": {
+                "text": "O que é um 'Type Guard'?",
+                "choices": [
+                    { "text": "Uma expressão que realiza uma verificação em tempo de execução para garantir o tipo.", "next": "node_25", "type": "safe" },
+                    { "text": "Uma forma de proteger seu código contra hackers.", "next": "fail_guard_hack", "type": "lose" },
+                    { "text": "Um comentário que documenta o tipo.", "next": "fail_guard_comment", "type": "lose" }
+                ]
+            },
+            "fail_guard_hack": { "text": "Não tem a ver com segurança de aplicação, mas com segurança de tipo.", "type": "try_again" },
+            "fail_guard_comment": { "text": "É código executável, não um comentário.", "type": "try_again" },
+            "node_25": {
+                "text": "Qual o tipo de 'x' na declaração: `const x = 'hello';`?",
+                "choices": [
+                    { "text": "string", "next": "fail_literal_string", "type": "lose" },
+                    { "text": "'hello'", "next": "node_26", "type": "safe" },
+                    { "text": "any", "next": "fail_literal_any", "type": "lose" }
+                ]
+            },
+            "fail_literal_string": { "text": "Quase! Por ser uma constante, o TS infere o tipo mais específico, que é o próprio valor literal.", "type": "try_again" },
+            "fail_literal_any": { "text": "Não, o TypeScript infere o tipo a partir do valor.", "type": "try_again" },
+            "node_26": {
+                "text": "Como você define um tipo para um array de tamanho fixo com tipos específicos em cada posição (ex: nome e idade)?",
+                "choices": [
+                    { "text": "Tuple: [string, number]", "next": "node_27", "type": "safe" },
+                    { "text": "Array<string | number>", "next": "fail_tuple_array", "type": "lose" },
+                    { "text": "Pair<string, number>", "next": "fail_tuple_pair", "type": "lose" }
+                ]
+            },
+            "fail_tuple_array": { "text": "Isso define um array que pode conter strings OU números, em qualquer posição.", "type": "try_again" },
+            "fail_tuple_pair": { "text": "Pair não é um tipo nativo do TypeScript.", "type": "try_again" },
+            "node_27": {
+                "text": "Qual 'Utility Type' constrói um tipo pegando todas as propriedades de T, exceto K?",
+                "choices": [
+                    { "text": "Exclude<T, K>", "next": "fail_util_exclude", "type": "lose" },
+                    { "text": "Omit<T, K>", "next": "node_28", "type": "safe" },
+                    { "text": "Remove<T, K>", "next": "fail_util_remove", "type": "lose" }
+                ]
+            },
+            "fail_util_exclude": { "text": "Exclude<T, K> remove tipos de uma união T que são atribuíveis a K.", "type": "try_again" },
+            "fail_util_remove": { "text": "Utility type inexistente.", "type": "try_again" },
+            "node_28": {
+                "text": "O que a sintaxe '@' antes de uma declaração de classe ou método geralmente representa?",
+                "choices": [
+                    { "text": "Um comentário", "next": "fail_decorator_comment", "type": "lose" },
+                    { "text": "Um Decorator", "next": "node_29", "type": "safe" },
+                    { "text": "Uma anotação de erro", "next": "fail_decorator_error", "type": "lose" }
+                ]
+            },
+            "fail_decorator_comment": { "text": "Não é um comentário, é uma feature de metaprogramação.", "type": "try_again" },
+            "fail_decorator_error": { "text": "É uma sintaxe válida, não um erro.", "type": "try_again" },
+            "node_29": {
+                "text": "Como você define uma propriedade 'idade' opcional em uma interface?",
+                "choices": [
+                    { "text": "idade: number | null;", "next": "fail_optional_null", "type": "lose" },
+                    { "text": "idade?: number;", "next": "node_30", "type": "safe" },
+                    { "text": "optional idade: number;", "next": "fail_optional_keyword", "type": "lose" }
+                ]
+            },
+            "fail_optional_null": { "text": "Isso permite que seja nulo, mas ainda exige que a propriedade exista.", "type": "try_again" },
+            "fail_optional_keyword": { "text": "A sintaxe correta é usar o '?' após o nome da propriedade.", "type": "try_again" },
+            "node_30": {
+                "text": "Qual Utility Type constrói um tipo com um conjunto de propriedades K, onde cada propriedade é do tipo T?",
+                "choices": [
+                    { "text": "Map<K, T>", "next": "fail_util_map", "type": "lose" },
+                    { "text": "Record<K, T>", "next": "node_31", "type": "safe" },
+                    { "text": "Dictionary<K, T>", "next": "fail_util_dict", "type": "lose" }
+                ]
+            },
+            "fail_util_map": { "text": "Map é um objeto de coleção, não um Utility Type.", "type": "try_again" },
+            "fail_util_dict": { "text": "Dictionary não é um Utility Type nativo.", "type": "try_again" },
+            "node_31": {
+                "text": "Chefe Final: O Transpilador. Ele pergunta: 'No final do dia, em que linguagem o seu código TypeScript é transformado para rodar nos navegadores?'",
+                "choices": [
+                    { "text": "Assembly", "next": "fail_final_asm", "type": "lose" },
+                    { "text": "JavaScript", "next": "win", "type": "win" },
+                    { "text": "WebAssembly", "next": "fail_final_wasm", "type": "lose" }
+                ]
+            },
+            "fail_final_asm": { "text": "Nível muito baixo! O alvo é uma linguagem de script de alto nível.", "type": "try_again" },
+            "fail_final_wasm": { "text": "É uma possibilidade, mas o alvo primário e universal é outro.", "type": "try_again" },
+            "win": { "text": "VOCÊ DOMINOU OS TIPOS E SATISFEZ O COMPILADOR! SEU CÓDIGO É SEGURO E ROBUSTO. PARABÉNS, MESTRE DO TYPESCRIPT!", "type": "win" }
+        }
+    },
+    "Git": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você fez alterações no código. Qual o primeiro passo para salvá-las no histórico?",
+                "choices": [
+                    { "text": "git push", "next": "fail_push", "type": "lose" },
+                    { "text": "git add .", "next": "node_2", "type": "safe" },
+                    { "text": "git commit", "next": "fail_commit", "type": "lose" }
+                ]
+            },
+            "fail_push": { "text": "Nada foi comitado ainda!", "type": "try_again" },
+            "fail_commit": { "text": "Você precisa adicionar os arquivos (stage) antes de comitar.", "type": "try_again" },
+            "node_2": {
+                "text": "Arquivos preparados (staged). Agora, como você grava essa versão com uma mensagem?",
+                "choices": [
+                    { "text": "git save \"mensagem\"", "next": "fail_save", "type": "lose" },
+                    { "text": "git commit -m \"mensagem\"", "next": "win", "type": "win" },
+                    { "text": "git upload", "next": "fail_upload", "type": "lose" }
+                ]
+            },
+            "fail_save": { "text": "Git save não existe.", "type": "try_again" },
+            "fail_upload": { "text": "Comando inexistente.", "type": "try_again" },
+            "win": { "text": "Alterações versionadas! Histórico limpo.", "type": "win" }
+        }
+    },
+    "Docker": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você precisa criar uma receita para construir sua imagem. Qual o nome do arquivo?",
+                "choices": [
+                    { "text": "DockerImage.txt", "next": "fail_txt", "type": "lose" },
+                    { "text": "Dockerfile", "next": "node_2", "type": "safe" },
+                    { "text": "docker-compose.yml", "next": "fail_compose", "type": "lose" }
+                ]
+            },
+            "fail_txt": { "text": "O daemon do Docker não reconhece isso.", "type": "try_again" },
+            "fail_compose": { "text": "Isso é para orquestrar vários containers, não definir a imagem base.", "type": "try_again" },
+            "node_2": {
+                "text": "Imagem definida. Qual comando cria (builda) a imagem a partir do Dockerfile atual?",
+                "choices": [
+                    { "text": "docker run .", "next": "fail_run", "type": "lose" },
+                    { "text": "docker build -t meu-app .", "next": "win", "type": "win" },
+                    { "text": "docker create", "next": "fail_create", "type": "lose" }
+                ]
+            },
+            "fail_run": { "text": "Run executa um container, não constrói a imagem.", "type": "try_again" },
+            "fail_create": { "text": "Cria mas não inicia, e não constrói imagem.", "type": "try_again" },
+            "win": { "text": "Container isolado e pronto para deploy!", "type": "win" }
+        }
+    },
+    "Vue.js": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você quer exibir uma variável 'mensagem' no template HTML. Qual a sintaxe?",
+                "choices": [
+                    { "text": "{ mensagem }", "next": "fail_react", "type": "lose" },
+                    { "text": "{{ mensagem }}", "next": "node_2", "type": "safe" },
+                    { "text": "v-text=mensagem", "next": "node_2_alt", "type": "safe" }
+                ]
+            },
+            "fail_react": { "text": "Isso é sintaxe de React (uma chave). Vue usa Mustache (duas).", "type": "try_again" },
+            "node_2": {
+                "text": "Correto. Agora, como fazer um loop em uma lista <li>?",
+                "choices": [
+                    { "text": "v-for=\"item in lista\"", "next": "win", "type": "win" },
+                    { "text": "ng-repeat=\"item in lista\"", "next": "fail_ng", "type": "lose" },
+                    { "text": "lista.map()", "next": "fail_map", "type": "lose" }
+                ]
+            },
+            "node_2_alt": {
+                "text": "Funciona, mas {{ }} é mais comum. Como fazer um loop?",
+                "choices": [
+                    { "text": "v-for=\"item in lista\"", "next": "win", "type": "win" },
+                    { "text": "loop=item", "next": "fail_loop", "type": "lose" }
+                ]
+            },
+            "fail_ng": { "text": "Isso é Angular 1 (legacy).", "type": "try_again" },
+            "fail_map": { "text": "Isso é lógica JS, não diretiva de template Vue.", "type": "try_again" },
+            "fail_loop": { "text": "Diretiva inexistente.", "type": "try_again" },
+            "win": { "text": "Reatividade Vue dominada!", "type": "win" }
+        }
+    },
+    "Angular": {
+        "startNode": "intro",
+        "nodes": {
+            "intro": {
+                "text": "Você está criando um componente. Qual decorator é obrigatório na classe?",
+                "choices": [
+                    { "text": "@Component", "next": "node_2", "type": "safe" },
+                    { "text": "@Injectable", "next": "fail_service", "type": "lose" },
+                    { "text": "@Module", "next": "fail_module", "type": "lose" }
+                ]
+            },
+            "fail_service": { "text": "Isso é para Serviços.", "type": "try_again" },
+            "fail_module": { "text": "Isso é para Módulos.", "type": "try_again" },
+            "node_2": {
+                "text": "Para exibir dados condicionalmente (se for verdadeiro), qual diretiva estrutural você usa?",
+                "choices": [
+                    { "text": "*ngIf", "next": "win", "type": "win" },
+                    { "text": "v-if", "next": "fail_vue", "type": "lose" },
+                    { "text": "hidden", "next": "fail_html", "type": "lose" }
+                ]
+            },
+            "fail_vue": { "text": "Você está no framework errado (Vue).", "type": "try_again" },
+            "fail_html": { "text": "Isso apenas oculta via CSS, não remove do DOM como uma diretiva estrutural.", "type": "try_again" },
+            "win": { "text": "Aplicação Enterprise robusta construída!", "type": "win" }
+        }
+    }
+}
