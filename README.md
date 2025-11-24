@@ -48,16 +48,6 @@ Fetch API para carregar dados dinamicamente.
 
 IA Generativa (Google Gemini): Utilizada para criar a estrutura das quests, diálogos e expandir a base de conhecimento massivamente.
 
-📸 Screenshots
-
-(Insira aqui prints do seu projeto rodando!)
-
-Tela de Setup Inicial
-
-HUD e Avatar Animado
-
-Batalha de Código (Modal de RPG)
-
 🚀 Como Executar
 
 Clone este repositório:
