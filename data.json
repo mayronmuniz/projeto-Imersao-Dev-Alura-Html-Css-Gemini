@@ -2559,115 +2559,1269 @@
             "win": { "text": "VOCÊ DOMINOU OS TIPOS E SATISFEZ O COMPILADOR! SEU CÓDIGO É SEGURO E ROBUSTO. PARABÉNS, MESTRE DO TYPESCRIPT!", "type": "win" }
         }
     },
-    "Git": {
-        "startNode": "intro",
-        "nodes": {
-            "intro": {
-                "text": "Você fez alterações no código. Qual o primeiro passo para salvá-las no histórico?",
-                "choices": [
-                    { "text": "git push", "next": "fail_push", "type": "lose" },
-                    { "text": "git add .", "next": "node_2", "type": "safe" },
-                    { "text": "git commit", "next": "fail_commit", "type": "lose" }
-                ]
-            },
-            "fail_push": { "text": "Nada foi comitado ainda!", "type": "try_again" },
-            "fail_commit": { "text": "Você precisa adicionar os arquivos (stage) antes de comitar.", "type": "try_again" },
-            "node_2": {
-                "text": "Arquivos preparados (staged). Agora, como você grava essa versão com uma mensagem?",
-                "choices": [
-                    { "text": "git save \"mensagem\"", "next": "fail_save", "type": "lose" },
-                    { "text": "git commit -m \"mensagem\"", "next": "win", "type": "win" },
-                    { "text": "git upload", "next": "fail_upload", "type": "lose" }
-                ]
-            },
-            "fail_save": { "text": "Git save não existe.", "type": "try_again" },
-            "fail_upload": { "text": "Comando inexistente.", "type": "try_again" },
-            "win": { "text": "Alterações versionadas! Histórico limpo.", "type": "win" }
+   "Git": {
+    "startNode": "intro",
+    "nodes": {
+        "intro": {
+            "text": "1/31: Você quer iniciar um novo repositório Git vazio na pasta atual. Qual o comando?",
+            "choices": [
+                { "text": "git start", "next": "f_intro", "type": "lose" },
+                { "text": "git init", "next": "q2", "type": "safe" },
+                { "text": "git new", "next": "f_intro", "type": "lose" }
+            ]
+        },
+        "f_intro": { "text": "Comando desconhecido. Use 'init' para inicializar.", "type": "try_again" },
+
+        "q2": {
+            "text": "2/31: Você quer baixar um repositório existente de um servidor remoto para sua máquina.",
+            "choices": [
+                { "text": "git clone <url>", "next": "q3", "type": "safe" },
+                { "text": "git pull <url>", "next": "f_q2", "type": "lose" },
+                { "text": "git copy <url>", "next": "f_q2", "type": "lose" }
+            ]
+        },
+        "f_q2": { "text": "Para trazer um repo inteiro pela primeira vez, usamos clone.", "type": "try_again" },
+
+        "q3": {
+            "text": "3/31: Você modificou arquivos. Qual comando mostra o estado atual (quais arquivos mudaram)?",
+            "choices": [
+                { "text": "git check", "next": "f_q3", "type": "lose" },
+                { "text": "git info", "next": "f_q3", "type": "lose" },
+                { "text": "git status", "next": "q4", "type": "safe" }
+            ]
+        },
+        "f_q3": { "text": "O comando correto é 'status' para ver o estado da working tree.", "type": "try_again" },
+
+        "q4": {
+            "text": "4/31: Você criou um arquivo 'index.html'. Como prepará-lo (stage) para o commit?",
+            "choices": [
+                { "text": "git add index.html", "next": "q5", "type": "safe" },
+                { "text": "git stage index.html", "next": "f_q4", "type": "lose" },
+                { "text": "git push index.html", "next": "f_q4", "type": "lose" }
+            ]
+        },
+        "f_q4": { "text": "Use 'git add' para mover arquivos para a staging area.", "type": "try_again" },
+
+        "q5": {
+            "text": "5/31: Arquivos preparados. Como salvar essa versão no histórico com uma mensagem?",
+            "choices": [
+                { "text": "git save -m \"msg\"", "next": "f_q5", "type": "lose" },
+                { "text": "git commit -m \"msg\"", "next": "q6", "type": "safe" },
+                { "text": "git upload \"msg\"", "next": "f_q5", "type": "lose" }
+            ]
+        },
+        "f_q5": { "text": "O comando para salvar uma versão é 'commit'.", "type": "try_again" },
+
+        "q6": {
+            "text": "6/31: Você quer enviar seus commits locais para o repositório remoto (GitHub/GitLab).",
+            "choices": [
+                { "text": "git send", "next": "f_q6", "type": "lose" },
+                { "text": "git fetch", "next": "f_q6", "type": "lose" },
+                { "text": "git push", "next": "q7", "type": "safe" }
+            ]
+        },
+        "f_q6": { "text": "Para 'empurrar' alterações para o remoto, use push.", "type": "try_again" },
+
+        "q7": {
+            "text": "7/31: Seu colega fez alterações no remoto. Como você baixa e aplica essas mudanças automaticamente?",
+            "choices": [
+                { "text": "git pull", "next": "q8", "type": "safe" },
+                { "text": "git get", "next": "f_q7", "type": "lose" },
+                { "text": "git download", "next": "f_q7", "type": "lose" }
+            ]
+        },
+        "f_q7": { "text": "Git pull faz o fetch e o merge automaticamente.", "type": "try_again" },
+
+        "q8": {
+            "text": "8/31: Você quer trabalhar em uma nova feature isolada. Como criar uma branch chamada 'login'?",
+            "choices": [
+                { "text": "git branch login", "next": "q9", "type": "safe" },
+                { "text": "git create login", "next": "f_q8", "type": "lose" },
+                { "text": "git new login", "next": "f_q8", "type": "lose" }
+            ]
+        },
+        "f_q8": { "text": "Use 'git branch <nome>' para criar.", "type": "try_again" },
+
+        "q9": {
+            "text": "9/31: A branch 'login' foi criada. Como você muda para ela para começar a trabalhar?",
+            "choices": [
+                { "text": "git checkout login", "next": "q10", "type": "safe" },
+                { "text": "git move login", "next": "f_q9", "type": "lose" },
+                { "text": "git switch-to login", "next": "f_q9", "type": "lose" }
+            ]
+        },
+        "f_q9": { "text": "Use 'checkout' (ou 'switch' nas versões novas) para mudar de branch.", "type": "try_again" },
+
+        "q10": {
+            "text": "10/31: Feature pronta! Você está na 'main'. Como juntar o código da branch 'login' na 'main'?",
+            "choices": [
+                { "text": "git join login", "next": "f_q10", "type": "lose" },
+                { "text": "git merge login", "next": "q11", "type": "safe" },
+                { "text": "git combine login", "next": "f_q10", "type": "lose" }
+            ]
+        },
+        "f_q10": { "text": "Use 'merge' para fundir histórias de branches.", "type": "try_again" },
+
+        "q11": {
+            "text": "11/31: Você quer ver o histórico de commits (hashes, autores, datas).",
+            "choices": [
+                { "text": "git history", "next": "f_q11", "type": "lose" },
+                { "text": "git log", "next": "q12", "type": "safe" },
+                { "text": "git timeline", "next": "f_q11", "type": "lose" }
+            ]
+        },
+        "f_q11": { "text": "O comando 'log' mostra o histórico do repositório.", "type": "try_again" },
+
+        "q12": {
+            "text": "12/31: Você alterou um arquivo mas não deu 'add'. Como ver exatamente quais linhas mudaram?",
+            "choices": [
+                { "text": "git diff", "next": "q13", "type": "safe" },
+                { "text": "git peek", "next": "f_q12", "type": "lose" },
+                { "text": "git changes", "next": "f_q12", "type": "lose" }
+            ]
+        },
+        "f_q12": { "text": "Use 'diff' para ver as diferenças no código.", "type": "try_again" },
+
+        "q13": {
+            "text": "13/31: Você precisa conectar seu repo local a um servidor remoto pela primeira vez.",
+            "choices": [
+                { "text": "git remote add origin <url>", "next": "q14", "type": "safe" },
+                { "text": "git connect <url>", "next": "f_q13", "type": "lose" },
+                { "text": "git link <url>", "next": "f_q13", "type": "lose" }
+            ]
+        },
+        "f_q13": { "text": "O comando é 'git remote add origin <url>'.", "type": "try_again" },
+
+        "q14": {
+            "text": "14/31: Você tem arquivos de log (.log) que não devem ser versionados. O que fazer?",
+            "choices": [
+                { "text": "git ignore *.log", "next": "f_q14", "type": "lose" },
+                { "text": "Criar arquivo .gitignore", "next": "q15", "type": "safe" },
+                { "text": "git delete *.log", "next": "f_q14", "type": "lose" }
+            ]
+        },
+        "f_q14": { "text": "Crie um arquivo chamado '.gitignore' e liste os padrões lá.", "type": "try_again" },
+
+        "q15": {
+            "text": "15/31: Você fez um commit errado, mas quer manter os arquivos alterados (staged) para corrigir.",
+            "choices": [
+                { "text": "git reset --soft HEAD~1", "next": "q16", "type": "safe" },
+                { "text": "git reset --hard HEAD~1", "next": "f_q15", "type": "lose" },
+                { "text": "git undo", "next": "f_q15", "type": "lose" }
+            ]
+        },
+        "f_q15": { "text": "O 'soft' desfaz o commit mas mantém o trabalho. O 'hard' apaga tudo.", "type": "try_again" },
+
+        "q16": {
+            "text": "16/31: Agora você quer desfazer tudo, destruindo alterações locais e voltando ao último commit.",
+            "choices": [
+                { "text": "git reset --hard HEAD", "next": "q17", "type": "safe" },
+                { "text": "git checkout .", "next": "f_q16", "type": "lose" },
+                { "text": "git clean", "next": "f_q16", "type": "lose" }
+            ]
+        },
+        "f_q16": { "text": "Cuidado! 'reset --hard' apaga alterações não commitadas.", "type": "try_again" },
+
+        "q17": {
+            "text": "17/31: Você precisa reverter um commit antigo (publicado) sem reescrever o histórico (criar um 'anti-commit').",
+            "choices": [
+                { "text": "git delete <hash>", "next": "f_q17", "type": "lose" },
+                { "text": "git revert <hash>", "next": "q18", "type": "safe" },
+                { "text": "git remove <hash>", "next": "f_q17", "type": "lose" }
+            ]
+        },
+        "f_q17": { "text": "Use 'revert' para criar um novo commit que desfaz o anterior de forma segura.", "type": "try_again" },
+
+        "q18": {
+            "text": "18/31: Você precisa mudar de branch urgente, mas tem trabalho incompleto que não quer comitar agora.",
+            "choices": [
+                { "text": "git stash", "next": "q19", "type": "safe" },
+                { "text": "git hold", "next": "f_q18", "type": "lose" },
+                { "text": "git pause", "next": "f_q18", "type": "lose" }
+            ]
+        },
+        "f_q18": { "text": "Use 'stash' para guardar mudanças temporariamente numa pilha.", "type": "try_again" },
+
+        "q19": {
+            "text": "19/31: Você voltou para a branch original. Como recuperar o trabalho guardado no stash?",
+            "choices": [
+                { "text": "git unstash", "next": "f_q19", "type": "lose" },
+                { "text": "git stash pop", "next": "q20", "type": "safe" },
+                { "text": "git stash get", "next": "f_q19", "type": "lose" }
+            ]
+        },
+        "f_q19": { "text": "Use 'stash pop' para aplicar e remover da pilha, ou 'apply' para manter.", "type": "try_again" },
+
+        "q20": {
+            "text": "20/31: Você quer marcar a versão 1.0.0 do seu software no commit atual.",
+            "choices": [
+                { "text": "git tag v1.0.0", "next": "q21", "type": "safe" },
+                { "text": "git mark v1.0.0", "next": "f_q20", "type": "lose" },
+                { "text": "git version v1.0.0", "next": "f_q20", "type": "lose" }
+            ]
+        },
+        "f_q20": { "text": "Tags são usadas para marcar releases. Comando: git tag.", "type": "try_again" },
+
+        "q21": {
+            "text": "21/31: Você quer baixar as referências do remoto sem mesclar nada no seu código atual.",
+            "choices": [
+                { "text": "git fetch", "next": "q22", "type": "safe" },
+                { "text": "git pull", "next": "f_q21", "type": "lose" },
+                { "text": "git sync", "next": "f_q21", "type": "lose" }
+            ]
+        },
+        "f_q21": { "text": "Pull faz fetch + merge. Para só baixar dados, use 'fetch'.", "type": "try_again" },
+
+        "q22": {
+            "text": "22/31: Você esqueceu um arquivo no último commit ou errou a mensagem. Como corrigir o *último* commit?",
+            "choices": [
+                { "text": "git commit --amend", "next": "q23", "type": "safe" },
+                { "text": "git fix", "next": "f_q22", "type": "lose" },
+                { "text": "git change-last", "next": "f_q22", "type": "lose" }
+            ]
+        },
+        "f_q22": { "text": "Use '--amend' para editar o último commit (não use se já fez push!).", "type": "try_again" },
+
+        "q23": {
+            "text": "23/31: Você estragou o arquivo 'style.css'. Como descartar mudanças SÓ nesse arquivo (voltando ao último commit)?",
+            "choices": [
+                { "text": "git checkout style.css", "next": "q24", "type": "safe" },
+                { "text": "git reset style.css", "next": "f_q23", "type": "lose" },
+                { "text": "git discard style.css", "next": "f_q23", "type": "lose" }
+            ]
+        },
+        "f_q23": { "text": "Use 'checkout <arquivo>' (ou 'restore') para descartar mudanças locais.", "type": "try_again" },
+
+        "q24": {
+            "text": "24/31: Como parar de versionar um arquivo, removendo-o do Git, mas mantendo-o no seu HD?",
+            "choices": [
+                { "text": "git rm --cached <file>", "next": "q25", "type": "safe" },
+                { "text": "git rm <file>", "next": "f_q24", "type": "lose" },
+                { "text": "git delete <file>", "next": "f_q24", "type": "lose" }
+            ]
+        },
+        "f_q24": { "text": "Use '--cached' para tirar do index mas manter no diretório de trabalho.", "type": "try_again" },
+
+        "q25": {
+            "text": "25/31: Você tem vários arquivos não rastreados (untracked) e quer apagar todos de uma vez.",
+            "choices": [
+                { "text": "git clean -fd", "next": "q26", "type": "safe" },
+                { "text": "git clear", "next": "f_q25", "type": "lose" },
+                { "text": "git wipe", "next": "f_q25", "type": "lose" }
+            ]
+        },
+        "f_q25": { "text": "'git clean' remove arquivos não rastreados. -fd força diretórios.", "type": "try_again" },
+
+        "q26": {
+            "text": "26/31: [Avançado] Você quer atualizar sua branch com a main, mas mantendo um histórico linear (sem commit de merge).",
+            "choices": [
+                { "text": "git rebase main", "next": "q27", "type": "safe" },
+                { "text": "git merge main", "next": "f_q26", "type": "lose" },
+                { "text": "git linear main", "next": "f_q26", "type": "lose" }
+            ]
+        },
+        "f_q26": { "text": "O 'rebase' reaplica seus commits no topo da outra branch, linearizando a história.", "type": "try_again" },
+
+        "q27": {
+            "text": "27/31: [Avançado] Você precisa pegar UM commit específico de outra branch e aplicar na sua, sem trazer a branch toda.",
+            "choices": [
+                { "text": "git cherry-pick <hash>", "next": "q28", "type": "safe" },
+                { "text": "git pick <hash>", "next": "f_q27", "type": "lose" },
+                { "text": "git select <hash>", "next": "f_q27", "type": "lose" }
+            ]
+        },
+        "f_q27": { "text": "O 'cherry-pick' seleciona e aplica um commit unitário.", "type": "try_again" },
+
+        "q28": {
+            "text": "28/31: [Salva-vidas] Você deletou uma branch ou resetou errado e perdeu commits. Onde encontrar o histórico de AÇÕES?",
+            "choices": [
+                { "text": "git reflog", "next": "q29", "type": "safe" },
+                { "text": "git recover", "next": "f_q28", "type": "lose" },
+                { "text": "git logs", "next": "f_q28", "type": "lose" }
+            ]
+        },
+        "f_q28": { "text": "O 'reflog' mostra onde o HEAD esteve. É o anjo da guarda do Git.", "type": "try_again" },
+
+        "q29": {
+            "text": "29/31: Quem escreveu essa linha de código com bug? Você quer ver o autor de cada linha do arquivo.",
+            "choices": [
+                { "text": "git blame <arquivo>", "next": "q30", "type": "safe" },
+                { "text": "git who <arquivo>", "next": "f_q29", "type": "lose" },
+                { "text": "git inspector <arquivo>", "next": "f_q29", "type": "lose" }
+            ]
+        },
+        "f_q29": { "text": "O 'blame' mostra o autor e commit de cada linha.", "type": "try_again" },
+
+        "q30": {
+            "text": "30/31: Um bug foi introduzido em algum lugar nos últimos 50 commits. Qual comando ajuda a fazer busca binária para achar?",
+            "choices": [
+                { "text": "git bisect", "next": "q31", "type": "safe" },
+                { "text": "git search", "next": "f_q30", "type": "lose" },
+                { "text": "git find", "next": "f_q30", "type": "lose" }
+            ]
+        },
+        "f_q30": { "text": "O 'bisect' permite marcar 'good' e 'bad' para isolar o commit problemático.", "type": "try_again" },
+
+        "q31": {
+            "text": "31/31: Última! O que é 'HEAD' no Git?",
+            "choices": [
+                { "text": "Aponta para o branch/commit atual", "next": "win", "type": "safe" },
+                { "text": "É o primeiro commit do repo", "next": "f_q31", "type": "lose" },
+                { "text": "É o servidor remoto principal", "next": "f_q31", "type": "lose" }
+            ]
+        },
+        "f_q31": { "text": "HEAD é o ponteiro para onde você está olhando agora no histórico.", "type": "try_again" },
+
+        "win": { "text": "Parabéns! Você é um Mestre Jedi do Git! 100% Completo.", "type": "win" }
         }
     },
     "Docker": {
         "startNode": "intro",
         "nodes": {
             "intro": {
-                "text": "Você precisa criar uma receita para construir sua imagem. Qual o nome do arquivo?",
+                "text": "Você entra no Estaleiro Abstrato. Uma voz metálica ecoa: 'Qual o conceito fundamental que empacota sua aplicação e todas as suas dependências?'",
                 "choices": [
-                    { "text": "DockerImage.txt", "next": "fail_txt", "type": "lose" },
-                    { "text": "Dockerfile", "next": "node_2", "type": "safe" },
-                    { "text": "docker-compose.yml", "next": "fail_compose", "type": "lose" }
+                    { "text": "Máquina Virtual (VM)", "next": "fail_vm", "type": "lose" },
+                    { "text": "Container", "next": "node_2", "type": "safe" },
+                    { "text": "Instalador (.exe/.msi)", "next": "fail_installer", "type": "lose" }
                 ]
             },
-            "fail_txt": { "text": "O daemon do Docker não reconhece isso.", "type": "try_again" },
-            "fail_compose": { "text": "Isso é para orquestrar vários containers, não definir a imagem base.", "type": "try_again" },
+            "fail_vm": { "text": "Uma VM virtualiza o hardware, é muito mais pesada. Docker virtualiza o SO.", "type": "try_again" },
+            "fail_installer": { "text": "Isso é para sistemas operacionais específicos. Containers são universais.", "type": "try_again" },
             "node_2": {
-                "text": "Imagem definida. Qual comando cria (builda) a imagem a partir do Dockerfile atual?",
+                "text": "Correto. E qual o nome do arquivo de 'receita' que descreve como construir uma imagem Docker?",
                 "choices": [
-                    { "text": "docker run .", "next": "fail_run", "type": "lose" },
-                    { "text": "docker build -t meu-app .", "next": "win", "type": "win" },
-                    { "text": "docker create", "next": "fail_create", "type": "lose" }
+                    { "text": "Docker.config", "next": "fail_config", "type": "lose" },
+                    { "text": "Dockerfile", "next": "node_3", "type": "safe" },
+                    { "text": "docker-compose.yml", "next": "fail_compose_build", "type": "lose" }
                 ]
             },
-            "fail_run": { "text": "Run executa um container, não constrói a imagem.", "type": "try_again" },
-            "fail_create": { "text": "Cria mas não inicia, e não constrói imagem.", "type": "try_again" },
-            "win": { "text": "Container isolado e pronto para deploy!", "type": "win" }
+            "fail_config": { "text": "Nome incorreto. O padrão é um nome simples e sem extensão.", "type": "try_again" },
+            "fail_compose_build": { "text": "Compose usa um Dockerfile, mas não é ele a receita da imagem.", "type": "try_again" },
+            "node_3": {
+                "text": "Qual comando no Dockerfile define a imagem base para sua construção?",
+                "choices": [
+                    { "text": "FROM", "next": "node_4", "type": "safe" },
+                    { "text": "BASE", "next": "fail_base", "type": "lose" },
+                    { "text": "IMAGE", "next": "fail_image", "type": "lose" }
+                ]
+            },
+            "fail_base": { "text": "Comando incorreto. A instrução correta é 'FROM'.", "type": "try_again" },
+            "fail_image": { "text": "Comando incorreto. A instrução correta é 'FROM'.", "type": "try_again" },
+            "node_4": {
+                "text": "Como você copia arquivos da sua máquina local para dentro da imagem?",
+                "choices": [
+                    { "text": "MOVE ./app /app", "next": "fail_move", "type": "lose" },
+                    { "text": "ADD ./app /app", "next": "node_5_alt", "type": "safe" },
+                    { "text": "COPY ./app /app", "next": "node_5", "type": "safe" }
+                ]
+            },
+            "fail_move": { "text": "Comando inexistente no Dockerfile.", "type": "try_again" },
+            "node_5_alt": { "text": "'ADD' funciona, mas 'COPY' é preferido por ser mais transparente. Você avança.", "next": "node_5", "type": "safe" },
+            "node_5": {
+                "text": "Qual instrução executa um comando durante o processo de build da imagem (ex: 'npm install')?",
+                "choices": [
+                    { "text": "RUN npm install", "next": "node_6", "type": "safe" },
+                    { "text": "CMD [\"npm\", \"install\"]", "next": "fail_cmd", "type": "lose" },
+                    { "text": "EXEC npm install", "next": "fail_exec", "type": "lose" }
+                ]
+            },
+            "fail_cmd": { "text": "'CMD' define o comando padrão para executar quando o container iniciar, não durante o build.", "type": "try_again" },
+            "fail_exec": { "text": "Comando inexistente no Dockerfile.", "type": "try_again" },
+            "node_6": {
+                "text": "E qual instrução define o comando padrão que será executado quando o container iniciar?",
+                "choices": [
+                    { "text": "RUN [\"node\", \"app.js\"]", "next": "fail_run_start", "type": "lose" },
+                    { "text": "ENTRYPOINT [\"node\", \"app.js\"]", "next": "node_7_alt", "type": "safe" },
+                    { "text": "CMD [\"node\", \"app.js\"]", "next": "node_7", "type": "safe" }
+                ]
+            },
+            "fail_run_start": { "text": "'RUN' executa comandos apenas durante o build da imagem.", "type": "try_again" },
+            "node_7_alt": { "text": "'ENTRYPOINT' também define o comando, mas de forma mais fixa. 'CMD' é mais comum para argumentos. Correto!", "next": "node_7", "type": "safe" },
+            "node_7": {
+                "text": "Qual comando você usa no terminal para construir (build) uma imagem a partir de um Dockerfile?",
+                "choices": [
+                    { "text": "docker build -t meu-app .", "next": "node_8", "type": "safe" },
+                    { "text": "docker create -t meu-app .", "next": "fail_create_img", "type": "lose" },
+                    { "text": "docker make meu-app", "next": "fail_make", "type": "lose" }
+                ]
+            },
+            "fail_create_img": { "text": "Comando 'docker create' cria um container, mas não constrói a imagem.", "type": "try_again" },
+            "fail_make": { "text": "Comando inexistente.", "type": "try_again" },
+            "node_8": {
+                "text": "E para iniciar um container a partir da imagem 'meu-app'?",
+                "choices": [
+                    { "text": "docker start meu-app", "next": "fail_start_img", "type": "lose" },
+                    { "text": "docker run meu-app", "next": "node_9", "type": "safe" },
+                    { "text": "docker exec meu-app", "next": "fail_exec_run", "type": "lose" }
+                ]
+            },
+            "fail_start_img": { "text": "'docker start' inicia um container que já existe e está parado. 'run' cria e inicia.", "type": "try_again" },
+            "fail_exec_run": { "text": "'docker exec' executa um comando dentro de um container que já está rodando.", "type": "try_again" },
+            "node_9": {
+                "text": "Como você lista todos os containers em execução?",
+                "choices": [
+                    { "text": "docker ls", "next": "fail_ls", "type": "lose" },
+                    { "text": "docker ps", "next": "node_10", "type": "safe" },
+                    { "text": "docker list containers", "next": "fail_list", "type": "lose" }
+                ]
+            },
+            "fail_ls": { "text": "Embora 'ls' seja comum em linux, o comando do Docker para processos é outro.", "type": "try_again" },
+            "fail_list": { "text": "Comando muito verboso e incorreto. Tente um mais curto.", "type": "try_again" },
+            "node_10": {
+                "text": "E para listar TODAS as imagens baixadas na sua máquina?",
+                "choices": [
+                    { "text": "docker ps -a", "next": "fail_ps_a", "type": "lose" },
+                    { "text": "docker images", "next": "node_11", "type": "safe" },
+                    { "text": "docker hub list", "next": "fail_hub", "type": "lose" }
+                ]
+            },
+            "fail_ps_a": { "text": "Isso lista todos os containers (em execução ou parados), não as imagens.", "type": "try_again" },
+            "fail_hub": { "text": "Isso não é um comando real. As imagens são locais.", "type": "try_again" },
+            "node_11": {
+                "text": "Qual comando é usado para remover um container parado?",
+                "choices": [
+                    { "text": "docker rm <id_container>", "next": "node_12", "type": "safe" },
+                    { "text": "docker rmi <id_container>", "next": "fail_rmi", "type": "lose" },
+                    { "text": "docker delete <id_container>", "next": "fail_delete", "type": "lose" }
+                ]
+            },
+            "fail_rmi": { "text": "'rmi' é para remover IMAGENS (Remove Image). Para containers, é apenas 'rm'.", "type": "try_again" },
+            "fail_delete": { "text": "Comando inexistente. Use 'rm'.", "type": "try_again" },
+            "node_12": {
+                "text": "Sua aplicação no container precisa acessar a porta 8080 da sua máquina. Como você faz o mapeamento de portas?",
+                "choices": [
+                    { "text": "docker run -p 8080:80 meu-app", "next": "node_13", "type": "safe" },
+                    { "text": "docker run --port 8080->80 meu-app", "next": "fail_port_syntax", "type": "lose" },
+                    { "text": "EXPOSE 8080:80 no Dockerfile", "next": "fail_expose", "type": "lose" }
+                ]
+            },
+            "fail_port_syntax": { "text": "Sintaxe incorreta. A flag correta é '-p' e o formato é 'host:container'.", "type": "try_again" },
+            "fail_expose": { "text": "'EXPOSE' apenas documenta a porta, não a publica de fato. O mapeamento é feito no 'docker run'.", "type": "try_again" },
+            "node_13": {
+                "text": "O que é um 'volume' em Docker?",
+                "choices": [
+                    { "text": "O tamanho em disco de uma imagem.", "next": "fail_vol_size", "type": "lose" },
+                    { "text": "Uma forma de persistir dados gerados por um container fora do seu ciclo de vida.", "next": "node_14", "type": "safe" },
+                    { "text": "Uma camada (layer) de uma imagem.", "next": "fail_vol_layer", "type": "lose" }
+                ]
+            },
+            "fail_vol_size": { "text": "Não, o conceito não está relacionado ao tamanho da imagem.", "type": "try_again" },
+            "fail_vol_layer": { "text": "Volumes são separados do sistema de arquivos em camadas da imagem.", "type": "try_again" },
+            "node_14": {
+                "text": "Qual a diferença entre um 'bind mount' e um 'volume'?",
+                "choices": [
+                    { "text": "Nenhuma, são sinônimos.", "next": "fail_bind_same", "type": "lose" },
+                    { "text": "Bind mount usa um diretório da máquina host; volume é gerenciado pelo Docker.", "next": "node_15", "type": "safe" },
+                    { "text": "Bind mounts são para Linux, volumes para Windows.", "next": "fail_bind_os", "type": "lose" }
+                ]
+            },
+            "fail_bind_same": { "text": "Não são. A forma como são gerenciados é a principal diferença.", "type": "try_again" },
+            "fail_bind_os": { "text": "Ambos funcionam em diferentes sistemas operacionais.", "type": "try_again" },
+            "node_15": {
+                "text": "O que é o Docker Hub?",
+                "choices": [
+                    { "text": "A interface gráfica do Docker.", "next": "fail_hub_gui", "type": "lose" },
+                    { "text": "Um registro público (e privado) de imagens Docker.", "next": "node_16", "type": "safe" },
+                    { "text": "O fórum da comunidade Docker.", "next": "fail_hub_forum", "type": "lose" }
+                ]
+            },
+            "fail_hub_gui": { "text": "A interface gráfica é uma ferramenta separada (Docker Desktop).", "type": "try_again" },
+            "fail_hub_forum": { "text": "O fórum existe, mas o Hub é o registro de imagens.", "type": "try_again" },
+            "node_16": {
+                "text": "Qual comando você usa para baixar uma imagem do Docker Hub sem iniciar um container?",
+                "choices": [
+                    { "text": "docker download nginx", "next": "fail_download", "type": "lose" },
+                    { "text": "docker pull nginx", "next": "node_17", "type": "safe" },
+                    { "text": "docker fetch nginx", "next": "fail_fetch", "type": "lose" }
+                ]
+            },
+            "fail_download": { "text": "Comando inexistente. O termo correto é 'pull'.", "type": "try_again" },
+            "fail_fetch": { "text": "Comando mais associado ao Git. Em Docker, use 'pull'.", "type": "try_again" },
+            "node_17": {
+                "text": "E para enviar sua própria imagem 'meu-app' para o Docker Hub?",
+                "choices": [
+                    { "text": "docker send meu-app", "next": "fail_send", "type": "lose" },
+                    { "text": "docker upload meu-app", "next": "fail_upload", "type": "lose" },
+                    { "text": "docker push meu-usuario/meu-app", "next": "node_18", "type": "safe" }
+                ]
+            },
+            "fail_send": { "text": "Comando inexistente.", "type": "try_again" },
+            "fail_upload": { "text": "Comando inexistente. Use 'push'.", "type": "try_again" },
+            "node_18": {
+                "text": "O que o arquivo 'docker-compose.yml' permite fazer?",
+                "choices": [
+                    { "text": "Definir e orquestrar múltiplos containers que trabalham juntos.", "next": "node_19", "type": "safe" },
+                    { "text": "Apenas construir uma única imagem.", "next": "fail_compose_single", "type": "lose" },
+                    { "text": "Configurar as preferências do Docker Desktop.", "next": "fail_compose_config", "type": "lose" }
+                ]
+            },
+            "fail_compose_single": { "text": "Ele pode construir imagens, mas seu poder está em gerenciar múltiplos serviços.", "type": "try_again" },
+            "fail_compose_config": { "text": "Isso é feito nas configurações da aplicação, não em um arquivo de projeto.", "type": "try_again" },
+            "node_19": {
+                "text": "Dentro do 'docker-compose.yml', qual chave define os diferentes containers da sua aplicação?",
+                "choices": [
+                    { "text": "containers:", "next": "fail_compose_containers", "type": "lose" },
+                    { "text": "apps:", "next": "fail_compose_apps", "type": "lose" },
+                    { "text": "services:", "next": "node_20", "type": "safe" }
+                ]
+            },
+            "fail_compose_containers": { "text": "A terminologia usada no Compose é 'serviços'.", "type": "try_again" },
+            "fail_compose_apps": { "text": "A terminologia usada no Compose é 'serviços'.", "type": "try_again" },
+            "node_20": {
+                "text": "Qual comando inicia todos os serviços definidos no seu 'docker-compose.yml'?",
+                "choices": [
+                    { "text": "docker-compose up", "next": "node_21", "type": "safe" },
+                    { "text": "docker-compose start", "next": "fail_compose_start", "type": "lose" },
+                    { "text": "docker-compose run", "next": "fail_compose_run", "type": "lose" }
+                ]
+            },
+            "fail_compose_start": { "text": "'start' é usado para serviços já criados. 'up' cria e inicia.", "type": "try_again" },
+            "fail_compose_run": { "text": "'run' executa um comando único em um serviço, não levanta a stack toda.", "type": "try_again" },
+            "node_21": {
+                "text": "Para que serve uma 'network' em Docker?",
+                "choices": [
+                    { "text": "Para conectar o Docker à internet.", "next": "fail_net_internet", "type": "lose" },
+                    { "text": "Para permitir que containers se comuniquem uns com os outros.", "next": "node_22", "type": "safe" },
+                    { "text": "Para limitar a velocidade da internet de um container.", "next": "fail_net_limit", "type": "lose" }
+                ]
+            },
+            "fail_net_internet": { "text": "Isso é gerenciado pelo Docker, mas a criação de networks customizadas tem outro propósito.", "type": "try_again" },
+            "fail_net_limit": { "text": "Isso é uma configuração avançada, mas não o propósito principal de uma network.", "type": "try_again" },
+            "node_22": {
+                "text": "O que são as 'camadas' (layers) de uma imagem Docker?",
+                "choices": [
+                    { "text": "Diferentes versões da imagem.", "next": "fail_layer_version", "type": "lose" },
+                    { "text": "Cada instrução no Dockerfile (FROM, RUN, COPY) que modifica o sistema de arquivos.", "next": "node_23", "type": "safe" },
+                    { "text": "Pastas dentro do container.", "next": "fail_layer_folder", "type": "lose" }
+                ]
+            },
+            "fail_layer_version": { "text": "Versões são gerenciadas por tags, não por camadas.", "type": "try_again" },
+            "fail_layer_folder": { "text": "Não, camadas são um conceito do sistema de arquivos da imagem.", "type": "try_again" },
+            "node_23": {
+                "text": "Por que é uma boa prática usar um arquivo '.dockerignore'?",
+                "choices": [
+                    { "text": "Para ignorar certos containers no 'docker ps'.", "next": "fail_ignore_ps", "type": "lose" },
+                    { "text": "Para evitar que arquivos desnecessários (node_modules, logs) sejam copiados para a imagem, diminuindo seu tamanho.", "next": "node_24", "type": "safe" },
+                    { "text": "Para esconder segredos do Docker Hub.", "next": "fail_ignore_secrets", "type": "lose" }
+                ]
+            },
+            "fail_ignore_ps": { "text": "Não tem relação com a listagem de containers.", "type": "try_again" },
+            "fail_ignore_secrets": { "text": "É uma consequência, mas o objetivo principal é otimizar o contexto do build.", "type": "try_again" },
+            "node_24": {
+                "text": "Qual o benefício do cache de camadas do Docker?",
+                "choices": [
+                    { "text": "Torna os containers mais rápidos em execução.", "next": "fail_cache_run", "type": "lose" },
+                    { "text": "Acelera builds subsequentes ao reutilizar camadas que não mudaram.", "next": "node_25", "type": "safe" },
+                    { "text": "Diminui o uso de CPU do Docker Desktop.", "next": "fail_cache_cpu", "type": "lose" }
+                ]
+            },
+            "fail_cache_run": { "text": "O cache é um benefício de tempo de build, não de execução.", "type": "try_again" },
+            "fail_cache_cpu": { "text": "Não diretamente. O benefício é a velocidade do build.", "type": "try_again" },
+            "node_25": {
+                "text": "O que é um 'multi-stage build' no Dockerfile?",
+                "choices": [
+                    { "text": "Construir uma imagem para vários sistemas operacionais.", "next": "fail_multi_os", "type": "lose" },
+                    { "text": "Usar uma imagem para compilar/buildar e outra, menor, para rodar a aplicação, resultando em uma imagem final leve.", "next": "node_26", "type": "safe" },
+                    { "text": "Construir várias imagens ao mesmo tempo.", "next": "fail_multi_many", "type": "lose" }
+                ]
+            },
+            "fail_multi_os": { "text": "Isso é possível, mas o termo 'multi-stage' se refere a outra técnica.", "type": "try_again" },
+            "fail_multi_many": { "text": "O objetivo é criar uma única imagem final otimizada.", "type": "try_again" },
+            "node_26": {
+                "text": "Como você vê os logs de um container em execução?",
+                "choices": [
+                    { "text": "docker cat <id_container>", "next": "fail_cat", "type": "lose" },
+                    { "text": "docker logs <id_container>", "next": "node_27", "type": "safe" },
+                    { "text": "docker console <id_container>", "next": "fail_console", "type": "lose" }
+                ]
+            },
+            "fail_cat": { "text": "Comando inexistente. Use 'logs'.", "type": "try_again" },
+            "fail_console": { "text": "Comando inexistente. Use 'logs'.", "type": "try_again" },
+            "node_27": {
+                "text": "Qual comando para um container em execução de forma 'graciosa' (gracefully)?",
+                "choices": [
+                    { "text": "docker kill <id_container>", "next": "fail_kill", "type": "lose" },
+                    { "text": "docker stop <id_container>", "next": "node_28", "type": "safe" },
+                    { "text": "docker pause <id_container>", "next": "fail_pause", "type": "lose" }
+                ]
+            },
+            "fail_kill": { "text": "'kill' força o desligamento imediato, não permitindo que a aplicação finalize seus processos.", "type": "try_again" },
+            "fail_pause": { "text": "'pause' suspende o container, mas não o para.", "type": "try_again" },
+            "node_28": {
+                "text": "O que é 'Docker Swarm'?",
+                "choices": [
+                    { "text": "Um plugin para visualizar containers.", "next": "fail_swarm_plugin", "type": "lose" },
+                    { "text": "A ferramenta de orquestração de containers nativa do Docker.", "next": "node_29", "type": "safe" },
+                    { "text": "O mascote do Docker.", "next": "fail_swarm_mascot", "type": "lose" }
+                ]
+            },
+            "fail_swarm_plugin": { "text": "Não, é uma ferramenta muito mais poderosa.", "type": "try_again" },
+            "fail_swarm_mascot": { "text": "O mascote é uma baleia chamada Moby Dock. Swarm é outra coisa.", "type": "try_again" },
+            "node_29": {
+                "text": "Se um container sai, mas você quer manter seus dados, o que você deve usar?",
+                "choices": [
+                    { "text": "docker commit", "next": "fail_commit_data", "type": "lose" },
+                    { "text": "Volumes", "next": "node_30", "type": "safe" },
+                    { "text": "docker save", "next": "fail_save_data", "type": "lose" }
+                ]
+            },
+            "fail_commit_data": { "text": "'commit' cria uma nova imagem a partir do estado de um container, o que não é ideal para dados.", "type": "try_again" },
+            "fail_save_data": { "text": "'save' salva uma imagem em um arquivo .tar, não os dados de um volume.", "type": "try_again" },
+            "node_30": {
+                "text": "Qual a diferença entre 'docker stop' e 'docker down' no Compose?",
+                "choices": [
+                    { "text": "'down' é só um apelido para 'stop'.", "next": "fail_down_alias", "type": "lose" },
+                    { "text": "'stop' para os containers, mas 'down' para, remove os containers, e opcionalmente redes e volumes.", "next": "node_31", "type": "safe" },
+                    { "text": "'stop' é para um serviço, 'down' para todos.", "next": "fail_down_all", "type": "lose" }
+                ]
+            },
+            "fail_down_alias": { "text": "Não são. 'down' é muito mais destrutivo e completo.", "type": "try_again" },
+            "fail_down_all": { "text": "Você pode usar 'stop' em todos os serviços também. A diferença é a remoção dos recursos.", "type": "try_again" },
+            "node_31": {
+                "text": "Chefe Final: O Kubernetes. Ele ri e pergunta: 'Qual a vantagem do Docker?'",
+                "choices": [
+                    { "text": "Ele substitui completamente a necessidade de desenvolvedores.", "next": "fail_final_ai", "type": "lose" },
+                    { "text": "Cria um ambiente padronizado e portátil para desenvolvimento, teste e produção.", "next": "win", "type": "win" },
+                    { "text": "Funciona apenas para aplicações web.", "next": "fail_final_web", "type": "lose" }
+                ]
+            },
+            "fail_final_ai": { "text": "Ainda não! O desenvolvedor é a peça chave.", "type": "try_again" },
+            "fail_final_web": { "text": "Não, Docker pode empacotar qualquer tipo de aplicação ou serviço.", "type": "try_again" },
+            "win": { "text": "VOCÊ DOMINOU A ARTE DA CONTAINERIZAÇÃO! SUAS APLICAÇÕES AGORA SÃO PORTÁTEIS E ESCALÁVEIS. PARABÉNS, ENGENHEIRO DE DEVOPS!", "type": "win" }
         }
     },
     "Vue.js": {
-        "startNode": "intro",
-        "nodes": {
-            "intro": {
-                "text": "Você quer exibir uma variável 'mensagem' no template HTML. Qual a sintaxe?",
-                "choices": [
-                    { "text": "{ mensagem }", "next": "fail_react", "type": "lose" },
-                    { "text": "{{ mensagem }}", "next": "node_2", "type": "safe" },
-                    { "text": "v-text=mensagem", "next": "node_2_alt", "type": "safe" }
-                ]
-            },
-            "fail_react": { "text": "Isso é sintaxe de React (uma chave). Vue usa Mustache (duas).", "type": "try_again" },
-            "node_2": {
-                "text": "Correto. Agora, como fazer um loop em uma lista <li>?",
-                "choices": [
-                    { "text": "v-for=\"item in lista\"", "next": "win", "type": "win" },
-                    { "text": "ng-repeat=\"item in lista\"", "next": "fail_ng", "type": "lose" },
-                    { "text": "lista.map()", "next": "fail_map", "type": "lose" }
-                ]
-            },
-            "node_2_alt": {
-                "text": "Funciona, mas {{ }} é mais comum. Como fazer um loop?",
-                "choices": [
-                    { "text": "v-for=\"item in lista\"", "next": "win", "type": "win" },
-                    { "text": "loop=item", "next": "fail_loop", "type": "lose" }
-                ]
-            },
-            "fail_ng": { "text": "Isso é Angular 1 (legacy).", "type": "try_again" },
-            "fail_map": { "text": "Isso é lógica JS, não diretiva de template Vue.", "type": "try_again" },
-            "fail_loop": { "text": "Diretiva inexistente.", "type": "try_again" },
-            "win": { "text": "Reatividade Vue dominada!", "type": "win" }
+    "startNode": "intro",
+    "nodes": {
+        "intro": {
+            "text": "Você quer exibir uma variável 'msg' no HTML (interpolação de texto). Qual a sintaxe?",
+            "choices": [
+                { "text": "{ msg }", "next": "f_intro", "type": "lose" },
+                { "text": "{{ msg }}", "next": "q2", "type": "safe" },
+                { "text": "v-text=msg", "next": "q2_alt", "type": "safe" }
+            ]
+        },
+        "f_intro": { "text": "Uma chave {} é usada em React (JSX). O Vue usa Mustache {{ }}.", "type": "try_again" },
+        "q2_alt": { "text": "v-text funciona, mas {{ }} é o padrão mais comum. Próxima!", "type": "try_again", "next": "q2" },
+
+        "q2": {
+            "text": "Como você faz um loop para renderizar uma lista de itens em <li>?",
+            "choices": [
+                { "text": "v-for=\"item in lista\"", "next": "q3", "type": "safe" },
+                { "text": "v-loop=\"item of lista\"", "next": "f_q2", "type": "lose" },
+                { "text": "ng-repeat=\"item in lista\"", "next": "f_q2", "type": "lose" }
+            ]
+        },
+        "f_q2": { "text": "A diretiva correta para loops no Vue é 'v-for'.", "type": "try_again" },
+
+        "q3": {
+            "text": "Você precisa ouvir um evento de clique em um botão. Qual a sintaxe abreviada?",
+            "choices": [
+                { "text": ":click=\"acao\"", "next": "f_q3", "type": "lose" },
+                { "text": "@click=\"acao\"", "next": "q4", "type": "safe" },
+                { "text": "#click=\"acao\"", "next": "f_q3", "type": "lose" }
+            ]
+        },
+        "f_q3": { "text": "A abreviação de v-on é '@'. O ':' é para v-bind.", "type": "try_again" },
+
+        "q4": {
+            "text": "Qual diretiva cria um 'two-way data binding' em inputs de formulário?",
+            "choices": [
+                { "text": "v-bind", "next": "f_q4", "type": "lose" },
+                { "text": "v-model", "next": "q5", "type": "safe" },
+                { "text": "v-input", "next": "f_q4", "type": "lose" }
+            ]
+        },
+        "f_q4": { "text": "Use 'v-model' para sincronizar automaticamente o valor do input com a variável.", "type": "try_again" },
+
+        "q5": {
+            "text": "Como vincular dinamicamente o atributo 'src' de uma imagem a uma variável?",
+            "choices": [
+                { "text": "src={{url}}", "next": "f_q5", "type": "lose" },
+                { "text": ":src=\"url\"", "next": "q6", "type": "safe" },
+                { "text": "v-src=\"url\"", "next": "f_q5", "type": "lose" }
+            ]
+        },
+        "f_q5": { "text": "Não use {{}} dentro de atributos HTML. Use v-bind ou sua abreviação ':'.", "type": "try_again" },
+
+        "q6": {
+            "text": "Você quer alternar a visibilidade de um elemento usando CSS (display: none), sem removê-lo do DOM.",
+            "choices": [
+                { "text": "v-if", "next": "f_q6", "type": "lose" },
+                { "text": "v-show", "next": "q7", "type": "safe" },
+                { "text": "v-hide", "next": "f_q6", "type": "lose" }
+            ]
+        },
+        "f_q6": { "text": "'v-if' remove do DOM. 'v-show' apenas alterna o CSS display.", "type": "try_again" },
+
+        "q7": {
+            "text": "Ao usar v-for, é altamente recomendado (e às vezes obrigatório) usar um atributo especial. Qual?",
+            "choices": [
+                { "text": ":key", "next": "q8", "type": "safe" },
+                { "text": ":id", "next": "f_q7", "type": "lose" },
+                { "text": ":index", "next": "f_q7", "type": "lose" }
+            ]
+        },
+        "f_q7": { "text": "O atributo ':key' ajuda o Vue a rastrear a identidade dos nós para performance.", "type": "try_again" },
+
+        "q8": {
+            "text": "Qual recurso deve ser usado para lógica complexa que depende de dados reativos e deve ser cacheada?",
+            "choices": [
+                { "text": "Methods", "next": "f_q8", "type": "lose" },
+                { "text": "Computed Properties", "next": "q9", "type": "safe" },
+                { "text": "Watchers", "next": "f_q8", "type": "lose" }
+            ]
+        },
+        "f_q8": { "text": "Computed properties são cacheadas baseadas nas dependências. Methods rodam sempre.", "type": "try_again" },
+
+        "q9": {
+            "text": "Você precisa executar uma ação assíncrona (API call) sempre que uma variável mudar.",
+            "choices": [
+                { "text": "computed", "next": "f_q9", "type": "lose" },
+                { "text": "watch", "next": "q10", "type": "safe" },
+                { "text": "onUpdate", "next": "f_q9", "type": "lose" }
+            ]
+        },
+        "f_q9": { "text": "Use 'watch' para reagir a mudanças de dados com efeitos colaterais (side effects).", "type": "try_again" },
+
+        "q10": {
+            "text": "Como passar dados de um componente pai para um componente filho?",
+            "choices": [
+                { "text": "Props", "next": "q11", "type": "safe" },
+                { "text": "State", "next": "f_q10", "type": "lose" },
+                { "text": "Events", "next": "f_q10", "type": "lose" }
+            ]
+        },
+        "f_q10": { "text": "O fluxo de dados pai -> filho é feito via Props.", "type": "try_again" },
+
+        "q11": {
+            "text": "E como o filho envia mensagens/dados de volta para o pai?",
+            "choices": [
+                { "text": "Props callback", "next": "f_q11", "type": "lose" },
+                { "text": "$emit (Eventos)", "next": "q12", "type": "safe" },
+                { "text": "Return", "next": "f_q11", "type": "lose" }
+            ]
+        },
+        "f_q11": { "text": "O filho emite eventos usando $emit (ou defineEmits) que o pai escuta.", "type": "try_again" },
+
+        "q12": {
+            "text": "Qual elemento é usado para inserir conteúdo dinâmico 'dentro' de um componente (content projection)?",
+            "choices": [
+                { "text": "<template>", "next": "f_q12", "type": "lose" },
+                { "text": "<slot>", "next": "q13", "type": "safe" },
+                { "text": "<child>", "next": "f_q12", "type": "lose" }
+            ]
+        },
+        "f_q12": { "text": "Slots são placeholders para conteúdo passado pelo pai.", "type": "try_again" },
+
+        "q13": {
+            "text": "Qual hook do ciclo de vida (Options API) ou função (Composition API) roda quando o componente foi inserido no DOM?",
+            "choices": [
+                { "text": "created", "next": "f_q13", "type": "lose" },
+                { "text": "mounted", "next": "q14", "type": "safe" },
+                { "text": "setup", "next": "f_q13", "type": "lose" }
+            ]
+        },
+        "f_q13": { "text": "Para acessar o DOM, use 'mounted' (ou onMounted). 'created' roda antes do DOM.", "type": "try_again" },
+
+        "q14": {
+            "text": "Na Composition API, qual função cria uma referência reativa para tipos primitivos (string, number)?",
+            "choices": [
+                { "text": "reactive()", "next": "f_q14", "type": "lose" },
+                { "text": "ref()", "next": "q15", "type": "safe" },
+                { "text": "state()", "next": "f_q14", "type": "lose" }
+            ]
+        },
+        "f_q14": { "text": "Use 'ref()' para primitivos (acessado via .value). 'reactive()' é para objetos.", "type": "try_again" },
+
+        "q15": {
+            "text": "E qual função cria um proxy reativo profundo para objetos?",
+            "choices": [
+                { "text": "reactive()", "next": "q16", "type": "safe" },
+                { "text": "refObj()", "next": "f_q15", "type": "lose" },
+                { "text": "model()", "next": "f_q15", "type": "lose" }
+            ]
+        },
+        "f_q15": { "text": "'reactive()' retorna um objeto proxy original reativo.", "type": "try_again" },
+
+        "q16": {
+            "text": "Qual é a extensão padrão para arquivos Single File Components do Vue?",
+            "choices": [
+                { "text": ".js", "next": "f_q16", "type": "lose" },
+                { "text": ".vue", "next": "q17", "type": "safe" },
+                { "text": ".jsx", "next": "f_q16", "type": "lose" }
+            ]
+        },
+        "f_q16": { "text": "Os componentes Vue geralmente ficam em arquivos .vue.", "type": "try_again" },
+
+        "q17": {
+            "text": "Como fazer com que o CSS de um componente afete APENAS aquele componente?",
+            "choices": [
+                { "text": "<style local>", "next": "f_q17", "type": "lose" },
+                { "text": "<style scoped>", "next": "q18", "type": "safe" },
+                { "text": "<style module>", "next": "f_q17", "type": "lose" }
+            ]
+        },
+        "f_q17": { "text": "Adicione o atributo 'scoped' à tag style.", "type": "try_again" },
+
+        "q18": {
+            "text": "Você quer prevenir o recarregamento da página ao enviar um form. Qual modificador usar?",
+            "choices": [
+                { "text": "@submit.stop", "next": "f_q18", "type": "lose" },
+                { "text": "@submit.prevent", "next": "q19", "type": "safe" },
+                { "text": "@submit.no-reload", "next": "f_q18", "type": "lose" }
+            ]
+        },
+        "f_q18": { "text": "Use .prevent para chamar event.preventDefault() automaticamente.", "type": "try_again" },
+
+        "q19": {
+            "text": "Como ouvir eventos apenas quando a tecla Enter é pressionada?",
+            "choices": [
+                { "text": "@keyup.enter", "next": "q20", "type": "safe" },
+                { "text": "@key.13", "next": "f_q19", "type": "lose" },
+                { "text": "@enter", "next": "f_q19", "type": "lose" }
+            ]
+        },
+        "f_q19": { "text": "Vue tem aliases de teclas. Use @keyup.enter.", "type": "try_again" },
+
+        "q20": {
+            "text": "Usando Vue Router, qual componente cria um link de navegação sem recarregar a página?",
+            "choices": [
+                { "text": "<a href>", "next": "f_q20", "type": "lose" },
+                { "text": "<router-link>", "next": "q21", "type": "safe" },
+                { "text": "<go-to>", "next": "f_q20", "type": "lose" }
+            ]
+        },
+        "f_q20": { "text": "Use <router-link to=\"...\"> para navegação SPA.", "type": "try_again" },
+
+        "q21": {
+            "text": "Na Composition API, como você acessa os parâmetros da rota atual (ex: id na URL)?",
+            "choices": [
+                { "text": "this.$route", "next": "f_q21", "type": "lose" },
+                { "text": "useRoute()", "next": "q22", "type": "safe" },
+                { "text": "useRouter()", "next": "f_q21", "type": "lose" }
+            ]
+        },
+        "f_q21": { "text": "'useRoute' obtém dados da rota atual. 'useRouter' é para navegar (push).", "type": "try_again" },
+
+        "q22": {
+            "text": "Qual é a biblioteca de gerenciamento de estado (Store) oficialmente recomendada atualmente?",
+            "choices": [
+                { "text": "Vuex", "next": "f_q22", "type": "lose" },
+                { "text": "Redux", "next": "f_q22", "type": "lose" },
+                { "text": "Pinia", "next": "q23", "type": "safe" }
+            ]
+        },
+        "f_q22": { "text": "Vuex é legado. Pinia é o padrão atual para Vue 3.", "type": "try_again" },
+
+        "q23": {
+            "text": "Qual diretiva renderiza HTML puro (cuidado com XSS!)?",
+            "choices": [
+                { "text": "v-html", "next": "q24", "type": "safe" },
+                { "text": "v-render", "next": "f_q23", "type": "lose" },
+                { "text": "v-inner", "next": "f_q23", "type": "lose" }
+            ]
+        },
+        "f_q23": { "text": "Use 'v-html' para renderizar strings como HTML real.", "type": "try_again" },
+
+        "q24": {
+            "text": "Qual componente permite renderizar um pedaço do template em outro lugar do DOM (ex: body)?",
+            "choices": [
+                { "text": "<Portal>", "next": "f_q24", "type": "lose" },
+                { "text": "<Teleport>", "next": "q25", "type": "safe" },
+                { "text": "<Move>", "next": "f_q24", "type": "lose" }
+            ]
+        },
+        "f_q24": { "text": "<Teleport to=\"body\"> é o componente nativo para isso no Vue 3.", "type": "try_again" },
+
+        "q25": {
+            "text": "Você quer manter um componente vivo (cacheado) quando o usuário navega para fora dele.",
+            "choices": [
+                { "text": "<KeepAlive>", "next": "q26", "type": "safe" },
+                { "text": "<Cache>", "next": "f_q25", "type": "lose" },
+                { "text": "<Persist>", "next": "f_q25", "type": "lose" }
+            ]
+        },
+        "f_q25": { "text": "Envolva componentes dinâmicos em <KeepAlive> para preservar estado.", "type": "try_again" },
+
+        "q26": {
+            "text": "Como evitar 'Prop Drilling' (passar props por muitos níveis) nativamente?",
+            "choices": [
+                { "text": "Provide / Inject", "next": "q27", "type": "safe" },
+                { "text": "Global Variables", "next": "f_q26", "type": "lose" },
+                { "text": "Emit All", "next": "f_q26", "type": "lose" }
+            ]
+        },
+        "f_q26": { "text": "Um componente pai usa 'provide' e qualquer descendente usa 'inject'.", "type": "try_again" },
+
+        "q27": {
+            "text": "Qual é a sintaxe de 'açúcar sintático' (sugar) para usar Composition API em SFCs?",
+            "choices": [
+                { "text": "<script setup>", "next": "q28", "type": "safe" },
+                { "text": "<script composition>", "next": "f_q27", "type": "lose" },
+                { "text": "<script api>", "next": "f_q27", "type": "lose" }
+            ]
+        },
+        "f_q27": { "text": "<script setup> simplifica muito o código, sem precisar de return {}.", "type": "try_again" },
+
+        "q28": {
+            "text": "Como importar um componente apenas quando ele for necessário (Lazy Loading)?",
+            "choices": [
+                { "text": "importLazy()", "next": "f_q28", "type": "lose" },
+                { "text": "defineAsyncComponent()", "next": "q29", "type": "safe" },
+                { "text": "require()", "next": "f_q28", "type": "lose" }
+            ]
+        },
+        "f_q28": { "text": "Use defineAsyncComponent(() => import(...)) para code-splitting.", "type": "try_again" },
+
+        "q29": {
+            "text": "Você alterou um dado e quer esperar o Vue atualizar o DOM antes de executar algo.",
+            "choices": [
+                { "text": "setTimeout", "next": "f_q29", "type": "lose" },
+                { "text": "nextTick()", "next": "q30", "type": "safe" },
+                { "text": "awaitDom()", "next": "f_q29", "type": "lose" }
+            ]
+        },
+        "f_q29": { "text": "nextTick() retorna uma Promise que resolve após a atualização do DOM.", "type": "try_again" },
+
+        "q30": {
+            "text": "Qual componente experimental orquestra dependências assíncronas (fallback de loading)?",
+            "choices": [
+                { "text": "<Async>", "next": "f_q30", "type": "lose" },
+                { "text": "<Suspense>", "next": "q31", "type": "safe" },
+                { "text": "<Loader>", "next": "f_q30", "type": "lose" }
+            ]
+        },
+        "f_q30": { "text": "<Suspense> permite exibir conteúdo de fallback enquanto componentes async carregam.", "type": "try_again" },
+
+        "q31": {
+            "text": "O Vue se autodenomina que tipo de framework?",
+            "choices": [
+                { "text": "Monolítico", "next": "f_q31", "type": "lose" },
+                { "text": "Progressivo", "next": "win", "type": "safe" },
+                { "text": "Backend", "next": "f_q31", "type": "lose" }
+            ]
+        },
+        "f_q31": { "text": "Vue é o 'Framework Progressivo' – escalável do simples ao complexo.", "type": "try_again" },
+
+        "win": { "text": "Parabéns! Você dominou o ecossistema Vue.js! 100% Completo.", "type": "win" }
         }
     },
     "Angular": {
-        "startNode": "intro",
-        "nodes": {
-            "intro": {
-                "text": "Você está criando um componente. Qual decorator é obrigatório na classe?",
-                "choices": [
-                    { "text": "@Component", "next": "node_2", "type": "safe" },
-                    { "text": "@Injectable", "next": "fail_service", "type": "lose" },
-                    { "text": "@Module", "next": "fail_module", "type": "lose" }
-                ]
-            },
-            "fail_service": { "text": "Isso é para Serviços.", "type": "try_again" },
-            "fail_module": { "text": "Isso é para Módulos.", "type": "try_again" },
-            "node_2": {
-                "text": "Para exibir dados condicionalmente (se for verdadeiro), qual diretiva estrutural você usa?",
-                "choices": [
-                    { "text": "*ngIf", "next": "win", "type": "win" },
-                    { "text": "v-if", "next": "fail_vue", "type": "lose" },
-                    { "text": "hidden", "next": "fail_html", "type": "lose" }
-                ]
-            },
-            "fail_vue": { "text": "Você está no framework errado (Vue).", "type": "try_again" },
-            "fail_html": { "text": "Isso apenas oculta via CSS, não remove do DOM como uma diretiva estrutural.", "type": "try_again" },
-            "win": { "text": "Aplicação Enterprise robusta construída!", "type": "win" }
+    "startNode": "intro",
+    "nodes": {
+        "intro": {
+            "text": "Você está criando um componente. Qual decorator é obrigatório na classe?",
+            "choices": [
+                { "text": "@Component", "next": "q2", "type": "safe" },
+                { "text": "@Injectable", "next": "f_intro", "type": "lose" },
+                { "text": "@Module", "next": "f_intro", "type": "lose" }
+            ]
+        },
+        "f_intro": { "text": "@Injectable é para serviços e @Module (NgModule) é para módulos. Componentes usam @Component.", "type": "try_again" },
+
+        "q2": {
+            "text": "Para exibir dados condicionalmente (se for verdadeiro), qual diretiva estrutural você usa?",
+            "choices": [
+                { "text": "*ngIf", "next": "q3", "type": "safe" },
+                { "text": "v-if", "next": "f_q2", "type": "lose" },
+                { "text": "hidden", "next": "f_q2", "type": "lose" }
+            ]
+        },
+        "f_q2": { "text": "v-if é Vue. hidden é atributo HTML. No Angular usamos *ngIf (ou @if no novo fluxo).", "type": "try_again" },
+
+        "q3": {
+            "text": "Como você exibe o valor de uma variável 'titulo' dentro do HTML (interpolação)?",
+            "choices": [
+                { "text": "{{ titulo }}", "next": "q4", "type": "safe" },
+                { "text": "{ titulo }", "next": "f_q3", "type": "lose" },
+                { "text": "[[ titulo ]]", "next": "f_q3", "type": "lose" }
+            ]
+        },
+        "f_q3": { "text": "Angular usa chaves duplas {{ }} para interpolação.", "type": "try_again" },
+
+        "q4": {
+            "text": "Você quer vincular a propriedade 'src' de uma imagem a uma variável. Qual a sintaxe de Property Binding?",
+            "choices": [
+                { "text": "[src]=\"url\"", "next": "q5", "type": "safe" },
+                { "text": "src={{url}}", "next": "f_q4", "type": "lose" },
+                { "text": "(src)=\"url\"", "next": "f_q4", "type": "lose" }
+            ]
+        },
+        "f_q4": { "text": "Para property binding usamos colchetes [propriedade].", "type": "try_again" },
+
+        "q5": {
+            "text": "Como escutar o evento de clique de um botão?",
+            "choices": [
+                { "text": "(click)=\"funcao()\"", "next": "q6", "type": "safe" },
+                { "text": "[click]=\"funcao()\"", "next": "f_q5", "type": "lose" },
+                { "text": "@click=\"funcao()\"", "next": "f_q5", "type": "lose" }
+            ]
+        },
+        "f_q5": { "text": "Eventos no Angular usam parênteses (evento).", "type": "try_again" },
+
+        "q6": {
+            "text": "Qual a sintaxe para Two-Way Data Binding (Banana in a box)?",
+            "choices": [
+                { "text": "[(ngModel)]=\"valor\"", "next": "q7", "type": "safe" },
+                { "text": "([ngModel])=\"valor\"", "next": "f_q6", "type": "lose" },
+                { "text": "{ngModel}=\"valor\"", "next": "f_q6", "type": "lose" }
+            ]
+        },
+        "f_q6": { "text": "Lembre-se: A banana [] está dentro da caixa (). Sintaxe: [(...)]", "type": "try_again" },
+
+        "q7": {
+            "text": "Qual diretiva é usada para iterar sobre uma lista de itens?",
+            "choices": [
+                { "text": "*ngFor", "next": "q8", "type": "safe" },
+                { "text": "*ngLoop", "next": "f_q7", "type": "lose" },
+                { "text": "*ngRepeat", "next": "f_q7", "type": "lose" }
+            ]
+        },
+        "f_q7": { "text": "Use *ngFor (ou @for no novo fluxo) para loops.", "type": "try_again" },
+
+        "q8": {
+            "text": "Você quer formatar uma data ou moeda direto no template. O que você usa?",
+            "choices": [
+                { "text": "Pipes (|)", "next": "q9", "type": "safe" },
+                { "text": "Services", "next": "f_q8", "type": "lose" },
+                { "text": "Directives", "next": "f_q8", "type": "lose" }
+            ]
+        },
+        "f_q8": { "text": "Pipes transformam dados no template visualmente.", "type": "try_again" },
+
+        "q9": {
+            "text": "Onde você deve colocar a lógica de negócios e chamadas de API para serem reutilizáveis?",
+            "choices": [
+                { "text": "Services", "next": "q10", "type": "safe" },
+                { "text": "Components", "next": "f_q9", "type": "lose" },
+                { "text": "Pipes", "next": "f_q9", "type": "lose" }
+            ]
+        },
+        "f_q9": { "text": "Componentes são para a View. Lógica pesada vai para Services (@Injectable).", "type": "try_again" },
+
+        "q10": {
+            "text": "Como um componente pai passa dados para um componente filho?",
+            "choices": [
+                { "text": "@Input()", "next": "q11", "type": "safe" },
+                { "text": "@Output()", "next": "f_q10", "type": "lose" },
+                { "text": "@Send()", "next": "f_q10", "type": "lose" }
+            ]
+        },
+        "f_q10": { "text": "@Input permite que o componente receba dados de fora.", "type": "try_again" },
+
+        "q11": {
+            "text": "E como o filho avisa o pai que algo aconteceu (emite um evento)?",
+            "choices": [
+                { "text": "@Output() + EventEmitter", "next": "q12", "type": "safe" },
+                { "text": "@Input()", "next": "f_q11", "type": "lose" },
+                { "text": "Callback", "next": "f_q11", "type": "lose" }
+            ]
+        },
+        "f_q11": { "text": "O filho usa @Output com um EventEmitter para disparar eventos.", "type": "try_again" },
+
+        "q12": {
+            "text": "Qual Lifecycle Hook é mais usado para inicializar dados assim que o componente carrega?",
+            "choices": [
+                { "text": "ngOnInit", "next": "q13", "type": "safe" },
+                { "text": "constructor", "next": "f_q12", "type": "lose" },
+                { "text": "ngOnChanges", "next": "f_q12", "type": "lose" }
+            ]
+        },
+        "f_q12": { "text": "Constructor é para injeção de dependência. Lógica de inicialização vai no ngOnInit.", "type": "try_again" },
+
+        "q13": {
+            "text": "No roteamento, qual tag atua como o placeholder onde os componentes das rotas serão carregados?",
+            "choices": [
+                { "text": "<router-outlet>", "next": "q14", "type": "safe" },
+                { "text": "<ng-content>", "next": "f_q13", "type": "lose" },
+                { "text": "<router-view>", "next": "f_q13", "type": "lose" }
+            ]
+        },
+        "f_q13": { "text": "<router-outlet> é a marcação dinâmica do Router.", "type": "try_again" },
+
+        "q14": {
+            "text": "Para criar um link de navegação sem recarregar a página inteira, usamos:",
+            "choices": [
+                { "text": "routerLink", "next": "q15", "type": "safe" },
+                { "text": "href", "next": "f_q14", "type": "lose" },
+                { "text": "ng-link", "next": "f_q14", "type": "lose" }
+            ]
+        },
+        "f_q14": { "text": "href recarrega a página. Use a diretiva routerLink para SPAs.", "type": "try_again" },
+
+        "q15": {
+            "text": "Para formulários complexos e escaláveis, qual abordagem o Angular recomenda?",
+            "choices": [
+                { "text": "Reactive Forms", "next": "q16", "type": "safe" },
+                { "text": "Template-driven Forms", "next": "f_q15", "type": "lose" },
+                { "text": "HTML Forms", "next": "f_q15", "type": "lose" }
+            ]
+        },
+        "f_q15": { "text": "Reactive Forms dão mais controle e são testáveis.", "type": "try_again" },
+
+        "q16": {
+            "text": "O Angular usa fortemente uma biblioteca para lidar com eventos assíncronos e streams. Qual?",
+            "choices": [
+                { "text": "RxJS", "next": "q17", "type": "safe" },
+                { "text": "Redux", "next": "f_q16", "type": "lose" },
+                { "text": "Lodash", "next": "f_q16", "type": "lose" }
+            ]
+        },
+        "f_q16": { "text": "RxJS (Observables) é a espinha dorsal reativa do Angular.", "type": "try_again" },
+
+        "q17": {
+            "text": "Qual pipe assina um Observable automaticamente no HTML e cancela a assinatura ao destruir o componente?",
+            "choices": [
+                { "text": "async", "next": "q18", "type": "safe" },
+                { "text": "json", "next": "f_q17", "type": "lose" },
+                { "text": "subscribe", "next": "f_q17", "type": "lose" }
+            ]
+        },
+        "f_q17": { "text": "O pipe 'async' gerencia o subscribe/unsubscribe para evitar vazamento de memória.", "type": "try_again" },
+
+        "q18": {
+            "text": "Nas versões recentes (v14+), como criar componentes sem precisar declarar em NgModules?",
+            "choices": [
+                { "text": "Standalone Components", "next": "q19", "type": "safe" },
+                { "text": "Lazy Components", "next": "f_q18", "type": "lose" },
+                { "text": "Single Components", "next": "f_q18", "type": "lose" }
+            ]
+        },
+        "f_q18": { "text": "Defina 'standalone: true' no decorator do componente.", "type": "try_again" },
+
+        "q19": {
+            "text": "Qual diretiva permite adicionar ou remover classes CSS dinamicamente baseada em condições?",
+            "choices": [
+                { "text": "ngClass", "next": "q20", "type": "safe" },
+                { "text": "ngStyle", "next": "f_q19", "type": "lose" },
+                { "text": "ngIf", "next": "f_q19", "type": "lose" }
+            ]
+        },
+        "f_q19": { "text": "ngClass manipula classes. ngStyle manipula estilos inline.", "type": "try_again" },
+
+        "q20": {
+            "text": "Como inserir conteúdo HTML externo 'dentro' do template de um componente (Content Projection)?",
+            "choices": [
+                { "text": "<ng-content>", "next": "q21", "type": "safe" },
+                { "text": "<ng-yield>", "next": "f_q20", "type": "lose" },
+                { "text": "<slot>", "next": "f_q20", "type": "lose" }
+            ]
+        },
+        "f_q20": { "text": "No Angular usamos <ng-content> para projeção de conteúdo.", "type": "try_again" },
+
+        "q21": {
+            "text": "Você precisa acessar um elemento do DOM ou componente filho diretamente na sua classe TypeScript.",
+            "choices": [
+                { "text": "@ViewChild", "next": "q22", "type": "safe" },
+                { "text": "@Input", "next": "f_q21", "type": "lose" },
+                { "text": "@Host", "next": "f_q21", "type": "lose" }
+            ]
+        },
+        "f_q21": { "text": "@ViewChild permite acessar referências locais do template.", "type": "try_again" },
+
+        "q22": {
+            "text": "Angular v16 introduziu uma nova primitiva reativa para gerenciamento de estado granular. Qual é?",
+            "choices": [
+                { "text": "Signals", "next": "q23", "type": "safe" },
+                { "text": "Hooks", "next": "f_q22", "type": "lose" },
+                { "text": "Behaviors", "next": "f_q22", "type": "lose" }
+            ]
+        },
+        "f_q22": { "text": "Signals oferecem reatividade fina e melhor performance que Zone.js.", "type": "try_again" },
+
+        "q23": {
+            "text": "Qual serviço usamos para ler parâmetros da URL (ex: /produto/:id)?",
+            "choices": [
+                { "text": "ActivatedRoute", "next": "q24", "type": "safe" },
+                { "text": "Router", "next": "f_q23", "type": "lose" },
+                { "text": "Location", "next": "f_q23", "type": "lose" }
+            ]
+        },
+        "f_q23": { "text": "Router navega. ActivatedRoute contém informações da rota atual.", "type": "try_again" },
+
+        "q24": {
+            "text": "Como impedir que um usuário não logado acesse uma rota específica?",
+            "choices": [
+                { "text": "Guards (CanActivate)", "next": "q25", "type": "safe" },
+                { "text": "Services", "next": "f_q24", "type": "lose" },
+                { "text": "Pipes", "next": "f_q24", "type": "lose" }
+            ]
+        },
+        "f_q24": { "text": "Route Guards protegem rotas baseados em lógica booleana.", "type": "try_again" },
+
+        "q25": {
+            "text": "Para fazer requisições HTTP (GET, POST), qual módulo/provider devemos importar?",
+            "choices": [
+                { "text": "HttpClientModule", "next": "q26", "type": "safe" },
+                { "text": "HttpModule", "next": "f_q25", "type": "lose" },
+                { "text": "FetchModule", "next": "f_q25", "type": "lose" }
+            ]
+        },
+        "f_q25": { "text": "HttpClientModule (ou provideHttpClient) é o padrão atual.", "type": "try_again" },
+
+        "q26": {
+            "text": "Você quer adicionar um token de autenticação em TODAS as requisições HTTP automaticamente.",
+            "choices": [
+                { "text": "Interceptor", "next": "q27", "type": "safe" },
+                { "text": "Middleware", "next": "f_q26", "type": "lose" },
+                { "text": "Proxy", "next": "f_q26", "type": "lose" }
+            ]
+        },
+        "f_q26": { "text": "HttpInterceptors interceptam e modificam requisições globalmente.", "type": "try_again" },
+
+        "q27": {
+            "text": "Técnica para carregar módulos/componentes apenas quando o usuário acessa a rota, diminuindo o bundle inicial.",
+            "choices": [
+                { "text": "Lazy Loading", "next": "q28", "type": "safe" },
+                { "text": "Eager Loading", "next": "f_q27", "type": "lose" },
+                { "text": "Preloading", "next": "f_q27", "type": "lose" }
+            ]
+        },
+        "f_q27": { "text": "Lazy Loading carrega código sob demanda.", "type": "try_again" },
+
+        "q28": {
+            "text": "Estratégia de detecção de mudanças que melhora performance, verificando apenas quando inputs mudam.",
+            "choices": [
+                { "text": "OnPush", "next": "q29", "type": "safe" },
+                { "text": "Default", "next": "f_q28", "type": "lose" },
+                { "text": "Manual", "next": "f_q28", "type": "lose" }
+            ]
+        },
+        "f_q28": { "text": "ChangeDetectionStrategy.OnPush desliga a verificação automática constante.", "type": "try_again" },
+
+        "q29": {
+            "text": "Ao usar *ngFor em listas grandes, qual função ajuda o Angular a não renderizar a lista toda se só um item mudar?",
+            "choices": [
+                { "text": "trackBy", "next": "q30", "type": "safe" },
+                { "text": "indexBy", "next": "f_q29", "type": "lose" },
+                { "text": "keyBy", "next": "f_q29", "type": "lose" }
+            ]
+        },
+        "f_q29": { "text": "trackBy fornece uma identidade única para itens em loops.", "type": "try_again" },
+
+        "q30": {
+            "text": "Decorator usado para ouvir eventos globais (como window resize ou scroll) dentro de uma diretiva.",
+            "choices": [
+                { "text": "@HostListener", "next": "q31", "type": "safe" },
+                { "text": "@HostBinding", "next": "f_q30", "type": "lose" },
+                { "text": "@WindowListener", "next": "f_q30", "type": "lose" }
+            ]
+        },
+        "f_q30": { "text": "@HostListener escuta eventos do elemento hospedeiro ou globais.", "type": "try_again" },
+
+        "q31": {
+            "text": "Qual comando do CLI cria um novo componente chamado 'header'?",
+            "choices": [
+                { "text": "ng generate component header", "next": "win", "type": "safe" },
+                { "text": "ng create component header", "next": "f_q31", "type": "lose" },
+                { "text": "ng new header", "next": "f_q31", "type": "lose" }
+            ]
+        },
+        "f_q31": { "text": "ng generate (ou ng g) component cria componentes. ng new cria projetos.", "type": "try_again" },
+
+        "win": { "text": "Parabéns! Aplicação Enterprise robusta construída com sucesso!", "type": "win" }
         }
     }
 }
